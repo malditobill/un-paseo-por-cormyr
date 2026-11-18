@@ -1,7 +1,7 @@
 PCGVERSION:2.0
 
 # System Information
-CAMPAIGN:Dungeons & Dragons - Core Books|CAMPAIGN:Monster Manual II|CAMPAIGN:Player's Handbook II|CAMPAIGN:Dungeon Master's Guide II|CAMPAIGN:Monster Manual III|CAMPAIGN:Fiend Folio|CAMPAIGN:Spell Compendium|CAMPAIGN:Magic Item Compendium|CAMPAIGN:Expanded Psionics Handbook|CAMPAIGN:Unearthed Arcana (Complete)|CAMPAIGN:Complete Adventurer|CAMPAIGN:Complete Arcane|CAMPAIGN:Complete Champion|CAMPAIGN:Complete Divine|CAMPAIGN:Complete Mage|CAMPAIGN:Complete Psionic|CAMPAIGN:Complete Scoundrel|CAMPAIGN:Complete Warrior|CAMPAIGN:Player's Guide to Faerun|CAMPAIGN:Underdark|CAMPAIGN:Shining South|CAMPAIGN:Lost Empires of Faerun|CAMPAIGN:Champions of Ruin|CAMPAIGN:Champions of Valor|CAMPAIGN:City of Splendors: Waterdeep|CAMPAIGN:Magic of Faerun|CAMPAIGN:Faiths and Pantheons|CAMPAIGN:Races of Faerun (35e)|CAMPAIGN:Unapproachable East|CAMPAIGN:Pool of Radiance - Attack on Myth Drannor (35e)|CAMPAIGN:City of the Spider Queen (35e)
+CAMPAIGN:Dungeons & Dragons - Core Books|CAMPAIGN:Monster Manual II|CAMPAIGN:Player's Handbook II|CAMPAIGN:Dungeon Master's Guide II|CAMPAIGN:Monster Manual III|CAMPAIGN:Fiend Folio|CAMPAIGN:Spell Compendium|CAMPAIGN:Magic Item Compendium|CAMPAIGN:Expanded Psionics Handbook|CAMPAIGN:Unearthed Arcana (Complete)|CAMPAIGN:Complete Adventurer|CAMPAIGN:Complete Arcane|CAMPAIGN:Complete Champion|CAMPAIGN:Complete Divine|CAMPAIGN:Complete Mage|CAMPAIGN:Complete Psionic|CAMPAIGN:Complete Scoundrel|CAMPAIGN:Complete Warrior|CAMPAIGN:Player's Guide to Faerun|CAMPAIGN:Underdark|CAMPAIGN:Shining South|CAMPAIGN:Lost Empires of Faerun|CAMPAIGN:Champions of Ruin|CAMPAIGN:Champions of Valor|CAMPAIGN:City of Splendors: Waterdeep|CAMPAIGN:Magic of Faerun|CAMPAIGN:Faiths and Pantheons|CAMPAIGN:Races of Faerun (35e)|CAMPAIGN:Unapproachable East|CAMPAIGN:Pool of Radiance - Attack on Myth Drannor (35e)|CAMPAIGN:City of the Spider Queen (35e)|CAMPAIGN:Cormyr wiki - Magia de la Corona
 VERSION:6.09.07
 ROLLMETHOD:0|EXPRESSION:0
 PURCHASEPOINTS:N
@@ -108,8 +108,8 @@ ABILITY:Favored Enemy|TYPE:NORMAL|CATEGORY:Special Ability|KEY:Favored Enemy ~ H
 ABILITY:Favored Enemy|TYPE:NORMAL|CATEGORY:Special Ability|KEY:Favored Enemy ~ Humanoid (Human)
 ABILITY:Ranger Combat Style|TYPE:NORMAL|CATEGORY:Special Ability|KEY:Combat Style ~ Two-Weapon Fighting
 ABILITY:*LANGBONUS|TYPE:VIRTUAL|CATEGORY:*LANGBONUS|KEY:*LANGBONUS|APPLIEDTO:Elven
-ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat
-ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat
+ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat|APPLIEDTO:
+ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat|APPLIEDTO:
 ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:Add Language|APPLIEDTO:Common
 
 # Character Equipment
@@ -123,6 +123,7 @@ EQUIPNAME:Ring of Protection +2|OUTPUTORDER:6|QUANTITY:1.0|NOTE:
 EQUIPNAME:Cloak of Resistance +2|OUTPUTORDER:7|QUANTITY:1.0|NOTE:
 EQUIPNAME:Gloves of Dexterity +2|OUTPUTORDER:8|QUANTITY:1.0|NOTE:
 EQUIPNAME:Boots of Elvenkind|OUTPUTORDER:9|QUANTITY:1.0|NOTE:
+EQUIPNAME:Commander's Ring|OUTPUTORDER:10|QUANTITY:1.0|NOTE:
 EQUIPSET:Default Set|ID:0.1|USETEMPMODS:Y
 EQUIPSET:Primary Hand|ID:0.1.01|VALUE:Longsword +5 (Keen)|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Secondary Hand|ID:0.1.02|VALUE:Masterwork Dagger|QUANTITY:1.0|USETEMPMODS:Y
@@ -133,6 +134,7 @@ EQUIPSET:Fingers|ID:0.1.06|VALUE:Ring of Protection +2|QUANTITY:1.0|USETEMPMODS:
 EQUIPSET:Shoulders|ID:0.1.07|VALUE:Cloak of Resistance +2|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Hands|ID:0.1.08|VALUE:Gloves of Dexterity +2|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Foot|ID:0.1.09|VALUE:Boots of Elvenkind|QUANTITY:1.0|USETEMPMODS:Y
+EQUIPSET:Fingers|ID:0.1.10|VALUE:Commander's Ring|QUANTITY:1.0|USETEMPMODS:Y
 CALCEQUIPSET:0.1
 
 # Character Deity/Domain

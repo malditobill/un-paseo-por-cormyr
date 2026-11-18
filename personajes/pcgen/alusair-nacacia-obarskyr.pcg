@@ -1,7 +1,7 @@
 PCGVERSION:2.0
 
 # System Information
-CAMPAIGN:Dungeons & Dragons - Core Books|CAMPAIGN:Monster Manual II|CAMPAIGN:Player's Handbook II|CAMPAIGN:Dungeon Master's Guide II|CAMPAIGN:Monster Manual III|CAMPAIGN:Fiend Folio|CAMPAIGN:Spell Compendium|CAMPAIGN:Magic Item Compendium|CAMPAIGN:Expanded Psionics Handbook|CAMPAIGN:Unearthed Arcana (Complete)|CAMPAIGN:Complete Adventurer|CAMPAIGN:Complete Arcane|CAMPAIGN:Complete Champion|CAMPAIGN:Complete Divine|CAMPAIGN:Complete Mage|CAMPAIGN:Complete Psionic|CAMPAIGN:Complete Scoundrel|CAMPAIGN:Complete Warrior|CAMPAIGN:Player's Guide to Faerun|CAMPAIGN:Underdark|CAMPAIGN:Shining South|CAMPAIGN:Lost Empires of Faerun|CAMPAIGN:Champions of Ruin|CAMPAIGN:Champions of Valor|CAMPAIGN:City of Splendors: Waterdeep|CAMPAIGN:Magic of Faerun|CAMPAIGN:Faiths and Pantheons|CAMPAIGN:Races of Faerun (35e)|CAMPAIGN:Unapproachable East|CAMPAIGN:Pool of Radiance - Attack on Myth Drannor (35e)|CAMPAIGN:City of the Spider Queen (35e)
+CAMPAIGN:Dungeons & Dragons - Core Books|CAMPAIGN:Monster Manual II|CAMPAIGN:Player's Handbook II|CAMPAIGN:Dungeon Master's Guide II|CAMPAIGN:Monster Manual III|CAMPAIGN:Fiend Folio|CAMPAIGN:Spell Compendium|CAMPAIGN:Magic Item Compendium|CAMPAIGN:Expanded Psionics Handbook|CAMPAIGN:Unearthed Arcana (Complete)|CAMPAIGN:Complete Adventurer|CAMPAIGN:Complete Arcane|CAMPAIGN:Complete Champion|CAMPAIGN:Complete Divine|CAMPAIGN:Complete Mage|CAMPAIGN:Complete Psionic|CAMPAIGN:Complete Scoundrel|CAMPAIGN:Complete Warrior|CAMPAIGN:Player's Guide to Faerun|CAMPAIGN:Underdark|CAMPAIGN:Shining South|CAMPAIGN:Lost Empires of Faerun|CAMPAIGN:Champions of Ruin|CAMPAIGN:Champions of Valor|CAMPAIGN:City of Splendors: Waterdeep|CAMPAIGN:Magic of Faerun|CAMPAIGN:Faiths and Pantheons|CAMPAIGN:Races of Faerun (35e)|CAMPAIGN:Unapproachable East|CAMPAIGN:Pool of Radiance - Attack on Myth Drannor (35e)|CAMPAIGN:City of the Spider Queen (35e)|CAMPAIGN:Cormyr wiki - Magia de la Corona
 VERSION:6.09.07
 ROLLMETHOD:0|EXPRESSION:0
 PURCHASEPOINTS:N
@@ -27,7 +27,7 @@ TABNAME:
 PLAYERNAME:Cormyr wiki
 HEIGHT:68
 WEIGHT:140
-AGE:23
+AGE:39
 GENDER:Female
 HANDED:Right
 SKINCOLOR:
@@ -36,12 +36,12 @@ HAIRCOLOR:dark brown
 BIRTHPLACE:Suzail
 
 # Character Attributes
-STAT:STR|SCORE:21
-STAT:DEX|SCORE:15
-STAT:CON|SCORE:16
-STAT:INT|SCORE:11
-STAT:WIS|SCORE:11
-STAT:CHA|SCORE:14
+STAT:STR|SCORE:23
+STAT:DEX|SCORE:17
+STAT:CON|SCORE:18
+STAT:INT|SCORE:10
+STAT:WIS|SCORE:10
+STAT:CHA|SCORE:13
 ALIGN:NG
 RACE:Human
 
@@ -106,9 +106,9 @@ ABILITY:FEAT|TYPE:NORMAL|CATEGORY:FEAT|KEY:Combat Reflexes
 ABILITY:FEAT|TYPE:NORMAL|CATEGORY:FEAT|KEY:Diehard
 ABILITY:Favored Enemy|TYPE:NORMAL|CATEGORY:Special Ability|KEY:Favored Enemy ~ Humanoid (Orc)
 ABILITY:*LANGBONUS|TYPE:VIRTUAL|CATEGORY:*LANGBONUS|KEY:*LANGBONUS|APPLIEDTO:Dwarven
-ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat
-ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat
-ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat
+ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat|APPLIEDTO:
+ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat|APPLIEDTO:
+ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat|APPLIEDTO:
 ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:Add Language|APPLIEDTO:Common
 
 # Character Equipment
@@ -121,6 +121,8 @@ EQUIPNAME:Ring of Freedom of Movement|OUTPUTORDER:5|QUANTITY:1.0|NOTE:
 EQUIPNAME:Belt of Giant Strength +4|OUTPUTORDER:6|QUANTITY:1.0|NOTE:
 EQUIPNAME:Cloak of Resistance +3|OUTPUTORDER:7|QUANTITY:1.0|NOTE:
 EQUIPNAME:Warhorse (Heavy)|OUTPUTORDER:8|QUANTITY:1.0|NOTE:
+EQUIPNAME:Royal Signet of the Obarskyrs|OUTPUTORDER:9|QUANTITY:1.0|NOTE:
+EQUIPNAME:Commander's Ring|OUTPUTORDER:10|QUANTITY:1.0|NOTE:
 EQUIPSET:Default Set|ID:0.1|USETEMPMODS:Y
 EQUIPSET:Primary Hand|ID:0.1.01|VALUE:Longsword +3 (Vorpal)|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Body|ID:0.1.02|VALUE:Mithral Full Plate +2|QUANTITY:1.0|USETEMPMODS:Y
@@ -129,6 +131,8 @@ EQUIPSET:Fingers|ID:0.1.04|VALUE:Ring of Protection +3|QUANTITY:1.0|USETEMPMODS:
 EQUIPSET:Fingers|ID:0.1.05|VALUE:Ring of Freedom of Movement|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Waist|ID:0.1.06|VALUE:Belt of Giant Strength +4|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Shoulders|ID:0.1.07|VALUE:Cloak of Resistance +3|QUANTITY:1.0|USETEMPMODS:Y
+EQUIPSET:Carried|ID:0.1.08|VALUE:Royal Signet of the Obarskyrs|QUANTITY:1.0|USETEMPMODS:Y
+EQUIPSET:Carried|ID:0.1.09|VALUE:Commander's Ring|QUANTITY:1.0|USETEMPMODS:Y
 CALCEQUIPSET:0.1
 
 # Character Description/Bio/History

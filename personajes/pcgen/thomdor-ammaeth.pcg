@@ -1,7 +1,7 @@
 PCGVERSION:2.0
 
 # System Information
-CAMPAIGN:Dungeons & Dragons - Core Books|CAMPAIGN:Monster Manual II|CAMPAIGN:Player's Handbook II|CAMPAIGN:Dungeon Master's Guide II|CAMPAIGN:Monster Manual III|CAMPAIGN:Fiend Folio|CAMPAIGN:Spell Compendium|CAMPAIGN:Magic Item Compendium|CAMPAIGN:Expanded Psionics Handbook|CAMPAIGN:Unearthed Arcana (Complete)|CAMPAIGN:Complete Adventurer|CAMPAIGN:Complete Arcane|CAMPAIGN:Complete Champion|CAMPAIGN:Complete Divine|CAMPAIGN:Complete Mage|CAMPAIGN:Complete Psionic|CAMPAIGN:Complete Scoundrel|CAMPAIGN:Complete Warrior|CAMPAIGN:Player's Guide to Faerun|CAMPAIGN:Underdark|CAMPAIGN:Shining South|CAMPAIGN:Lost Empires of Faerun|CAMPAIGN:Champions of Ruin|CAMPAIGN:Champions of Valor|CAMPAIGN:City of Splendors: Waterdeep|CAMPAIGN:Magic of Faerun|CAMPAIGN:Faiths and Pantheons|CAMPAIGN:Races of Faerun (35e)|CAMPAIGN:Unapproachable East|CAMPAIGN:Pool of Radiance - Attack on Myth Drannor (35e)|CAMPAIGN:City of the Spider Queen (35e)
+CAMPAIGN:Dungeons & Dragons - Core Books|CAMPAIGN:Monster Manual II|CAMPAIGN:Player's Handbook II|CAMPAIGN:Dungeon Master's Guide II|CAMPAIGN:Monster Manual III|CAMPAIGN:Fiend Folio|CAMPAIGN:Spell Compendium|CAMPAIGN:Magic Item Compendium|CAMPAIGN:Expanded Psionics Handbook|CAMPAIGN:Unearthed Arcana (Complete)|CAMPAIGN:Complete Adventurer|CAMPAIGN:Complete Arcane|CAMPAIGN:Complete Champion|CAMPAIGN:Complete Divine|CAMPAIGN:Complete Mage|CAMPAIGN:Complete Psionic|CAMPAIGN:Complete Scoundrel|CAMPAIGN:Complete Warrior|CAMPAIGN:Player's Guide to Faerun|CAMPAIGN:Underdark|CAMPAIGN:Shining South|CAMPAIGN:Lost Empires of Faerun|CAMPAIGN:Champions of Ruin|CAMPAIGN:Champions of Valor|CAMPAIGN:City of Splendors: Waterdeep|CAMPAIGN:Magic of Faerun|CAMPAIGN:Faiths and Pantheons|CAMPAIGN:Races of Faerun (35e)|CAMPAIGN:Unapproachable East|CAMPAIGN:Pool of Radiance - Attack on Myth Drannor (35e)|CAMPAIGN:City of the Spider Queen (35e)|CAMPAIGN:Cormyr wiki - Magia de la Corona
 VERSION:6.09.07
 ROLLMETHOD:0|EXPRESSION:0
 PURCHASEPOINTS:N
@@ -27,7 +27,7 @@ TABNAME:
 PLAYERNAME:Cormyr wiki
 HEIGHT:71
 WEIGHT:200
-AGE:72
+AGE:71
 GENDER:Male
 HANDED:Right
 SKINCOLOR:
@@ -110,9 +110,9 @@ ABILITY:FEAT|TYPE:NORMAL|CATEGORY:FEAT|KEY:Power Attack
 ABILITY:FEAT|TYPE:NORMAL|CATEGORY:FEAT|KEY:Leadership
 ABILITY:FEAT|TYPE:NORMAL|CATEGORY:FEAT|KEY:Cleave
 ABILITY:FEAT|TYPE:NORMAL|CATEGORY:FEAT|KEY:Improved Toughness
-ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat
-ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat
-ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat
+ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat|APPLIEDTO:
+ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat|APPLIEDTO:
+ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:+1 Bonus Feat|APPLIEDTO:
 ABILITY:GM Awards|TYPE:NORMAL|CATEGORY:Special Ability|KEY:Add Language|APPLIEDTO:Common
 
 # Character Equipment
@@ -127,6 +127,7 @@ EQUIPNAME:Amulet of Natural Armor +2|OUTPUTORDER:7|QUANTITY:1.0|NOTE:
 EQUIPNAME:Masterwork Lance|OUTPUTORDER:8|QUANTITY:1.0|NOTE:|CUSTOMIZATION:[BASEITEM:Lance|DATA:NAME=Masterwork Lance$EQMOD=Masterwork (Weapon)]
 EQUIPNAME:Masterwork Longbow|OUTPUTORDER:9|QUANTITY:1.0|NOTE:|CUSTOMIZATION:[BASEITEM:Longbow|DATA:NAME=Masterwork Longbow$EQMOD=Masterwork (Weapon)]
 EQUIPNAME:Warhorse (Heavy)|OUTPUTORDER:10|QUANTITY:1.0|NOTE:
+EQUIPNAME:Commander's Ring|OUTPUTORDER:11|QUANTITY:1.0|NOTE:
 EQUIPSET:Default Set|ID:0.1|USETEMPMODS:Y
 EQUIPSET:Primary Hand|ID:0.1.01|VALUE:Longsword +3 (Keen)|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Body|ID:0.1.02|VALUE:Full Plate +3|QUANTITY:1.0|USETEMPMODS:Y
@@ -137,6 +138,7 @@ EQUIPSET:Fingers|ID:0.1.06|VALUE:Ring of Protection +2|QUANTITY:1.0|USETEMPMODS:
 EQUIPSET:Neck|ID:0.1.07|VALUE:Amulet of Natural Armor +2|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Carried|ID:0.1.08|VALUE:Masterwork Lance|QUANTITY:1.0|USETEMPMODS:Y
 EQUIPSET:Carried|ID:0.1.09|VALUE:Masterwork Longbow|QUANTITY:1.0|USETEMPMODS:Y
+EQUIPSET:Fingers|ID:0.1.10|VALUE:Commander's Ring|QUANTITY:1.0|USETEMPMODS:Y
 CALCEQUIPSET:0.1
 
 # Character Description/Bio/History
