@@ -1,502 +1,558 @@
-[
+{
+"w": 6096,
+"h": 4128,
+"lugares": [
 {
 "n": "Suzail",
 "t": "capital",
-"x": 3743,
-"y": 2585,
+"x": 3714,
+"y": 2605,
 "u": "geografía/ciudades/suzail",
 "r": "Suzail es la ciudad de la corona: la capital de Cormyr, en la costa norte del Lake of Dragons, el lugar donde se sienta el rey y desde donde se gobierna el reino. Tiene un puerto activo, los jardines más hermosos que se puedan ver dentro de unas murallas, un…"
 },
 {
 "n": "Arabel",
 "t": "ciudad",
-"x": 4166,
-"y": 1452,
+"x": 4133,
+"y": 1463,
 "u": "geografía/ciudades/arabel",
 "r": "Arabel es la Caravan City de Cormyr, el lugar donde se juntan los caminos. Allí se cruzan el High Road, Calantar's Way, el East Way y el Moonsea Ride, y por ellos llegan y se van las caravanas que unen el corazón del reino con las riquezas del Moonsea y de…"
 },
 {
 "n": "Marsember",
 "t": "ciudad",
-"x": 4173,
-"y": 2565,
+"x": 4140,
+"y": 2585,
 "u": "geografía/ciudades/marsember",
 "r": "Marsember es más vieja que Suzail y, según casi todo el mundo, mucho más decadente. Se levanta en la orilla oeste de la desembocadura del Starwater, el río más transitado del reino, que baja de las Stormhorn Mountains, cruza el gran bosque del centro y muere…"
 },
 {
 "n": "Tilverton",
 "t": "arrasada",
-"x": 4558,
-"y": 526,
+"x": 4522,
+"y": 530,
 "u": "geografía/ciudades/tilverton",
 "r": "Donde estaba Tilverton hoy hay un cráter. En Mirtul de 1372 DR, en la guerra contra los shadovar de Thultanthar, la ciudad se hundió en una oscuridad mágica que no se ha disipado, y en su lugar quedó una herida en la tierra: el Tilverton Scar. Halfhap, que…"
 },
 {
 "n": "Eagle Peak",
 "t": "aldea",
-"x": 2409,
-"y": 1487,
+"x": 2390,
+"y": 1499,
 "u": "geografía/territorios-y-ruinas/eagle-peak",
 "r": "Eagle Peak es un lugar sombrío. Todo en él es de piedra, teja y pizarra, para que los proyectiles incendiarios no prendan en un asedio, y esa misma elección facilita reactivar las muchas alarmas mágicas del pueblo. Se encarama en una saliente de los…"
 },
 {
 "n": "High Horn",
 "t": "castillo",
-"x": 2662,
-"y": 1527,
+"x": 2641,
+"y": 1539,
 "u": "geografía/castillos/high-horn",
 "r": "High Horn es el nombre del punto más alto de la línea de picos Dragonjaw y también del castillo que lo corona. La fortaleza ocupa la cima entera, esculpida como una barrera, y guarda el paso a través de los Storm Horns: la «puerta occidental» de Cormyr. El…"
 },
 {
 "n": "Tyrluk",
 "t": "caserio",
-"x": 2897,
-"y": 1497,
+"x": 2874,
+"y": 1509,
 "u": "geografía/pueblos/tyrluk",
 "r": "Tyrluk no recibe bien a los forasteros. Sus aldeanos son casi hostiles con los forasteros, con una actitud que viene a decir que el mundo es malo y solo trae males, salvo a quien necesita sus bienes. Están en el extremo oeste de la escarpa de piedra caliza,…"
 },
 {
 "n": "Collinwood",
 "t": "aldea",
-"x": 3244,
-"y": 1560,
+"x": 3219,
+"y": 1572,
 "u": "geografía/pueblos/collinwood",
 "r": "Collinwood hacia 1489 DR"
 },
 {
 "n": "Espar",
 "t": "aldea",
-"x": 2874,
-"y": 1786,
+"x": 2852,
+"y": 1800,
 "u": "geografía/pueblos/espar",
 "r": "Espar es un pueblo de piedra entre campos de cultivo, con los Storm Horns alzándose al oeste y el Way of the Dragon pasando al sur. Ciento veinte edificios de piedra y una comunidad agrícola tranquila, centrada en el culto a Helm. También se venera a…"
 },
 {
 "n": "Plungepool",
 "t": "paraje",
-"x": 2958,
-"y": 1680,
+"x": 2935,
+"y": 1693,
 "u": "geografía/territorios-y-ruinas/plungepool",
 "r": "El rugido no cesa nunca. En el King's Forest, el río Sharragh, que nace en los bosques rocosos al este de Espar, corre varios kilómetros al sureste por bosque denso hasta un pozo natural de caliza que se lo traga en una cascada interminable, siempre lleno de…"
 },
 {
 "n": "Dhedluk",
 "t": "caserio",
-"x": 3474,
-"y": 1807,
+"x": 3447,
+"y": 1821,
 "u": "geografía/pueblos/dhedluk",
 "r": "Dhedluk está en el King's Forest, rodeado de pantanos. Cabañas de troncos asoman entre los árboles, con pequeños jardines de helechos y parcelas de cultivo; la luz llega filtrada entre árboles gigantes cubiertos de musgo, y el lugar resulta muy bello. Se alza…"
 },
 {
 "n": "Waymoot",
 "t": "pueblo",
-"x": 3272,
-"y": 1944,
+"x": 3246,
+"y": 1959,
 "u": "geografía/pueblos/waymoot",
 "r": "Waymoot es lo que queda cuando un reino le arranca un pedazo al bosque y decide quedárselo. El pueblo más grande del King's Forest se alza en el centro de un claro de ocho kilómetros de ancho abierto a mano en plena espesura, y desde sus bordes los árboles…"
 },
 {
 "n": "Stagsteads",
 "t": "aldea",
-"x": 3594,
-"y": 1924,
+"x": 3566,
+"y": 1939,
 "u": "geografía/pueblos/stagsteads",
 "r": "Stagsteads (también llamado «Stag Steads») es un pabellón de caza excavado en las laderas del King's Forest, cubierto de musgo y rodeado de árboles. Casi no se ve hasta llegar a la puerta, como una tortuga medio escondida en un charco. Por dentro es fresco,…"
 },
 {
 "n": "Eveningstar",
 "t": "caserio",
-"x": 3596,
-"y": 1444,
+"x": 3568,
+"y": 1455,
 "u": "geografía/pueblos/eveningstar",
 "r": "Eveningstar es una aldea pintoresca y próspera, llena de árboles y jardines: «un huerto con edificios dentro», dice Elminster. Se alza donde el Starwater Road se cruza con el High Road, que cruza el río Starwater por un ancho puente de piedra, y en la boca…"
 },
 {
 "n": "Haunted Halls",
 "t": "ruina",
-"x": 3326,
-"y": 1400,
+"x": 3300,
+"y": 1411,
 "u": "geografía/territorios-y-ruinas/haunted-halls",
 "r": "Está a media altura de la pared oeste del Eveningstar Gorge, cerca de Eveningstar: una fortaleza excavada en la pared de un risco, un complejo subterráneo de varios niveles. Lo hicieron enanos, hace mucho, para un señor bandido humano llamado Rivior. Fue…"
 },
 {
 "n": "Knightswood",
 "t": "aldea",
-"x": 3865,
-"y": 1786,
+"x": 3835,
+"y": 1800,
 "u": "geografía/pueblos/knightswood",
 "r": "Knightswood es un claro en el King's Forest, junto al Starwater, que el río cruza por un puente de madera en arco. Creció alrededor de las haciendas de varios caballeros, de ahí su nombre, y se mantuvo tranquilo y sin desarrollarse. Hoy es poca cosa: el…"
 },
 {
 "n": "Aunkspear",
 "t": "aldea",
-"x": 4085,
-"y": 1869,
+"x": 4053,
+"y": 1884,
 "u": "geografía/pueblos/aunkspear",
 "r": "Aunkspear se extiende sobre y entre tres colinas, junto al Calantar's Way, al noroeste de Immersea. Es agradable a la vista y hoy poco importante, aunque en otro tiempo fue un lugar de peso, igual de pequeño. Lleva el nombre de su vecino más célebre, un…"
 },
 {
 "n": "Minroe",
 "t": "caserio",
-"x": 2891,
-"y": 2146,
+"x": 2868,
+"y": 2163,
 "u": "geografía/pueblos/minroe",
 "r": "Minroe se esconde en las estribaciones de los Storm Horns, justo al oeste de Waymoot. Fue un centro minero activo hasta que se agotaron las vetas de gemas y llegaron las medusas. Hoy viven allí unas pocas familias, en cabañas malolientes, desconfiadas y…"
 },
 {
 "n": "Gray Oaks",
 "t": "caserio",
-"x": 3855,
-"y": 2193,
+"x": 3825,
+"y": 2210,
 "u": "geografía/pueblos/gray-oaks",
 "r": "Gray Oaks, antes Black Oaks, es una aldea del Northbank, las tierras de cultivo de los medianos al norte del Starwater y al sur del King's Forest, a cuyo borde se asienta, cerca de Hilp. Fue el «granero de Northbank» y el mayor mercado agrícola de Cormyr; hoy…"
 },
 {
 "n": "Hilp",
 "t": "caserio",
-"x": 4041,
-"y": 2134,
+"x": 4009,
+"y": 2151,
 "u": "geografía/pueblos/hilp",
 "r": "Hilp está en el camino de Immersea a Suzail, en el cruce del Calantar's Way con el Way of the Manticore. Sus casas son altas y angostas, con techo de pizarra, la tienda abajo y la vivienda arriba, y el pueblo desborda su muralla y se estira por los dos…"
 },
 {
 "n": "Old Axe",
 "t": "castillo",
-"x": 2402,
-"y": 2403,
+"x": 2383,
+"y": 2422,
 "u": "geografía/castillos/old-axe",
 "r": "Old Axe es una aldea que se esconde a sí misma. El High Road pasa cerca de un pico abruptamente elevado, el Old Axe, y a su sombra, al sur de Skull Crag, está el poblado que le debe el nombre. Los edificios que se ven desde fuera están abandonados y quemados,…"
 },
 {
 "n": "Griffon Hill",
 "t": "aldea",
-"x": 4399,
-"y": 505,
+"x": 4365,
+"y": 509,
 "u": "geografía/territorios-y-ruinas/griffon-hill",
 "r": "Griffon Hill es una altura rocosa a la que se llega por el Stonebolt Trail, al este del legendario cementerio goblin donde la mayoría de los mapas muestran que el sendero cambia de dirección. Poco hay en ella: una posada, quemada varias veces por saqueadores…"
 },
 {
 "n": "Halfhap",
 "t": "pueblo",
-"x": 4449,
-"y": 667,
+"x": 4414,
+"y": 672,
 "u": "geografía/territorios-y-ruinas/halfhap",
 "r": "Halfhap es un lugar sombrío que existe para abastecer. Sus murallas, ovaladas como una papa gigante, encierran un pueblo con el aire, y el encanto, de un campamento armado; no hay nada pintoresco que ver. Por todas partes marchan, entrenan o reparan…"
 },
 {
 "n": "Castle Crag",
 "t": "castillo",
-"x": 4314,
-"y": 998,
+"x": 4280,
+"y": 1006,
 "u": "geografía/castillos/castle-crag",
 "r": "Castle Crag es un puesto de frontera y nada más. En la porción centro-norte de Cormyr, del otro lado del Gnoll Pass, se extienden las Stonelands, y la fortaleza existe para que lo que venga de allí no pase. Cerca quedan los Helmlands, donde la magia no se…"
 },
 {
 "n": "Hillmarch",
 "t": "aldea",
-"x": 4524,
-"y": 1150,
+"x": 4489,
+"y": 1159,
 "u": "geografía/pueblos/hillmarch",
 "r": "Hillmarch es lo más parecido a un pueblo minero que tiene el este de Cormyr, y se lo ve antes de llegar: una columna de humo sobre las colinas, al pie de los Gnoll Peaks. Queda poco al este de Castle Crag, sobre el Dragon Trail, a un día a caballo hacia el…"
 },
 {
 "n": "Sunset Hill",
 "t": "pueblo",
-"x": 4533,
-"y": 1489,
+"x": 4498,
+"y": 1501,
 "u": "geografía/pueblos/sunset-hill",
 "r": "Sunset Hill debe su nombre al tinte dorado que toma la colina al atardecer: retiene la luz del sol poniente mucho después que las tierras bajas de alrededor. Es una colina alta y herbosa, al este de Bospir, y a su alrededor se extiende una aldea dispersa, sin…"
 },
 {
 "n": "Bospir",
 "t": "aldea",
-"x": 4410,
-"y": 1559,
+"x": 4376,
+"y": 1571,
 "u": "geografía/pueblos/bospir",
 "r": "Bospir es un grupo de casitas viejas y polvorientas en un cruce de senderos, en medio de ranchos de ovejas y ganado que se agrupan alrededor de tres pozos profundos. Un único camino bueno, hacia el norte, lo une con el East Way. El olor a estiércol de oveja…"
 },
 {
 "n": "Yeoman Bridge",
 "t": "caserio",
-"x": 4332,
-"y": 1660,
+"x": 4298,
+"y": 1673,
 "u": "geografía/pueblos/yeoman-bridge",
 "r": "Yeoman Bridge es un puñado de granjas en torno a un puente cubierto de piedra que lleva el Immer Trail sobre el Sword River. El río, que también se llama River Arabel y corre al sudeste desde Arabel Springs, al sur de Arabel, se une al Wyvernwater justo aguas…"
 },
 {
 "n": "Juniril",
 "t": "aldea",
-"x": 4676,
-"y": 1910,
+"x": 4639,
+"y": 1925,
 "u": "geografía/pueblos/juniril",
 "r": "Juniril pasa por ser la aldea más anodina de Cormyr. Está rodeada de granjas frutales entre ciénagas y se llega a ella por dos caminos. Sus 700 vecinos viven de pescar y de tejer los juncos de los pantanos. Apenas tiene dos cosas de interés, una posada y unas…"
 },
 {
 "n": "Immersea",
 "t": "aldea",
-"x": 4152,
-"y": 1964,
+"x": 4120,
+"y": 1979,
 "u": "geografía/pueblos/immersea",
 "r": "Immersea se abre en abanico en el valle del Immer Stream, que corre hacia el este hasta desembocar en el Wyvernwater, en la cabecera de la bahía que lleva el nombre del arroyo y también el de Mistfisher. La niebla que sube del agua lo mantiene todo…"
 },
 {
 "n": "Hultail",
 "t": "caserio",
-"x": 5026,
-"y": 1611,
+"x": 4987,
+"y": 1624,
 "u": "geografía/pueblos/hultail",
 "r": "Hultail es poca cosa a la vista: unos cuantos edificios a orillas del Wyvernwater, demasiado pocos para merecer un lord. Y sin embargo por sus muelles pasa todo lo que baja del High Dale por el Thunder River, y es el único puerto del lago al oeste de…"
 },
 {
 "n": "Thunderstone",
 "t": "aldea",
-"x": 5278,
-"y": 1649,
+"x": 5237,
+"y": 1662,
 "u": "geografía/pueblos/thunderstone",
 "r": "Thunderstone es el último pueblo antes de lo salvaje. Se alza en el borde sur del Hullack Forest, sobre el Thunder River, cerca de los Thunder Peaks y del Vast Swamp. Está a unos 240 km de Suzail por camino (cinco días de marcha) y la ruta pasa por las…"
 },
 {
 "n": "Ghars",
 "t": "pueblo",
-"x": 5077,
-"y": 1847,
+"x": 5037,
+"y": 1861,
 "u": "geografía/pueblos/ghars",
 "r": "Ghars vive a la sombra de una guarnición de Purple Dragons que patrulla al norte y al este del Vast Swamp, y su suerte es estar justo dentro del alcance de las incursiones que salen de esa ciénaga. Fue una aldea, y la guarnición la hizo crecer hasta pueblo de…"
 },
 {
 "n": "Gladehap",
 "t": "aldea",
-"x": 4242,
-"y": 2128,
+"x": 4209,
+"y": 2145,
 "u": "geografía/pueblos/gladehap",
 "r": "Gladehap ocupa el lecho de un lago seco junto al Way of the Manticore, al oeste de Wheloon. La hondonada, al norte del camino, se llama Lost Lake. El lago desapareció cuando una batalla entre magos, que se disputaban sus surlfish plateados, rompió las rocas…"
 },
 {
 "n": "Nesmyth",
 "t": "aldea",
-"x": 4312,
-"y": 2332,
+"x": 4278,
+"y": 2350,
 "u": "geografía/pueblos/nesmyth",
 "r": "Nesmyth es una comunidad en guerra consigo misma. Se alza al noreste de Marsember, entre colinas, en las tierras altas al norte y al este de la gran curva donde el Starwater gira hacia el sur, hacia el mar. Queda al sureste de Hilp, de donde viene el stelk…"
 },
 {
 "n": "Bogbrook",
 "t": "aldea",
-"x": 4234,
-"y": 2382,
+"x": 4201,
+"y": 2401,
 "u": "geografía/pueblos/bogbrook",
 "r": "Bogbrook debe su nombre a un manantial que forma un pantano y a un arroyo que lleva sus aguas hasta el río Starwater. Es un lugar salvaje y descuidado de pastizales altos y ciénagas. Las casas son de piedra, con techos de tablas y césped, y sus laterales de…"
 },
 {
 "n": "Wheloon",
 "t": "pueblo",
-"x": 4674,
-"y": 2308,
+"x": 4637,
+"y": 2326,
 "u": "geografía/pueblos/wheloon",
 "r": "Wheloon se extiende a ambos lados del Wyvernflow, sin murallas ni barreras naturales, en calles sinuosas sobre terreno de colinas. Sus techos de pizarra verde brillan al sol: la pizarra local se vuelve verde brillante con el sol, y de ahí sus «jade towers».…"
 },
 {
 "n": "Blustich",
 "t": "aldea",
-"x": 4626,
-"y": 2540,
+"x": 4590,
+"y": 2560,
 "u": "geografía/pueblos/blustich",
 "r": "Blustich es una aldea pequeña en la orilla oeste del Wyvernflow, allí donde el Hermit's Wood llega hasta el río. Sus habitantes viven de la pesca, de la caza en el bosque y de la agricultura. Es poco lo que retiene a un viajero."
 },
 {
 "n": "Monksblade",
 "t": "caserio",
-"x": 5227,
-"y": 2556
+"x": 5186,
+"y": 2576,
+"u": "geografía/pueblos/monksblade",
+"r": ""
 },
 {
 "n": "Wormtower",
 "t": "aldea",
-"x": 5508,
-"y": 2821,
+"x": 5465,
+"y": 2843,
 "u": "geografía/pueblos/wormtower",
 "r": "Wormtower es un laberinto de parcelas empinadas, cabañas, senderos sinuosos de grava, jardincitos con setos, muros de escombros y muchos árboles, en el que cuesta orientarse. Se esconde en un pequeño valle apartado al norte del Bluemist Trail, a medio día de…"
 },
 {
 "n": "Lost Refuge",
 "t": "ruina",
-"x": 5353,
-"y": 2371,
+"x": 5311,
+"y": 2390,
 "u": "geografía/territorios-y-ruinas/lost-refuge",
 "r": "El Lost Refuge fue un fuerte cormyreano con un pueblo a su alrededor, hoy tragado por el pantano. Es un recinto alargado de muros desmoronados, cubierto de enredaderas, con estanques de agua oscura, un portón con rastrillo en la esquina sureste y, al norte,…"
 },
 {
 "n": "Stonelands",
 "t": "region",
-"x": 3828,
-"y": 800,
+"x": 3798,
+"y": 806,
+"rot": -22.0,
+"dx": -32.0,
+"dy": -22.0,
 "u": "geografía/regiones/stonelands",
 "r": "A la luz de la luna, las Stonelands parecen un mar que se congeló en plena tormenta: olas de piedra que rompen contra dientes de gigante. De día no mejoran. El suelo es arcilla seca, sembrada de peñascos de todos los tamaños, algunos tan grandes como una…"
 },
 {
 "n": "Helmlands",
-"t": "region",
-"x": 3828,
-"y": 1120,
+"t": "region2",
+"x": 3798,
+"y": 1129,
+"rot": -29.0,
+"dx": 109.0,
+"dy": -52.0,
 "u": "geografía/castillos/helmlands",
 "r": "Los Helmlands son un pedazo de tierra donde las reglas dejaron de valer. Quedan en el borde oriental de los Stormhorn Mountains, cerca del Gnoll Pass y de Castle Crag, y los cormyrenses los rehúyen. Nunca se asentaron allí: una superstición que viene del Time…"
 },
 {
 "n": "Stormhorns",
 "t": "region",
-"x": 2948,
-"y": 2608,
+"x": 2925,
+"y": 2628,
+"rot": 68.0,
+"dx": -60.0,
+"dy": -128.0,
 "u": "geografía/regiones/stormhorns",
 "r": "Vistos desde el sur, por encima de los pinares, los Stormhorns son una línea púrpura en el horizonte: montañas que se alzan contra el cielo como colmillos. Son la gran muralla que defiende el flanco occidental de Cormyr y su frontera práctica, más real que…"
 },
 {
 "n": "King's Forest",
-"t": "region",
-"x": 3288,
-"y": 2188,
+"t": "region2",
+"x": 3262,
+"y": 2205,
+"dx": 48.0,
+"dy": -85.0,
 "u": "geografía/regiones/king's-forest",
 "r": "Bajo el King's Forest la luz llega verde y desde muy alto. Robles, arces y serbales levantan un dosel lejano, y abajo hay poco sotobosque: claros sueltos, troncos cubiertos de musgo, barrancos escondidos. Es un bosque viejo, profundo y hermoso, de ciervos…"
 },
 {
 "n": "Hullack Forest",
-"t": "region",
-"x": 5216,
-"y": 1300,
+"t": "region2",
+"x": 5175,
+"y": 1310,
+"dx": -36.0,
+"dy": -6.0,
 "u": "geografía/regiones/hullack-forest",
 "r": "Desde las lomas del oeste, más allá de la cinta plateada del Immerflow, el Hullack Forest es una línea verde oscura que ocupa todo el horizonte sin interrumpirse. Por dentro es otra cosa. Es oscuro, denso y húmedo; los árboles crecen apretados unos contra…"
 },
 {
 "n": "Thunder Peaks",
 "t": "region",
-"x": 5656,
-"y": 1120,
+"x": 5612,
+"y": 1129,
+"rot": -68.0,
+"dx": 64.0,
+"dy": 61.0,
 "u": "geografía/regiones/thunder-peaks",
 "r": "Desde el oeste, la tierra sube despacio: el bosque se abre, la roca desnuda aparece cada vez más seguido, y de pronto, detrás de la bruma, los Thunder Peaks se levantan como una gran muralla. Son altos y oscuros, grises y púrpuras sobre la línea de los…"
 },
 {
 "n": "Vast Swamp",
-"t": "region",
-"x": 5320,
-"y": 2000,
+"t": "region2",
+"x": 5278,
+"y": 2016,
+"dx": 32.0,
+"dy": 36.0,
 "u": "geografía/regiones/vast-swamp",
 "r": "En el Vast Swamp los árboles parecen muertos, aun los que están vivos. La corteza y las hojas son negras, como si el barro que sube por las raíces los tiñera desde adentro, y el musgo cuelga de las ramas en tiras verdes que recuerdan carne picada colgando de…"
 },
 {
 "n": "Tunlands",
 "t": "region",
-"x": 1996,
-"y": 2392,
+"x": 1980,
+"y": 2411,
 "u": "geografía/regiones/tunlands",
 "r": "Desde lo alto de una loma, el Farsea Marsh se ve como un mar de hierba. Llega hasta el horizonte: pastizal alto, de un verde dorado, cruzado por canales de agua color bronce que serpentean entre bosquecillos sueltos de álamos de pantano y abetos de turbera.…"
 },
 {
 "n": "Dragonmere",
 "t": "region",
-"x": 4432,
-"y": 3028,
+"x": 4397,
+"y": 3052,
+"dx": -24.0,
+"dy": -1.0,
 "u": "geografía/regiones/dragonmere",
 "r": "Al atardecer, en Suzail, la brisa llega del lago y con ella las voces de los pescadores que vuelven con la captura. El Dragonmere, al que también llaman Lake of Dragons, es la frontera sur de Cormyr y su salida al mundo. Por el norte el reino tiene el…"
 },
 {
 "n": "Wyvernwater",
 "t": "paraje",
-"x": 4476,
-"y": 1720
+"x": 4441,
+"y": 1733,
+"u": "geografía/regiones/wyvernwater",
+"r": ""
 },
 {
 "n": "Gnoll Pass",
 "t": "paraje",
-"x": 4246,
-"y": 744
+"x": 4213,
+"y": 750,
+"u": "geografía/regiones/gnoll-pass",
+"r": ""
 },
 {
 "n": "Tilver's Gap",
 "t": "paraje",
-"x": 5356,
-"y": 280
+"x": 5314,
+"y": 282,
+"u": "geografía/regiones/tilver's-gap",
+"r": ""
 },
 {
 "n": "Hermit's Wood",
 "t": "paraje",
-"x": 4496,
-"y": 2388
+"x": 4461,
+"y": 2407,
+"u": "geografía/regiones/hermit's-wood",
+"r": ""
 },
 {
 "n": "Sunset Mountains",
 "t": "region",
-"x": 1272,
-"y": 1316
+"x": 1262,
+"y": 1326,
+"u": "geografía/regiones/sunset-mountains",
+"r": ""
 },
 {
 "n": "Farsea Marshes",
-"t": "paraje",
-"x": 1908,
-"y": 1842
+"t": "region2",
+"x": 1893,
+"y": 1856
 },
 {
 "n": "Skull Gorge",
 "t": "paraje",
-"x": 460,
-"y": 1054
+"x": 456,
+"y": 1062,
+"u": "geografía/regiones/skull-gorge",
+"r": ""
 },
 {
 "n": "Darkhold",
 "t": "castillo",
-"x": 1049,
-"y": 1648
+"x": 1041,
+"y": 1661,
+"u": "geografía/castillos/darkhold",
+"r": ""
 },
 {
-"n": "Daerlum",
+"n": "Daerlun",
 "t": "extranjera",
-"x": 5951,
-"y": 2522
+"x": 5905,
+"y": 2542,
+"u": "geografía/ciudades/daerlun",
+"r": ""
 },
 {
 "n": "Westgate",
 "t": "extranjera",
-"x": 5915,
-"y": 3246
+"x": 5869,
+"y": 3271,
+"u": "geografía/ciudades/westgate",
+"r": ""
 },
 {
 "n": "Tezir",
 "t": "extranjera",
-"x": 4758,
-"y": 3592
+"x": 4721,
+"y": 3620
 },
 {
 "n": "Elversult",
 "t": "extranjera",
-"x": 3388,
-"y": 3910
+"x": 3362,
+"y": 3941,
+"u": "geografía/ciudades/elversult",
+"r": ""
 },
 {
 "n": "Priapurl",
 "t": "extranjera",
-"x": 2183,
-"y": 3898
+"x": 2166,
+"y": 3928
 },
 {
 "n": "Iriaebor",
 "t": "extranjera",
-"x": 904,
-"y": 3634
+"x": 897,
+"y": 3662
 },
 {
 "n": "Berdusk",
 "t": "extranjera",
-"x": 184,
-"y": 3972
+"x": 183,
+"y": 4003
 },
 {
 "n": "Asbravn",
 "t": "extranjera",
-"x": 960,
-"y": 3004
+"x": 952,
+"y": 3027,
+"u": "geografía/ciudades/asbravn",
+"r": ""
 },
 {
 "n": "Hluthvar",
 "t": "extranjera",
-"x": 727,
-"y": 2200
+"x": 721,
+"y": 2217
+},
+{
+"n": "Eastern Stormhorns",
+"t": "region",
+"x": 3243,
+"y": 988,
+"u": "geografía/regiones/stormhorns",
+"r": "Vistos desde el sur, por encima de los pinares, los Stormhorns son una línea púrpura en el horizonte: montañas que se alzan contra el cielo como colmillos. Son la gran muralla que defiende el flanco occidental de Cormyr y su frontera práctica, más real que…"
 }
 ]
+}

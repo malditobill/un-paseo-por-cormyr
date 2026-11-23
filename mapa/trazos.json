@@ -1,0 +1,35 @@
+{
+ "capas": [
+  {
+   "id": "principales",
+   "nombre": "Caminos principales",
+   "clase": "camino-principal",
+   "visible": true
+  },
+  {
+   "id": "secundarios",
+   "nombre": "Caminos secundarios",
+   "clase": "camino-secundario",
+   "visible": true
+  },
+  {
+   "id": "senderos",
+   "nombre": "Senderos",
+   "clase": "sendero",
+   "visible": true
+  },
+  {
+   "id": "fronteras",
+   "nombre": "Fronteras",
+   "clase": "frontera",
+   "visible": true
+  },
+  {
+   "id": "zonas",
+   "nombre": "Zonas",
+   "clase": "zona",
+   "visible": true
+  }
+ ],
+ "trazos": []
+}
