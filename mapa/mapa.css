@@ -1,0 +1,55 @@
+/* Mapa interactivo del reino. El papel del mapa es siempre claro: las etiquetas usan colores fijos. */
+#mapa-reino { margin: 1.5rem 0; position: relative; }
+.mapa-barra { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: .6rem; }
+.mapa-buscar {
+  flex: 1 1 14rem; min-width: 0; padding: .45rem .7rem; font: inherit;
+  border: 1px solid var(--lightgray); border-radius: 4px; background: var(--light); color: var(--dark);
+}
+.mapa-completa {
+  padding: .45rem .9rem; font: inherit; font-size: .92rem; cursor: pointer;
+  border: 1px solid var(--secondary); border-radius: 4px; background: transparent; color: var(--secondary);
+}
+.mapa-completa:hover { background: var(--secondary); color: var(--light); }
+.mapa-lienzo {
+  height: min(72vh, 760px); min-height: 360px; background: #faf7ee;
+  border: 1px solid #3d3265; box-shadow: inset 0 0 0 3px #faf7ee, inset 0 0 0 4px #b08d3c;
+}
+#mapa-reino.pantalla-completa {
+  position: fixed; inset: 0; z-index: 1000; margin: 0; padding: .8rem; background: var(--light);
+  display: flex; flex-direction: column;
+}
+#mapa-reino.pantalla-completa .mapa-lienzo { flex: 1; height: auto; }
+
+/* lugares */
+.lugar { background: none; border: 0; }
+.lugar .pt { position: absolute; inset: 0; border-radius: 50%; }
+.lugar:hover .pt, .lugar:focus .pt { box-shadow: 0 0 0 2px #b08d3c; }
+.lugar .et {
+  position: absolute; left: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap;
+  font-family: var(--headerFont), "Cinzel", Georgia, serif; font-size: 13px; font-weight: 600; color: #262040;
+  letter-spacing: .02em; pointer-events: auto;
+  text-shadow: 0 0 2px #faf7ee, 0 0 3px #faf7ee, 0 0 5px #faf7ee, 0 0 8px #faf7ee;
+}
+.lugar-capital .et, .lugar-ciudad .et { font-size: 16px; font-weight: 700; color: #3d3265; }
+.lugar-capital .et { font-size: 18px; }
+.lugar-extranjera .et { color: #5d5574; font-weight: 500; font-style: italic; }
+.lugar-region .et, .lugar-paraje .et {
+  position: static; display: block; transform: translate(-50%, -50%); text-align: center;
+  font-size: 17px; font-weight: 700; color: #5b2a6e; text-transform: uppercase; letter-spacing: .14em;
+}
+.lugar-paraje .et { font-size: 13px; text-transform: none; font-style: italic; letter-spacing: .04em; color: #4a3f78; }
+.mapa-lienzo .lugar-pueblo, .mapa-lienzo .lugar-castillo, .mapa-lienzo .lugar-ruina { display: none; }
+.mapa-lienzo.ver-pueblos .lugar-pueblo, .mapa-lienzo.ver-pueblos .lugar-castillo, .mapa-lienzo.ver-pueblos .lugar-ruina { display: block; }
+.mapa-lienzo .lugar-paraje { display: none; }
+.mapa-lienzo.ver-parajes .lugar-paraje { display: block; }
+
+/* ventanas */
+.mapa-popup b { display: block; font-family: var(--headerFont), Georgia, serif; font-size: 1.1rem; color: #3d3265; }
+.mapa-popup small { display: block; color: #8a6a1f; font-style: italic; margin-bottom: .3rem; }
+.mapa-popup p { margin: .3rem 0 .5rem; font-size: .92rem; line-height: 1.4; color: #262040; }
+.mapa-popup a { color: #3d3265; font-weight: 600; }
+.leaflet-container { font-family: var(--bodyFont), Georgia, serif; }
+.leaflet-popup-content-wrapper { background: #fcfaf6; border: 1px solid #b08d3c; border-radius: 4px; }
+.leaflet-popup-tip { background: #fcfaf6; }
+.leaflet-control-layers, .leaflet-bar a { background: #fcfaf6; color: #3d3265; }
+.leaflet-control-layers-expanded { color: #262040; font-size: .95rem; }
