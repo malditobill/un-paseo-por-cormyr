@@ -11,7 +11,7 @@
 }
 .mapa-completa:hover { background: var(--secondary); color: var(--light); }
 .mapa-lienzo {
-  height: min(72vh, 760px); min-height: 360px; background: #faf7ee;
+  aspect-ratio: 3 / 2; width: 100%; max-height: 78vh; min-height: 260px; background: #faf7ee;
   border: 1px solid #3d3265; box-shadow: inset 0 0 0 3px #faf7ee, inset 0 0 0 4px #b08d3c;
 }
 #mapa-reino.pantalla-completa {
@@ -22,34 +22,82 @@
 
 /* lugares */
 .lugar { background: none; border: 0; }
-.lugar .pt { position: absolute; inset: 0; border-radius: 50%; }
-.lugar:hover .pt, .lugar:focus .pt { box-shadow: 0 0 0 2px #b08d3c; }
+.lugar .pt { position: absolute; inset: 0; }
+.lugar .pt svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.lugar:hover .pt, .lugar:focus .pt { filter: drop-shadow(0 0 3px #b08d3c); }
 .lugar .et {
-  position: absolute; left: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap;
-  font-family: var(--headerFont), "Cinzel", Georgia, serif; font-size: 13px; font-weight: 600; color: #262040;
+  position: absolute; left: calc(100% + 4px); top: 50%; transform: translateY(-50%); white-space: nowrap;
+  font-family: var(--headerFont), "Cinzel", Georgia, serif; font-size: 17px; font-weight: 600; color: #262040;
   letter-spacing: .02em; pointer-events: auto;
   text-shadow: 0 0 2px #faf7ee, 0 0 3px #faf7ee, 0 0 5px #faf7ee, 0 0 8px #faf7ee;
 }
-.lugar-capital .et, .lugar-ciudad .et { font-size: 16px; font-weight: 700; color: #3d3265; }
-.lugar-capital .et { font-size: 18px; }
+.lugar-capital .et, .lugar-ciudad .et { font-size: 21px; font-weight: 700; color: #3d3265; }
+.lugar-capital .et { font-size: 23px; }
 .lugar-extranjera .et { color: #5d5574; font-weight: 500; font-style: italic; }
 .lugar-region .et, .lugar-paraje .et {
   position: static; display: block; transform: translate(-50%, -50%); text-align: center;
-  font-size: 17px; font-weight: 700; color: #5b2a6e; text-transform: uppercase; letter-spacing: .14em;
+  font-size: 22px; font-weight: 700; color: #5b2a6e; text-transform: uppercase; letter-spacing: .14em;
 }
-.lugar-paraje .et { font-size: 13px; text-transform: none; font-style: italic; letter-spacing: .04em; color: #4a3f78; }
-.mapa-lienzo .lugar-pueblo, .mapa-lienzo .lugar-castillo, .mapa-lienzo .lugar-ruina { display: none; }
-.mapa-lienzo.ver-pueblos .lugar-pueblo, .mapa-lienzo.ver-pueblos .lugar-castillo, .mapa-lienzo.ver-pueblos .lugar-ruina { display: block; }
-.mapa-lienzo .lugar-paraje { display: none; }
-.mapa-lienzo.ver-parajes .lugar-paraje { display: block; }
+.lugar-paraje .et { font-size: 17px; text-transform: none; font-style: italic; letter-spacing: .04em; color: #4a3f78; }
+/* de lejos: regiones y ciudades; al acercar, pueblos, aldeas, castillos y ruinas; más cerca, caseríos y parajes */
+.mapa-lienzo .lugar-pueblo, .mapa-lienzo .lugar-aldea, .mapa-lienzo .lugar-castillo, .mapa-lienzo .lugar-ruina,
+.mapa-lienzo .lugar-templo, .mapa-lienzo .lugar-sitio { display: none; }
+.mapa-lienzo.ver-pueblos .lugar-pueblo, .mapa-lienzo.ver-pueblos .lugar-aldea, .mapa-lienzo.ver-pueblos .lugar-castillo, .mapa-lienzo.ver-pueblos .lugar-ruina,
+.mapa-lienzo.ver-pueblos .lugar-templo, .mapa-lienzo.ver-pueblos .lugar-sitio { display: block; }
+.mapa-lienzo .lugar-paraje, .mapa-lienzo .lugar-caserio { display: none; }
+.mapa-lienzo.ver-parajes .lugar-paraje, .mapa-lienzo.ver-parajes .lugar-caserio { display: block; }
+.lugar-pueblo .et { font-size: 18px; }
+.lugar-caserio .et { font-size: 16px; font-weight: 500; }
 
 /* ventanas */
-.mapa-popup b { display: block; font-family: var(--headerFont), Georgia, serif; font-size: 1.1rem; color: #3d3265; }
+.mapa-popup b { display: block; font-family: var(--headerFont), Georgia, serif; font-size: 1.43rem; color: #3d3265; }
 .mapa-popup small { display: block; color: #8a6a1f; font-style: italic; margin-bottom: .3rem; }
-.mapa-popup p { margin: .3rem 0 .5rem; font-size: .92rem; line-height: 1.4; color: #262040; }
+.mapa-popup p { margin: .3rem 0 .5rem; font-size: 1.2rem; line-height: 1.4; color: #262040; }
 .mapa-popup a { color: #3d3265; font-weight: 600; }
 .leaflet-container { font-family: var(--bodyFont), Georgia, serif; }
 .leaflet-popup-content-wrapper { background: #fcfaf6; border: 1px solid #b08d3c; border-radius: 4px; }
 .leaflet-popup-tip { background: #fcfaf6; }
 .leaflet-control-layers, .leaflet-bar a { background: #fcfaf6; color: #3d3265; }
 .leaflet-control-layers-expanded { color: #262040; font-size: .95rem; }
+
+/* referencias (barra derecha y control dentro del mapa) */
+.mapa-ref .ref-titulo { margin: 0 0 .4rem; font-size: 1rem; }
+.mapa-ref .ref-grupo { margin: .7rem 0 .25rem; font-family: var(--headerFont), Georgia, serif; font-size: .75rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--gray); }
+.mapa-ref ul { list-style: none; margin: 0; padding: 0; }
+.mapa-ref li { margin: 0; padding: 0; }
+.mapa-ref button { display: flex; align-items: center; gap: .55rem; width: 100%; padding: .2rem 0; border: 0;
+  background: none; color: var(--darkgray); font: inherit; font-size: .9rem; line-height: 1.25; text-align: left; cursor: pointer; }
+.mapa-ref button:hover span:last-child { color: var(--secondary); }
+.mapa-ref button[aria-pressed="false"] { opacity: .38; }
+.mapa-ref button[aria-pressed="false"] span:last-child { text-decoration: line-through; }
+.mapa-ref .ref-ic { flex: 0 0 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+  background: #faf7ee; border-radius: 3px; }
+.mapa-ref .ref-ic svg { width: 20px; height: 20px; }
+.mapa-ref .ref-txt { font-family: var(--headerFont), Georgia, serif; font-size: 12px; font-weight: 700; color: #5b2a6e; }
+.mapa-ref .ref-paraje { font-style: italic; color: #4a3f78; font-weight: 600; }
+.mapa-ref-control { background: #fcfaf6; border: 1px solid #b08d3c; border-radius: 4px; padding: .35rem .6rem;
+  max-height: 60vh; overflow-y: auto; color: #262040; --gray: #5d5574; --darkgray: #262040; --secondary: #3d3265; }
+.mapa-ref-control summary { cursor: pointer; font-family: var(--headerFont), Georgia, serif; font-weight: 700; color: #3d3265; }
+@media (min-width: 1200px) { .mapa-ref-control { display: none; } }
+.mapa-lienzo.sin-capital .lugar-capital { display: none !important; }
+.mapa-lienzo.sin-ciudad .lugar-ciudad { display: none !important; }
+.mapa-lienzo.sin-arrasada .lugar-arrasada { display: none !important; }
+.mapa-lienzo.sin-pueblo .lugar-pueblo { display: none !important; }
+.mapa-lienzo.sin-aldea .lugar-aldea { display: none !important; }
+.mapa-lienzo.sin-caserio .lugar-caserio { display: none !important; }
+.mapa-lienzo.sin-castillo .lugar-castillo { display: none !important; }
+.mapa-lienzo.sin-ruina .lugar-ruina { display: none !important; }
+.mapa-lienzo.sin-templo .lugar-templo { display: none !important; }
+.mapa-lienzo.sin-sitio .lugar-sitio { display: none !important; }
+.mapa-lienzo.sin-extranjera .lugar-extranjera { display: none !important; }
+.mapa-lienzo.sin-region .lugar-region { display: none !important; }
+.mapa-lienzo.sin-paraje .lugar-paraje { display: none !important; }
+
+/* la capital lleva el nombre debajo, para no pisar a Marsember */
+.lugar-capital .et { left: 50%; top: calc(100% + 2px); transform: translateX(-50%); }
+
+/* mapa visto muy chico: nombres más chicos y sin las ciudades de otros reinos */
+.mapa-lienzo.lejos .lugar .et { font-size: 11px !important; letter-spacing: .04em; }
+.mapa-lienzo.lejos .lugar-capital .et, .mapa-lienzo.lejos .lugar-ciudad .et { font-size: 13px !important; }
+.mapa-lienzo.lejos .lugar-extranjera { display: none; }

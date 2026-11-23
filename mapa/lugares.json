@@ -25,7 +25,7 @@
 },
 {
 "n": "Tilverton",
-"t": "ciudad",
+"t": "arrasada",
 "x": 4558,
 "y": 526,
 "u": "geografía/ciudades/tilverton",
@@ -33,7 +33,7 @@
 },
 {
 "n": "Eagle Peak",
-"t": "pueblo",
+"t": "aldea",
 "x": 2409,
 "y": 1487,
 "u": "geografía/territorios-y-ruinas/eagle-peak",
@@ -49,7 +49,7 @@
 },
 {
 "n": "Tyrluk",
-"t": "pueblo",
+"t": "caserio",
 "x": 2897,
 "y": 1497,
 "u": "geografía/pueblos/tyrluk",
@@ -57,7 +57,7 @@
 },
 {
 "n": "Collinwood",
-"t": "pueblo",
+"t": "aldea",
 "x": 3244,
 "y": 1560,
 "u": "geografía/pueblos/collinwood",
@@ -65,7 +65,7 @@
 },
 {
 "n": "Espar",
-"t": "pueblo",
+"t": "aldea",
 "x": 2874,
 "y": 1786,
 "u": "geografía/pueblos/espar",
@@ -81,7 +81,7 @@
 },
 {
 "n": "Dhedluk",
-"t": "pueblo",
+"t": "caserio",
 "x": 3474,
 "y": 1807,
 "u": "geografía/pueblos/dhedluk",
@@ -97,7 +97,7 @@
 },
 {
 "n": "Stagsteads",
-"t": "pueblo",
+"t": "aldea",
 "x": 3594,
 "y": 1924,
 "u": "geografía/pueblos/stagsteads",
@@ -105,7 +105,7 @@
 },
 {
 "n": "Eveningstar",
-"t": "pueblo",
+"t": "caserio",
 "x": 3596,
 "y": 1444,
 "u": "geografía/pueblos/eveningstar",
@@ -121,7 +121,7 @@
 },
 {
 "n": "Knightswood",
-"t": "pueblo",
+"t": "aldea",
 "x": 3865,
 "y": 1786,
 "u": "geografía/pueblos/knightswood",
@@ -129,7 +129,7 @@
 },
 {
 "n": "Aunkspear",
-"t": "pueblo",
+"t": "aldea",
 "x": 4085,
 "y": 1869,
 "u": "geografía/pueblos/aunkspear",
@@ -137,7 +137,7 @@
 },
 {
 "n": "Minroe",
-"t": "pueblo",
+"t": "caserio",
 "x": 2891,
 "y": 2146,
 "u": "geografía/pueblos/minroe",
@@ -145,7 +145,7 @@
 },
 {
 "n": "Gray Oaks",
-"t": "pueblo",
+"t": "caserio",
 "x": 3855,
 "y": 2193,
 "u": "geografía/pueblos/gray-oaks",
@@ -153,7 +153,7 @@
 },
 {
 "n": "Hilp",
-"t": "pueblo",
+"t": "caserio",
 "x": 4041,
 "y": 2134,
 "u": "geografía/pueblos/hilp",
@@ -169,7 +169,7 @@
 },
 {
 "n": "Griffon Hill",
-"t": "pueblo",
+"t": "aldea",
 "x": 4399,
 "y": 505,
 "u": "geografía/territorios-y-ruinas/griffon-hill",
@@ -193,7 +193,7 @@
 },
 {
 "n": "Hillmarch",
-"t": "pueblo",
+"t": "aldea",
 "x": 4524,
 "y": 1150,
 "u": "geografía/pueblos/hillmarch",
@@ -209,7 +209,7 @@
 },
 {
 "n": "Bospir",
-"t": "pueblo",
+"t": "aldea",
 "x": 4410,
 "y": 1559,
 "u": "geografía/pueblos/bospir",
@@ -217,7 +217,7 @@
 },
 {
 "n": "Yeoman Bridge",
-"t": "pueblo",
+"t": "caserio",
 "x": 4332,
 "y": 1660,
 "u": "geografía/pueblos/yeoman-bridge",
@@ -225,7 +225,7 @@
 },
 {
 "n": "Juniril",
-"t": "pueblo",
+"t": "aldea",
 "x": 4676,
 "y": 1910,
 "u": "geografía/pueblos/juniril",
@@ -233,7 +233,7 @@
 },
 {
 "n": "Immersea",
-"t": "pueblo",
+"t": "aldea",
 "x": 4152,
 "y": 1964,
 "u": "geografía/pueblos/immersea",
@@ -241,7 +241,7 @@
 },
 {
 "n": "Hultail",
-"t": "pueblo",
+"t": "caserio",
 "x": 5026,
 "y": 1611,
 "u": "geografía/pueblos/hultail",
@@ -249,7 +249,7 @@
 },
 {
 "n": "Thunderstone",
-"t": "pueblo",
+"t": "aldea",
 "x": 5278,
 "y": 1649,
 "u": "geografía/pueblos/thunderstone",
@@ -265,7 +265,7 @@
 },
 {
 "n": "Gladehap",
-"t": "pueblo",
+"t": "aldea",
 "x": 4242,
 "y": 2128,
 "u": "geografía/pueblos/gladehap",
@@ -273,7 +273,7 @@
 },
 {
 "n": "Nesmyth",
-"t": "pueblo",
+"t": "aldea",
 "x": 4312,
 "y": 2332,
 "u": "geografía/pueblos/nesmyth",
@@ -281,7 +281,7 @@
 },
 {
 "n": "Bogbrook",
-"t": "pueblo",
+"t": "aldea",
 "x": 4234,
 "y": 2382,
 "u": "geografía/pueblos/bogbrook",
@@ -297,7 +297,7 @@
 },
 {
 "n": "Blustich",
-"t": "pueblo",
+"t": "aldea",
 "x": 4626,
 "y": 2540,
 "u": "geografía/pueblos/blustich",
@@ -305,13 +305,13 @@
 },
 {
 "n": "Monksblade",
-"t": "pueblo",
+"t": "caserio",
 "x": 5227,
 "y": 2556
 },
 {
 "n": "Wormtower",
-"t": "pueblo",
+"t": "aldea",
 "x": 5508,
 "y": 2821,
 "u": "geografía/pueblos/wormtower",
