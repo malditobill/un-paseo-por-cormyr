@@ -527,7 +527,9 @@
 "n": "Priapurl",
 "t": "extranjera",
 "x": 2166,
-"y": 3928
+"y": 3928,
+"u": "geografía/ciudades/priapurl",
+"r": ""
 },
 {
 "n": "Iriaebor",
@@ -557,7 +559,9 @@
 "n": "Hluthvar",
 "t": "extranjera",
 "x": 721,
-"y": 2217
+"y": 2217,
+"u": "geografía/ciudades/hluthvar",
+"r": ""
 },
 {
 "n": "Eastern Stormhorns",
