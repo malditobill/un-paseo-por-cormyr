@@ -23,6 +23,8 @@
 "t": "ciudad",
 "x": 4140,
 "y": 2585,
+"dx": -69.0,
+"dy": 25.0,
 "u": "geografía/ciudades/marsember",
 "r": "Marsember es más vieja que Suzail y, según casi todo el mundo, mucho más decadente. Se levanta en la orilla oeste de la desembocadura del Starwater, el río más transitado del reino, que baja de las Stormhorn Mountains, cruza el gran bosque del centro y muere…"
 },
@@ -332,12 +334,12 @@
 },
 {
 "n": "Stonelands",
-"t": "region",
+"t": "region2",
 "x": 3798,
 "y": 806,
 "rot": -22.0,
-"dx": -32.0,
-"dy": -22.0,
+"dx": -17.0,
+"dy": -15.0,
 "u": "geografía/regiones/stonelands",
 "r": "A la luz de la luna, las Stonelands parecen un mar que se congeló en plena tormenta: olas de piedra que rompen contra dientes de gigante. De día no mejoran. El suelo es arcilla seca, sembrada de peñascos de todos los tamaños, algunos tan grandes como una…"
 },
@@ -358,8 +360,8 @@
 "x": 2925,
 "y": 2628,
 "rot": 68.0,
-"dx": -60.0,
-"dy": -128.0,
+"dx": -42.0,
+"dy": -63.0,
 "u": "geografía/regiones/stormhorns",
 "r": "Vistos desde el sur, por encima de los pinares, los Stormhorns son una línea púrpura en el horizonte: montañas que se alzan contra el cielo como colmillos. Son la gran muralla que defiende el flanco occidental de Cormyr y su frontera práctica, más real que…"
 },
@@ -389,8 +391,8 @@
 "x": 5612,
 "y": 1129,
 "rot": -68.0,
-"dx": 64.0,
-"dy": 61.0,
+"dx": 49.0,
+"dy": 35.0,
 "u": "geografía/regiones/thunder-peaks",
 "r": "Desde el oeste, la tierra sube despacio: el bosque se abre, la roca desnuda aparece cada vez más seguido, y de pronto, detrás de la bruma, los Thunder Peaks se levantan como una gran muralla. Son altos y oscuros, grises y púrpuras sobre la línea de los…"
 },
@@ -399,16 +401,18 @@
 "t": "region2",
 "x": 5278,
 "y": 2016,
-"dx": 32.0,
-"dy": 36.0,
+"dx": 23.0,
+"dy": 35.0,
 "u": "geografía/regiones/vast-swamp",
 "r": "En el Vast Swamp los árboles parecen muertos, aun los que están vivos. La corteza y las hojas son negras, como si el barro que sube por las raíces los tiñera desde adentro, y el musgo cuelga de las ramas en tiras verdes que recuerdan carne picada colgando de…"
 },
 {
 "n": "Tunlands",
-"t": "region",
+"t": "region2",
 "x": 1980,
 "y": 2411,
+"dx": 8.0,
+"dy": 15.0,
 "u": "geografía/regiones/tunlands",
 "r": "Desde lo alto de una loma, el Farsea Marsh se ve como un mar de hierba. Llega hasta el horizonte: pastizal alto, de un verde dorado, cruzado por canales de agua color bronce que serpentean entre bosquecillos sueltos de álamos de pantano y abetos de turbera.…"
 },
@@ -459,6 +463,9 @@
 "t": "region",
 "x": 1262,
 "y": 1326,
+"rot": -34.0,
+"dx": 33.0,
+"dy": -29.0,
 "u": "geografía/regiones/sunset-mountains",
 "r": ""
 },
@@ -466,7 +473,9 @@
 "n": "Farsea Marshes",
 "t": "region2",
 "x": 1893,
-"y": 1856
+"y": 1856,
+"dx": 40.0,
+"dy": -32.0
 },
 {
 "n": "Skull Gorge",
@@ -524,13 +533,17 @@
 "n": "Iriaebor",
 "t": "extranjera",
 "x": 897,
-"y": 3662
+"y": 3662,
+"u": "geografía/ciudades/iriaebor",
+"r": ""
 },
 {
 "n": "Berdusk",
 "t": "extranjera",
 "x": 183,
-"y": 4003
+"y": 4003,
+"u": "geografía/ciudades/berdusk",
+"r": ""
 },
 {
 "n": "Asbravn",
@@ -551,6 +564,9 @@
 "t": "region",
 "x": 3243,
 "y": 988,
+"rot": -25.0,
+"dx": 96.0,
+"dy": 19.0,
 "u": "geografía/regiones/stormhorns",
 "r": "Vistos desde el sur, por encima de los pinares, los Stormhorns son una línea púrpura en el horizonte: montañas que se alzan contra el cielo como colmillos. Son la gran muralla que defiende el flanco occidental de Cormyr y su frontera práctica, más real que…"
 }
