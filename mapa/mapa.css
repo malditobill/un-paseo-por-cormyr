@@ -183,4 +183,7 @@ html.cronica-ancha .mapa-ref-control { display: block !important; }
 .mapa-trazos .contorno { pointer-events: none; }
 /* líneas ocultas (ríos): en el sitio solo el texto; en el editor, tenues y punteadas para poder elegirlas */
 .mapa-trazos:not(.editando) .trazo.oculta .vis, .mapa-trazos:not(.editando) .trazo.oculta .contorno { display: none; }
-.mapa-trazos.editando .trazo.oculta .vis { stroke-opacity: .45; stroke-dasharray: 5 4; }
+.mapa-trazos.editando .trazo.oculta .vis { stroke: #2f6fd0 !important; stroke-opacity: .85; stroke-dasharray: 7 4; stroke-width: 2.5px; }
+#ed-ui .ed-mano-guia { fill: none; stroke: #2f6fd0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none !important; }
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="mano"], #mapa-reino.editor-activo .mapa-lienzo[data-herramienta="mano"] * { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2728%27%20height%3D%2728%27%20viewBox%3D%270%200%2028%2028%27%3E%3Cpath%20d%3D%27M3%2025%20L4%2019%20L18%205%20L23%2010%20L9%2024%20Z%27%20fill%3D%27%23d9b56c%27%20stroke%3D%27%233d3265%27%20stroke-width%3D%271.6%27%20stroke-linejoin%3D%27round%27/%3E%3Cpath%20d%3D%27M3%2025%20L4%2019%20L9%2024%20Z%27%20fill%3D%27%233d3265%27/%3E%3Cpath%20d%3D%27M14%2026%20C17%2022%2021%2027%2025%2023%27%20fill%3D%27none%27%20stroke%3D%27%232f6fd0%27%20stroke-width%3D%271.6%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E") 3 25, crosshair !important; }
+.mapa-lienzo[data-herramienta="mano"] .lugar { pointer-events: none; }
