@@ -87,6 +87,7 @@ window.MAPA_TRAZOS = (function () {
             "font-family": `"${r.fuente || "EB Garamond"}", Georgia, serif`, "font-style": r.cursiva === false ? "normal" : "italic",
             "font-weight": r.peso || 600, "letter-spacing": (tam * 0.04).toFixed(2),
             stroke: "#faf7ee", "stroke-width": (3 * k).toFixed(2), "paint-order": "stroke", "stroke-linejoin": "round",
+            style: `fill:${r.color || "#6b2a3a"};stroke:#faf7ee`,
           }, gt)
           const tp = el("textPath", { href: "#" + id, startOffset: (r.pos ?? 50) + "%", "text-anchor": "middle" }, tx)
           tp.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#" + id)

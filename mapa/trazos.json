@@ -146,11 +146,13 @@
     "activo": true,
     "texto": "Dragoneye Way",
     "zoom": 3,
-    "color": "#b08d3c",
-    "pos": 60,
-    "tam": 20,
+    "color": "#8a6a1f",
+    "pos": 70,
+    "tam": 15,
     "invertir": false,
-    "cursiva": true
+    "cursiva": true,
+    "sep": -23,
+    "fuente": "EB Garamond"
    }
   }
  ]

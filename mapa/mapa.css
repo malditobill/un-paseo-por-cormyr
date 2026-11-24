@@ -164,3 +164,9 @@
 .ed-capas select { margin: 0; padding: .1rem; font-size: .78rem; }
 /* el estilo general del sitio corre las casillas 1,4rem a la izquierda (listas de tareas): en el editor, no */
 .ed-panel input[type="checkbox"] { margin-inline-start: 0 !important; margin-inline-end: .35rem; flex: 0 0 auto; }
+.mapa-lienzo[data-herramienta="unir"] .lugar { cursor: crosshair; }
+/* lo elegido en el editor: recuadro de color */
+#ed-ui .ed-recuadro { fill: none; stroke: #b08d3c; stroke-width: 1.5; stroke-dasharray: 6 4; pointer-events: none !important; }
+.lugar.ed-elegido .pt, .lugar-region.ed-elegido .et, .lugar-region2.ed-elegido .et, .lugar-paraje.ed-elegido .et {
+  outline: 2px dashed #b08d3c; outline-offset: 3px; border-radius: 3px; }
+.lugar.ed-elegido .et { outline: 2px dashed #b08d3c; outline-offset: 2px; border-radius: 3px; }
