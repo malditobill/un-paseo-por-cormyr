@@ -21,8 +21,8 @@
 {
 "n": "Marsember",
 "t": "ciudad",
-"x": 4140,
-"y": 2585,
+"x": 4195,
+"y": 2554,
 "dx": -69.0,
 "dy": 25.0,
 "u": "geografía/ciudades/marsember",
@@ -279,16 +279,20 @@
 {
 "n": "Nesmyth",
 "t": "aldea",
-"x": 4278,
-"y": 2350,
+"x": 4223,
+"y": 2236,
+"dx": -82.0,
+"dy": 26.0,
 "u": "geografía/pueblos/nesmyth",
 "r": "Nesmyth es una comunidad en guerra consigo misma. Se alza al noreste de Marsember, entre colinas, en las tierras altas al norte y al este de la gran curva donde el Starwater gira hacia el sur, hacia el mar. Queda al sureste de Hilp, de donde viene el stelk…"
 },
 {
 "n": "Bogbrook",
 "t": "aldea",
-"x": 4201,
-"y": 2401,
+"x": 4266,
+"y": 2397,
+"dx": -105.0,
+"dy": 16.0,
 "u": "geografía/pueblos/bogbrook",
 "r": "Bogbrook debe su nombre a un manantial que forma un pantano y a un arroyo que lleva sus aguas hasta el río Starwater. Es un lugar salvaje y descuidado de pastizales altos y ciénagas. Las casas son de piedra, con techos de tablas y césped, y sus laterales de…"
 },
@@ -303,8 +307,8 @@
 {
 "n": "Blustich",
 "t": "aldea",
-"x": 4590,
-"y": 2560,
+"x": 4610,
+"y": 2527,
 "u": "geografía/pueblos/blustich",
 "r": "Blustich es una aldea pequeña en la orilla oeste del Wyvernflow, allí donde el Hermit's Wood llega hasta el río. Sus habitantes viven de la pesca, de la caza en el bosque y de la agricultura. Es poco lo que retiene a un viajero."
 },
@@ -452,7 +456,7 @@
 },
 {
 "n": "Hermit's Wood",
-"t": "paraje",
+"t": "region2",
 "x": 4461,
 "y": 2407,
 "u": "geografía/regiones/hermit's-wood",
@@ -573,6 +577,14 @@
 "dy": 19.0,
 "u": "geografía/regiones/stormhorns",
 "r": "Vistos desde el sur, por encima de los pinares, los Stormhorns son una línea púrpura en el horizonte: montañas que se alzan contra el cielo como colmillos. Son la gran muralla que defiende el flanco occidental de Cormyr y su frontera práctica, más real que…"
+},
+{
+"n": "Moonever",
+"t": "aldea",
+"x": 4274,
+"y": 2583,
+"u": "geografía/pueblos/moonever",
+"r": "Moonever es una aldea pesquera en la orilla oriental del Starwater, justo tierra adentro desde la desembocadura del río. No hay mucho que ver: botes podridos y pescado en descomposición. Y sin embargo sus carros de hielo, goteando, son una imagen familiar en…"
 }
 ]
 }

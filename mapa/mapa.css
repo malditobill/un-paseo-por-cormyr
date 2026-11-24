@@ -145,13 +145,10 @@
 #ed-ui .ed-nodo-sel { fill: #b08d3c; stroke: #3d3265; }
 #ed-ui .ed-guia { fill: none; stroke: #3d3265; stroke-width: 1.2; stroke-dasharray: 4 4; pointer-events: none !important; }
 .mapa-trazos .ed-sel .vis { filter: drop-shadow(0 0 3px #b08d3c); }
-.mapa-lienzo[data-herramienta="linea"], .mapa-lienzo[data-herramienta="zona"] { cursor: crosshair; }
-.mapa-lienzo.ed-mano { cursor: grab; }
 .mapa-lienzo[data-herramienta="linea"] .lugar, .mapa-lienzo[data-herramienta="zona"] .lugar { pointer-events: none; }
 .ed-chk { display: flex !important; align-items: center; gap: .3rem; flex: 0 0 auto !important; }
 .ed-lugar { margin: .2rem 0 .4rem; }
 #mapa-reino.editor-activo .lugar .et { cursor: grab; }
-.mapa-lienzo[data-herramienta="lugar"] { cursor: copy; }
 .mapa-lienzo[data-herramienta="lugar"] .lugar { pointer-events: none; }
 .ed-zoom { font-size: .8rem; color: var(--gray); margin: 0 0 .5rem; }
 .ed-pub { font-size: .82rem; margin: .4rem 0 0; padding: .35rem .5rem; border-radius: 3px; background: color-mix(in srgb, var(--secondary) 8%, transparent); }
@@ -164,9 +161,20 @@
 .ed-capas select { margin: 0; padding: .1rem; font-size: .78rem; }
 /* el estilo general del sitio corre las casillas 1,4rem a la izquierda (listas de tareas): en el editor, no */
 .ed-panel input[type="checkbox"] { margin-inline-start: 0 !important; margin-inline-end: .35rem; flex: 0 0 auto; }
-.mapa-lienzo[data-herramienta="unir"] .lugar { cursor: crosshair; }
 /* lo elegido en el editor: recuadro de color */
 #ed-ui .ed-recuadro { fill: none; stroke: #b08d3c; stroke-width: 1.5; stroke-dasharray: 6 4; pointer-events: none !important; }
 .lugar.ed-elegido .pt, .lugar-region.ed-elegido .et, .lugar-region2.ed-elegido .et, .lugar-paraje.ed-elegido .et {
   outline: 2px dashed #b08d3c; outline-offset: 3px; border-radius: 3px; }
 .lugar.ed-elegido .et { outline: 2px dashed #b08d3c; outline-offset: 2px; border-radius: 3px; }
+
+/* cursor según la herramienta activa del editor */
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="seleccionar"] { cursor: default; }
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="seleccionar"] .leaflet-grab { cursor: default; }
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="seleccionar"] .leaflet-dragging .leaflet-grab { cursor: grabbing; }
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="linea"], #mapa-reino.editor-activo .mapa-lienzo[data-herramienta="linea"] * { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2728%27%20height%3D%2728%27%20viewBox%3D%270%200%2028%2028%27%3E%3Cpath%20d%3D%27M3%2025%20L5%2018%20L19%204%20L24%209%20L10%2023%20Z%27%20fill%3D%27%23fcfaf6%27%20stroke%3D%27%233d3265%27%20stroke-width%3D%271.8%27%20stroke-linejoin%3D%27round%27/%3E%3Cpath%20d%3D%27M16%207%20L21%2012%27%20stroke%3D%27%23b08d3c%27%20stroke-width%3D%272%27/%3E%3Ccircle%20cx%3D%273.5%27%20cy%3D%2724.5%27%20r%3D%271.6%27%20fill%3D%27%233d3265%27/%3E%3C/svg%3E") 3 25, crosshair !important; }
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="zona"], #mapa-reino.editor-activo .mapa-lienzo[data-herramienta="zona"] * { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2728%27%20height%3D%2728%27%20viewBox%3D%270%200%2028%2028%27%3E%3Cpath%20d%3D%27M4%204%20L4%204%27%20stroke%3D%27%233d3265%27/%3E%3Cpath%20d%3D%27M3%203%20L3%209%20M3%203%20L9%203%27%20stroke%3D%27%233d3265%27%20stroke-width%3D%272%27/%3E%3Cpath%20d%3D%27M11%209%20L24%2012%20L21%2024%20L9%2021%20Z%27%20fill%3D%27%23b08d3c%27%20fill-opacity%3D%27.35%27%20stroke%3D%27%233d3265%27%20stroke-width%3D%271.6%27%20stroke-dasharray%3D%273%202%27/%3E%3C/svg%3E") 3 3, crosshair !important; }
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="lugar"], #mapa-reino.editor-activo .mapa-lienzo[data-herramienta="lugar"] * { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2728%27%20height%3D%2728%27%20viewBox%3D%270%200%2028%2028%27%3E%3Cpath%20d%3D%27M14%2026%20C8%2018%205%2014%205%2010%20A9%209%200%200%201%2023%2010%20C23%2014%2020%2018%2014%2026%20Z%27%20fill%3D%27%23fcfaf6%27%20stroke%3D%27%233d3265%27%20stroke-width%3D%271.8%27/%3E%3Cpath%20d%3D%27M14%206%20V14%20M10%2010%20H18%27%20stroke%3D%27%23b08d3c%27%20stroke-width%3D%272.4%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E") 14 26, copy !important; }
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="unir"], #mapa-reino.editor-activo .mapa-lienzo[data-herramienta="unir"] * { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2728%27%20height%3D%2728%27%20viewBox%3D%270%200%2028%2028%27%3E%3Ccircle%20cx%3D%275%27%20cy%3D%275%27%20r%3D%273.2%27%20fill%3D%27%233d3265%27/%3E%3Ccircle%20cx%3D%2723%27%20cy%3D%2723%27%20r%3D%273.2%27%20fill%3D%27%233d3265%27/%3E%3Cpath%20d%3D%27M7%207%20C18%204%2010%2024%2021%2021%27%20fill%3D%27none%27%20stroke%3D%27%23b08d3c%27%20stroke-width%3D%272.2%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E") 5 5, crosshair !important; }
+#mapa-reino.editor-activo .mapa-lienzo[data-herramienta="unir"] .lugar, #mapa-reino.editor-activo .mapa-lienzo[data-herramienta="unir"] .lugar * { cursor: pointer !important; }
+#mapa-reino.editor-activo .mapa-lienzo.ed-mano, #mapa-reino.editor-activo .mapa-lienzo.ed-mano * { cursor: grab !important; }
+#mapa-reino.editor-activo .leaflet-control, #mapa-reino.editor-activo .leaflet-control * { cursor: pointer !important; }
