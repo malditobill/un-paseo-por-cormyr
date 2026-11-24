@@ -34,8 +34,25 @@
    "clase": "zona",
    "visible": true,
    "zoom": 0
+  },
+  {
+   "id": "rios",
+   "nombre": "Ríos",
+   "clase": "rio",
+   "zoom": 0,
+   "visible": true
   }
  ],
+ "clases": {
+  "camino-principal": {
+   "rotulo": {
+    "color": "#b08d3c"
+   },
+   "contorno": {
+    "activo": true
+   }
+  }
+ },
  "trazos": [
   {
    "id": "tmwtwio3feog",
@@ -45,9 +62,7 @@
    "nombre": "Dragoneye Way",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -145,14 +160,10 @@
    "rotulo": {
     "activo": true,
     "texto": "Dragoneye Way",
-    "zoom": 3,
     "color": "#8a6a1f",
     "pos": 70,
-    "tam": 15,
     "invertir": false,
-    "cursiva": true,
-    "sep": -23,
-    "fuente": "EB Garamond"
+    "sep": -23
    }
   },
   {
@@ -163,9 +174,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 3,
-   "trazo": "rayas",
    "nodos": [
     {
      "p": [
@@ -193,9 +202,6 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
-   "ancho": 2,
-   "trazo": "rayas",
    "nodos": [
     {
      "p": [
@@ -265,9 +271,6 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
-   "ancho": 2,
-   "trazo": "rayas",
    "nodos": [
     {
      "p": [
@@ -337,9 +340,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -403,7 +404,6 @@
    "rotulo": {
     "activo": true,
     "texto": "Calantar's Way",
-    "zoom": 3,
     "color": "#b08d3c",
     "pos": 46,
     "sep": 20
@@ -417,9 +417,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -489,9 +487,6 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#8a6a1f",
-   "ancho": 1.6,
-   "trazo": "puntos",
    "nodos": [
     {
      "p": [
@@ -561,9 +556,6 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#8a6a1f",
-   "ancho": 1.6,
-   "trazo": "puntos",
    "nodos": [
     {
      "p": [
@@ -633,9 +625,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -705,9 +695,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -767,7 +755,11 @@
      "a": null,
      "b": null
     }
-   ]
+   ],
+   "contorno": {
+    "activo": true,
+    "color": "#f3ead9"
+   }
   },
   {
    "id": "tmwu13abvqin",
@@ -777,9 +769,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -849,9 +839,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -921,9 +909,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -951,9 +937,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [
@@ -981,9 +965,7 @@
    "nombre": "",
    "desc": "",
    "u": "",
-   "color": "#b08d3c",
    "ancho": 5,
-   "trazo": "lleno",
    "nodos": [
     {
      "p": [

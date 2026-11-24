@@ -324,8 +324,8 @@
 "t": "caserio",
 "x": 5186,
 "y": 2576,
-"dx": -78.0,
-"dy": 17.0,
+"dx": -85.0,
+"dy": 13.0,
 "u": "geografía/pueblos/monksblade",
 "r": ""
 },
@@ -617,7 +617,9 @@
 "n": "Battlerise",
 "t": "caserio",
 "x": 5517,
-"y": 2611
+"y": 2611,
+"dx": -50.0,
+"dy": 18.0
 },
 {
 "n": "Pros",
