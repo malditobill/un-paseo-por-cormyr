@@ -139,6 +139,14 @@
     map.setMinZoom(map.getZoom())
     map.setMaxZoom(Z + 1.5)
     map.setMaxBounds(lim.pad(0.05))
+    // si cambia el tamaño del marco (p. ej. «ancho completo»), el zoom mínimo se recalcula; si estaba en la vista
+    // completa, se vuelve a encuadrar el mapa entero
+    if (!EDITAR) map.on("resize", () => {
+      const enVistaCompleta = map.getZoom() - map.getMinZoom() < 0.05
+      map.setMinZoom(0)
+      map.setMinZoom(map.getBoundsZoom(lim))
+      if (enVistaCompleta) map.fitBounds(lim)
+    })
 
     const grupos = {}, porNombre = {}
     const control = L.control.layers(null, null, { collapsed: true, position: "topright" })
@@ -315,7 +323,7 @@
     if (capasUsadas.length) {
       refHtml += '<p class="ref-grupo">Caminos, fronteras y zonas</p><ul>' + capasUsadas.map((c) => {
         const ej = datosTrazos.trazos.find((t) => t.capa === c.id)
-        return `<li><button type="button" data-capa="${esc(c.id)}" aria-pressed="true">${T.muestra(ej)}<span>${esc(c.nombre)}</span></button></li>`
+        return `<li><button type="button" data-capa="${esc(c.id)}" aria-pressed="true">${T.muestra(ej, datosTrazos)}<span>${esc(c.nombre)}</span></button></li>`
       }).join("") + "</ul>"
     }
     const alternar = (t) => {

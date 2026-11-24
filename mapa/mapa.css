@@ -101,7 +101,7 @@
 .mapa-trazos path { vector-effect: non-scaling-stroke; }
 .mapa-trazos .hit { pointer-events: stroke !important; cursor: pointer; }
 .mapa-trazos .trazo-zona { display: none; }
-.mapa-trazos .trazo-zona.activa { display: inline; }
+.mapa-trazos .trazo-zona.activa, .mapa-trazos .trazo-zona.siempre { display: inline; }
 .mapa-trazos .trazo-zona .hit { pointer-events: none !important; }
 .mapa-trazos.editando .trazo-zona { display: inline; }
 .mapa-trazos.editando .trazo-zona .hit { pointer-events: visible !important; }
@@ -178,3 +178,9 @@
 #mapa-reino.editor-activo .mapa-lienzo[data-herramienta="unir"] .lugar, #mapa-reino.editor-activo .mapa-lienzo[data-herramienta="unir"] .lugar * { cursor: pointer !important; }
 #mapa-reino.editor-activo .mapa-lienzo.ed-mano, #mapa-reino.editor-activo .mapa-lienzo.ed-mano * { cursor: grab !important; }
 #mapa-reino.editor-activo .leaflet-control, #mapa-reino.editor-activo .leaflet-control * { cursor: pointer !important; }
+/* con «ancho completo» no hay barra derecha: las referencias van dentro del mapa */
+html.cronica-ancha .mapa-ref-control { display: block !important; }
+.mapa-trazos .contorno { pointer-events: none; }
+/* líneas ocultas (ríos): en el sitio solo el texto; en el editor, tenues y punteadas para poder elegirlas */
+.mapa-trazos:not(.editando) .trazo.oculta .vis, .mapa-trazos:not(.editando) .trazo.oculta .contorno { display: none; }
+.mapa-trazos.editando .trazo.oculta .vis { stroke-opacity: .45; stroke-dasharray: 5 4; }

@@ -151,8 +151,10 @@
 {
 "n": "Gray Oaks",
 "t": "caserio",
-"x": 3825,
-"y": 2210,
+"x": 3724,
+"y": 2275,
+"dx": -100.0,
+"dy": 26.0,
 "u": "geografía/pueblos/gray-oaks",
 "r": "Gray Oaks, antes Black Oaks, es una aldea del Northbank, las tierras de cultivo de los medianos al norte del Starwater y al sur del King's Forest, a cuyo borde se asienta, cerca de Hilp. Fue el «granero de Northbank» y el mayor mercado agrícola de Cormyr; hoy…"
 },
@@ -161,6 +163,8 @@
 "t": "caserio",
 "x": 4009,
 "y": 2151,
+"dx": -35.0,
+"dy": 28.0,
 "u": "geografía/pueblos/hilp",
 "r": "Hilp está en el camino de Immersea a Suzail, en el cruce del Calantar's Way con el Way of the Manticore. Sus casas son altas y angostas, con techo de pizarra, la tienda abajo y la vivienda arriba, y el pueblo desborda su muralla y se estira por los dos…"
 },
@@ -271,16 +275,17 @@
 {
 "n": "Gladehap",
 "t": "aldea",
-"x": 4209,
-"y": 2145,
+"x": 4108,
+"y": 2134,
+"dx": 1.0,
 "u": "geografía/pueblos/gladehap",
 "r": "Gladehap ocupa el lecho de un lago seco junto al Way of the Manticore, al oeste de Wheloon. La hondonada, al norte del camino, se llama Lost Lake. El lago desapareció cuando una batalla entre magos, que se disputaban sus surlfish plateados, rompió las rocas…"
 },
 {
 "n": "Nesmyth",
 "t": "aldea",
-"x": 4223,
-"y": 2236,
+"x": 4230,
+"y": 2219,
 "dx": -82.0,
 "dy": 26.0,
 "u": "geografía/pueblos/nesmyth",
@@ -299,8 +304,8 @@
 {
 "n": "Wheloon",
 "t": "pueblo",
-"x": 4637,
-"y": 2326,
+"x": 4668,
+"y": 2291,
 "u": "geografía/pueblos/wheloon",
 "r": "Wheloon se extiende a ambos lados del Wyvernflow, sin murallas ni barreras naturales, en calles sinuosas sobre terreno de colinas. Sus techos de pizarra verde brillan al sol: la pizarra local se vuelve verde brillante con el sol, y de ahí sus «jade towers».…"
 },
@@ -319,6 +324,8 @@
 "t": "caserio",
 "x": 5186,
 "y": 2576,
+"dx": -78.0,
+"dy": 17.0,
 "u": "geografía/pueblos/monksblade",
 "r": ""
 },
@@ -504,6 +511,8 @@
 "t": "extranjera",
 "x": 5905,
 "y": 2542,
+"dx": -68.0,
+"dy": 36.0,
 "u": "geografía/ciudades/daerlun",
 "r": ""
 },
@@ -518,8 +527,10 @@
 {
 "n": "Tezir",
 "t": "extranjera",
-"x": 4721,
-"y": 3620
+"x": 4764,
+"y": 3594,
+"dx": -35.0,
+"dy": 25.0
 },
 {
 "n": "Elversult",
@@ -590,11 +601,37 @@
 },
 {
 "n": "Smuggler's Stone",
+"t": "aldea",
+"x": 5123,
+"y": 2657,
+"dx": -111.0,
+"dy": 38.0
+},
+{
+"n": "Dreamer's Rock",
 "t": "pueblo",
-"x": 4733,
-"y": 2608,
-"dx": -129.0,
-"dy": 43.0
+"x": 4910,
+"y": 2421
+},
+{
+"n": "Battlerise",
+"t": "caserio",
+"x": 5517,
+"y": 2611
+},
+{
+"n": "Pros",
+"t": "aldea",
+"x": 3685,
+"y": 3652,
+"u": "geografía/pueblos/pros",
+"r": "Pros es un puerto de la Dragon Coast, cerca de la ciudad de Elversult. En 1374 no forma parte de Cormyr."
+},
+{
+"n": "Horse Prairie y Lightning Steppes",
+"t": "region2",
+"x": 4097,
+"y": 3892
 }
 ]
 }
