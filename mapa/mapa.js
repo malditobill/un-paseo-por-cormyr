@@ -17,15 +17,15 @@
     ciudad: { ...H0, icono: "ciudad", tam: 30, tamTexto: 21, peso: 700, color: "#3d3265", zoom: 0, posicion: "derecha" },
     arrasada: { ...H0, icono: "arrasada", tam: 30, tamTexto: 21, peso: 700, color: "#3d3265", zoom: 0, posicion: "derecha" },
     pueblo: { ...H0, icono: "pueblo", tam: 20, tamTexto: 18, peso: 600, color: "#262040", zoom: 3, posicion: "derecha" },
-    aldea: { ...H0, icono: "aldea", tam: 15, tamTexto: 17, peso: 600, color: "#262040", zoom: 3, posicion: "derecha" },
-    caserio: { ...H0, icono: "caserio", tam: 11, tamTexto: 16, peso: 500, color: "#262040", zoom: 3.5, posicion: "derecha" },
-    castillo: { ...H0, icono: "castillo", tam: 24, tamTexto: 17, peso: 600, color: "#262040", zoom: 3, posicion: "derecha" },
-    ruina: { ...H0, icono: "ruina", tam: 24, tamTexto: 17, peso: 600, color: "#262040", zoom: 3, posicion: "derecha" },
-    templo: { ...H0, icono: "templo", tam: 22, tamTexto: 17, peso: 600, color: "#262040", zoom: 3, posicion: "derecha" },
-    sitio: { ...H0, icono: "sitio", tam: 18, tamTexto: 17, peso: 600, color: "#262040", zoom: 3, posicion: "derecha" },
-    extranjera: { ...H0, icono: "extranjera", tam: 20, tamTexto: 17, peso: 500, cursiva: true, color: "#5d5574", zoom: 0, posicion: "derecha" },
+    aldea: { ...H0, icono: "aldea", tam: 15, tamTexto: 17, peso: 600, color: "#262040", zoom: 3.25, posicion: "derecha" },
+    caserio: { ...H0, icono: "caserio", tam: 11, tamTexto: 16, peso: 500, color: "#262040", zoom: 3.75, posicion: "derecha" },
+    castillo: { ...H0, icono: "castillo", tam: 24, tamTexto: 17, peso: 600, color: "#262040", zoom: 3.25, posicion: "derecha" },
+    ruina: { ...H0, icono: "ruina", tam: 24, tamTexto: 17, peso: 600, color: "#262040", zoom: 3.5, posicion: "derecha" },
+    templo: { ...H0, icono: "templo", tam: 22, tamTexto: 17, peso: 600, color: "#262040", zoom: 3.5, posicion: "derecha" },
+    sitio: { ...H0, icono: "sitio", tam: 18, tamTexto: 17, peso: 600, color: "#262040", zoom: 3.5, posicion: "derecha" },
+    extranjera: { ...H0, icono: "extranjera", tam: 20, tamTexto: 17, peso: 500, cursiva: true, color: "#5d5574", zoom: 2.75, posicion: "derecha" },
     region: { ...H0, icono: "", tam: 0, tamTexto: 22, peso: 700, mayus: true, espaciado: 0.14, color: "#5b2a6e", zoom: 0, posicion: "centro" },
-    region2: { ...H0, icono: "", tam: 0, tamTexto: 16, peso: 600, mayus: true, espaciado: 0.1, color: "#5b2a6e", zoom: 0, posicion: "centro" },
+    region2: { ...H0, icono: "", tam: 0, tamTexto: 16, peso: 600, mayus: true, espaciado: 0.1, color: "#5b2a6e", zoom: 2.5, posicion: "centro" },
     paraje: { ...H0, icono: "", tam: 0, tamTexto: 17, peso: 600, cursiva: true, espaciado: 0.04, color: "#4a3f78", zoom: 3.5, posicion: "centro" },
   }
   // tipografías del desplegable: [nombre, consulta de Google Fonts]
@@ -128,6 +128,7 @@
       panel.querySelector(".mover-estado").textContent = `${movidos.size} lugar(es) movido(s).`
     }
 
+    let verTodo = false
     const capaTrazos = { alternarZona() {} } // se completa más abajo, cuando se dibujan los trazos
     const map = L.map(lienzo, { crs: L.CRS.Simple, zoomSnap: 0, zoomDelta: 0.5, wheelPxPerZoomLevel: 120, attributionControl: false })
     const lim = L.latLngBounds(map.unproject([0, H], Z), map.unproject([W, 0], Z))
@@ -248,7 +249,8 @@
     const datosTrazos = trazos || { capas: [], trazos: [] }
     const zonaActiva = new Set(), capasOcultas = new Set()
     const pintar = () => {
-      T.dibujar(svg, datosTrazos, { editar: EDITAR })
+      cargarFuentes(datosTrazos.trazos.map((t) => t.rotulo && t.rotulo.activo && t.rotulo.fuente).filter(Boolean))
+      T.dibujar(svg, datosTrazos, { editar: EDITAR, escala: 2 ** (map.getZoom() - Z), zoom: map.getZoom(), todo: verTodo })
       capasOcultas.forEach((id) => svg.querySelectorAll(`.capa[data-capa="${id}"]`).forEach((g) => (g.style.display = "none")))
       svg.querySelectorAll(".trazo-zona").forEach((g) => g.classList.toggle("activa", zonaActiva.has(g.dataset.nombre)))
       // nombres de regiones con zona: en granate
@@ -263,6 +265,7 @@
     capaTrazos.datos = datosTrazos
     capaTrazos.pintar = pintar
     pintar()
+    if (!EDITAR) map.on("zoomend", pintar) // el editor ya redibuja en cada zoom
     // tocar un camino o una frontera abre su ficha
     svg.addEventListener("click", (e) => {
       if (EDITAR) return
@@ -282,7 +285,6 @@
     // Qué se ve según el acercamiento: de lejos, regiones y ciudades; de cerca, todo.
     // Visibilidad por escala real del mapa (nivel de zoom de Leaflet), no por el tamaño de la ventana:
     // así el editor muestra exactamente lo que se ve en la web al mismo zoom. «Mostrar todo» es solo del editor.
-    let verTodo = false
     function zonas() {
       const z = map.getZoom()
       for (const t in E) lienzo.classList.toggle("oz-" + t, !verTodo && z < (+E[t].zoom || 0))
@@ -370,7 +372,7 @@
       if (e.key === "Escape" && el.classList.contains("pantalla-completa") && !EDITAR) completa.click()
     })
     return { map, svg, lienzo, el, W, H, Z, datos: datosTrazos, lugares, pintar, porNombre, EDITAR, E, aplicarEstilos, moverNombre, marcas, ICONOS, FUENTES, POS, agregarMarca, crearIcono,
-      verTodo: (v) => { if (v === undefined) return verTodo; verTodo = !!v; zonas() } }
+      verTodo: (v) => { if (v === undefined) return verTodo; verTodo = !!v; zonas(); pintar() } }
   }
 
   async function iniciar() {

@@ -129,7 +129,7 @@
 .ed-herr { display: flex; gap: .3rem; flex-wrap: wrap; }
 .ed-ayuda { font-size: .8rem; color: var(--gray); line-height: 1.35; margin: .4rem 0; }
 .ed-capas { list-style: none; padding: 0; margin: 0 0 .4rem; }
-.ed-capas li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto auto auto; gap: .25rem; align-items: center; padding: .15rem .2rem; border-radius: 3px; }
+.ed-capas li { display: grid; grid-template-columns: auto minmax(0, 1fr) 4.2rem auto auto auto auto; gap: .25rem; align-items: center; padding: .15rem .2rem; border-radius: 3px; }
 .ed-capas li.activa { background: color-mix(in srgb, var(--secondary) 10%, transparent); }
 .ed-capas input[type=text] { margin: 0; padding: .15rem .3rem; }
 .ed-capas button { padding: .1rem .35rem; }
@@ -160,3 +160,7 @@
 .ed-panel .ed-fav { width: 18px; height: 18px; padding: 0; border: 1px solid rgba(38, 32, 64, .35); border-radius: 3px; cursor: pointer; }
 .ed-panel .ed-fav-sel { outline: 2px solid var(--secondary); outline-offset: 1px; }
 .ed-panel .ed-fav-mas { width: 18px; height: 18px; padding: 0; line-height: 1; font-size: .8rem; border-radius: 3px; }
+.mapa-trazos .rotulo { pointer-events: none; }
+.ed-capas select { margin: 0; padding: .1rem; font-size: .78rem; }
+/* el estilo general del sitio corre las casillas 1,4rem a la izquierda (listas de tareas): en el editor, no */
+.ed-panel input[type="checkbox"] { margin-inline-start: 0 !important; margin-inline-end: .35rem; flex: 0 0 auto; }

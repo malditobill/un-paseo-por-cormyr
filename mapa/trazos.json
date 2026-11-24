@@ -4,31 +4,36 @@
    "id": "principales",
    "nombre": "Caminos principales",
    "clase": "camino-principal",
-   "visible": true
+   "visible": true,
+   "zoom": 0
   },
   {
    "id": "secundarios",
    "nombre": "Caminos secundarios",
    "clase": "camino-secundario",
-   "visible": true
+   "visible": true,
+   "zoom": 3
   },
   {
    "id": "senderos",
    "nombre": "Senderos",
    "clase": "sendero",
-   "visible": true
+   "visible": true,
+   "zoom": 3.5
   },
   {
    "id": "fronteras",
    "nombre": "Fronteras",
    "clase": "frontera",
-   "visible": true
+   "visible": true,
+   "zoom": 0
   },
   {
    "id": "zonas",
    "nombre": "Zonas",
    "clase": "zona",
-   "visible": true
+   "visible": true,
+   "zoom": 0
   }
  ],
  "trazos": [
@@ -37,7 +42,7 @@
    "capa": "principales",
    "tipo": "linea",
    "clase": "camino-principal",
-   "nombre": "",
+   "nombre": "Dragoneye Way",
    "desc": "",
    "u": "",
    "color": "#b08d3c",
@@ -136,7 +141,17 @@
      "a": null,
      "b": null
     }
-   ]
+   ],
+   "rotulo": {
+    "activo": true,
+    "texto": "Dragoneye Way",
+    "zoom": 3,
+    "color": "#b08d3c",
+    "pos": 60,
+    "tam": 20,
+    "invertir": false,
+    "cursiva": true
+   }
   }
  ]
 }
