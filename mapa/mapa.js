@@ -207,6 +207,37 @@
         iconAnchor: [s / 2, s / 2],
       })
     }
+    // Ficha del lugar: tarjeta fija abajo a la derecha (en celulares, franja abajo). No tapa lo que se toca.
+    const FichaCtl = L.Control.extend({
+      onAdd() {
+        const d = L.DomUtil.create("div", "mapa-ficha")
+        d.hidden = true
+        L.DomEvent.disableClickPropagation(d)
+        L.DomEvent.disableScrollPropagation(d)
+        return d
+      },
+    })
+    const fichaCtl = new FichaCtl({ position: "bottomright" }).addTo(map)
+    let elegida = null
+    function cerrarFicha() {
+      const d = fichaCtl.getContainer()
+      d.hidden = true
+      if (elegida && elegida.getElement()) elegida.getElement().classList.remove("mapa-elegido")
+      elegida = null
+    }
+    function mostrarFicha(f, marca) {
+      const d = fichaCtl.getContainer()
+      if (elegida && elegida.getElement()) elegida.getElement().classList.remove("mapa-elegido")
+      elegida = marca
+      if (marca && marca.getElement()) marca.getElement().classList.add("mapa-elegido")
+      d.innerHTML = `<button type="button" class="mapa-ficha-cerrar" aria-label="Cerrar">×</button>` +
+        `<b>${esc(f.n)}</b>${f.tipo ? `<small>${esc(f.tipo)}</small>` : ""}` +
+        (f.r ? `<p>${esc(f.r)}</p>` : "") +
+        (f.u ? `<a href="${RAIZ}${encodeURI(f.u)}" class="internal">Leer el artículo →</a>` : "")
+      d.querySelector(".mapa-ficha-cerrar").addEventListener("click", cerrarFicha)
+      d.hidden = false
+    }
+    map.on("click", cerrarFicha)
     const marcas = []
     const agregarMarca = (l) => {
       const m = L.marker(map.unproject([l.x, l.y], Z), { icon: crearIcono(l), title: l.n, riseOnHover: true, draggable: MOVER })
@@ -222,11 +253,7 @@
       if (EDITAR) {
         m.on("click", () => document.dispatchEvent(new CustomEvent("mapa-lugar-elegido", { detail: l })))
       } else {
-        let html = `<div class="mapa-popup"><b>${esc(l.n)}</b><small>${esc(TIPOS[l.t] || "")}</small>`
-        if (l.r) html += `<p>${esc(l.r)}</p>`
-        if (l.u) html += `<a href="${RAIZ}${encodeURI(l.u)}" class="internal">Leer el artículo →</a>`
-        html += "</div>"
-        m.bindPopup(html, { minWidth: 240, maxWidth: 300, autoPanPadding: [30, 30] })
+        m.on("click", () => mostrarFicha({ n: l.n, tipo: TIPOS[l.t], r: l.r, u: l.u }, m))
       }
       m.addTo(grupos[l.t] || grupos.pueblo)
       porNombre[l.n.toLowerCase()] = m
@@ -282,11 +309,7 @@
       const t = datosTrazos.trazos.find((x) => x.id === g.dataset.id)
       if (!t || (!t.nombre && !t.desc)) return
       L.DomEvent.stop(e)
-      let html = `<div class="mapa-popup"><b>${esc(t.nombre || "")}</b><small>${esc(T.TIPO_TXT[t.clase || t.tipo] || "")}</small>`
-      if (t.desc) html += `<p>${esc(t.desc)}</p>`
-      if (t.u) html += `<a href="${RAIZ}${encodeURI(t.u)}" class="internal">Leer el artículo →</a>`
-      html += "</div>"
-      L.popup({ minWidth: 240, maxWidth: 300 }).setLatLng(map.mouseEventToLatLng(e)).setContent(html).openOn(map)
+      mostrarFicha({ n: t.nombre || "", tipo: T.TIPO_TXT[t.clase || t.tipo], r: t.desc, u: t.u }, null)
       if (t.tipo === "zona") capaTrazos.alternarZona(t.nombre)
     })
 
@@ -367,7 +390,7 @@
       const m = porNombre[buscar.value.trim().toLowerCase()]
       if (!m) return
       map.flyTo(m.getLatLng(), Math.max(map.getZoom(), map.getMinZoom() + 1.5))
-      map.once("moveend", () => m.openPopup())
+      map.once("moveend", () => m.fire("click"))
     })
     const completa = barra.querySelector(".mapa-completa")
     completa.addEventListener("click", () => {
