@@ -200,8 +200,8 @@
  "region": {
   "nombre": "Región",
   "contorno": true,
-  "contornoColor": "#faf7ee",
-  "contornoAncho": 2,
+  "contornoColor": "#f3ead9",
+  "contornoAncho": 3,
   "rot": 0,
   "espaciado": 0.14,
   "cursiva": false,
@@ -218,8 +218,8 @@
  "region2": {
   "nombre": "Región menor",
   "contorno": true,
-  "contornoColor": "#faf7ee",
-  "contornoAncho": 2,
+  "contornoColor": "#f3ead9",
+  "contornoAncho": 3,
   "rot": 0,
   "espaciado": 0.1,
   "cursiva": false,

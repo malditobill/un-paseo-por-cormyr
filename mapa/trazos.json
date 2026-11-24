@@ -404,7 +404,6 @@
    "rotulo": {
     "activo": true,
     "texto": "Calantar's Way",
-    "color": "#b08d3c",
     "pos": 46,
     "sep": 20
    }
@@ -757,7 +756,6 @@
     }
    ],
    "contorno": {
-    "activo": true,
     "color": "#f3ead9"
    }
   },
