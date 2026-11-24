@@ -309,6 +309,8 @@
 "t": "aldea",
 "x": 4610,
 "y": 2527,
+"dx": -61.0,
+"dy": 40.0,
 "u": "geografía/pueblos/blustich",
 "r": "Blustich es una aldea pequeña en la orilla oeste del Wyvernflow, allí donde el Hermit's Wood llega hasta el río. Sus habitantes viven de la pesca, de la caza en el bosque y de la agricultura. Es poco lo que retiene a un viajero."
 },
@@ -587,10 +589,12 @@
 "r": "Moonever es una aldea pesquera en la orilla oriental del Starwater, justo tierra adentro desde la desembocadura del río. No hay mucho que ver: botes podridos y pescado en descomposición. Y sin embargo sus carros de hielo, goteando, son una imagen familiar en…"
 },
 {
-"n": "Smug",
+"n": "Smuggler's Stone",
 "t": "pueblo",
 "x": 4733,
-"y": 2608
+"y": 2608,
+"dx": -129.0,
+"dy": 43.0
 }
 ]
 }

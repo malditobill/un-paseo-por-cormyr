@@ -157,14 +157,14 @@
   },
   {
    "id": "tmwtzx45pn6m",
-   "capa": "principales",
+   "capa": "secundarios",
    "tipo": "linea",
    "clase": "camino-secundario",
    "nombre": "",
    "desc": "",
    "u": "",
    "color": "#b08d3c",
-   "ancho": 5,
+   "ancho": 3,
    "trazo": "rayas",
    "nodos": [
     {
@@ -187,14 +187,14 @@
   },
   {
    "id": "tmwtzyi4ttq7",
-   "capa": "principales",
+   "capa": "secundarios",
    "tipo": "linea",
-   "clase": "camino-principal",
+   "clase": "camino-secundario",
    "nombre": "",
    "desc": "",
    "u": "",
    "color": "#b08d3c",
-   "ancho": 5,
+   "ancho": 2,
    "trazo": "rayas",
    "nodos": [
     {
@@ -251,6 +251,78 @@
      "p": [
       4274,
       2583
+     ],
+     "a": null,
+     "b": null
+    }
+   ]
+  },
+  {
+   "id": "tmwu0b9wnqpy",
+   "capa": "secundarios",
+   "tipo": "linea",
+   "clase": "camino-secundario",
+   "nombre": "",
+   "desc": "",
+   "u": "",
+   "color": "#b08d3c",
+   "ancho": 2,
+   "trazo": "rayas",
+   "nodos": [
+    {
+     "p": [
+      4610,
+      2527
+     ],
+     "a": null,
+     "b": null
+    },
+    {
+     "p": [
+      4678.984640350381,
+      2526.4833692851134
+     ],
+     "a": [
+      4667.984640350381,
+      2519.4833692851134
+     ],
+     "b": [
+      4688.984640350381,
+      2532.4833692851134
+     ]
+    },
+    {
+     "p": [
+      4713.272477206353,
+      2539.0402158348784
+     ],
+     "a": [
+      4703.272477206353,
+      2532.0402158348784
+     ],
+     "b": [
+      4724.272477206353,
+      2545.0402158348784
+     ]
+    },
+    {
+     "p": [
+      4712.789567736557,
+      2579.1255436437477
+     ],
+     "a": [
+      4713.894641121781,
+      2566.969112719612
+     ],
+     "b": [
+      4711.340774480992,
+      2595.063087131914
+     ]
+    },
+    {
+     "p": [
+      4733,
+      2608
      ],
      "a": null,
      "b": null
