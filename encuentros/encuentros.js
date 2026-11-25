@@ -58,7 +58,10 @@
     return lista[i]
   }
   const PESO_FREC = { "común": 10, "poco común": 4, "raro": 1, "muy raro": 0.25 }
-  const pesoPerfil = (p) => PESO_FREC[p.frecuencia] || 1
+  let LUGAR = ""
+  const delLugar = (p) => LUGAR && ((p.pagina || "").toLowerCase().endsWith("/" + LUGAR.toLowerCase().replace(/ /g, "-")) ||
+    (p.donde || []).some((w) => (w.detalle || "").includes(LUGAR)) || (p.nombre || "").includes(LUGAR))
+  const pesoPerfil = (p) => (PESO_FREC[p.frecuencia] || 1) * (delLugar(p) ? 5 : 1)
 
   // ── nivel de encuentro (DMG 3.5): cada duplicación de criaturas suma 2 ──
   function vdNum(vd) {
@@ -259,18 +262,30 @@
 
   const NOMBRE_R = { criatura: "criatura", clima: "clima o terreno", suceso: "suceso", viajeros: "viajeros", doble: "dos encuentros", nada: "nada" }
   function bloque4h(ctx, forzar) {
-    const m = (DATOS.master || {})[ctx.contexto === "camino" ? "camino" : "campo"] ||
+    const m = ctx.master || (DATOS.master || {})[ctx.contexto === "camino" ? "camino" : "campo"] ||
       [{ hasta: 20, r: "criatura" }, { hasta: 25, r: "clima" }, { hasta: 30, r: "suceso" }, { hasta: 35, r: "viajeros" }, { hasta: 40, r: "doble" }, { hasta: 100, r: "nada" }]
     T = []
+    LUGAR = ctx.lugar || ""
     let r
-    // forzado: se tira solo entre los resultados que no son «nada» (p. ej. 1d40 en vez de 1d100)
-    const tope = forzar ? Math.max(...m.filter((e) => e.r !== "nada").map((e) => e.hasta)) : 100
-    const x = d(tope), i = m.findIndex((e) => x <= e.hasta)
-    r = m[i].r
-    const desde = i ? m[i - 1].hasta + 1 : 1
+    // forzado: se tira solo sobre los rangos que no son «nada» (p. ej. 1d40 en vez de 1d100)
     const f = (n) => (n === 100 ? "00" : dd(n))
-    anota(`Qué pasa en estas 4 horas (${ctx.contexto === "camino" ? "por camino" : "campo traviesa"}): <b>1d${tope}</b> = <b>${f(x)}</b> → ${NOMBRE_R[r]} <span class="enc-rango">(${f(desde)}–${f(m[i].hasta)})</span>` +
-          (forzar ? ` <span class="enc-rango">· encuentro forzado: se tira 1d${tope} para saltear «nada» (${f(tope + 1)}–00)</span>` : ""))
+    const como = ctx.terreno === "agua" ? "navegando" : ctx.contexto === "camino" ? "por camino" : "campo traviesa"
+    const tramos = m.map((e, i) => ({ r: e.r, desde: i ? m[i - 1].hasta + 1 : 1, hasta: e.hasta }))
+    if (forzar) {
+      const validos = tramos.filter((e) => e.r !== "nada")
+      const total = validos.reduce((a, e) => a + e.hasta - e.desde + 1, 0)
+      let x = d(total), elegido = validos[0], acc = 0
+      for (const e of validos) { acc += e.hasta - e.desde + 1; if (x <= acc) { elegido = e; break } }
+      // rangos del dado reducido, para que se pueda tirar a mano
+      let ini = 1
+      const rangos = validos.map((e) => { const w = e.hasta - e.desde + 1, s = `${dd(ini)}–${dd(ini + w - 1)} ${NOMBRE_R[e.r]}`; ini += w; return s })
+      r = elegido.r
+      anota(`Qué pasa en estas ${ctx.horas} horas (${como}), encuentro forzado: <b>1d${total}</b> = <b>${dd(x)}</b> → ${NOMBRE_R[r]} <span class="enc-rango">(${rangos.join(" · ")}; se saltea «nada»)</span>`)
+    } else {
+      const x = d(100), e = tramos.find((t) => x <= t.hasta)
+      r = e.r
+      anota(`Qué pasa en estas ${ctx.horas} horas (${como}): <b>1d100</b> = <b>${f(x)}</b> → ${NOMBRE_R[r]} <span class="enc-rango">(${f(e.desde)}–${f(e.hasta)})</span>`)
+    }
     const fin = (res) => {
       if (res.tipo !== "nada") res.escena = escena(ctx, res.tipo === "clima" ? res.titulo : null)
       res.tiradas = T; T = []; return res
@@ -281,7 +296,7 @@
       a.tiradas = nota.concat(a.tiradas || [])
       return [a, b]
     }
-    if (r === "nada") return [fin({ tipo: "nada", titulo: "Sin novedad", lineas: ["Cuatro horas tranquilas."] })]
+    if (r === "nada") return [fin({ tipo: "nada", titulo: "Sin novedad", lineas: [`${ctx.horas} horas tranquilas.`] })]
     if (r === "criatura") return [fin(tirarCriatura(ctx))]
     if (r === "viajeros") return [fin(tirarViajeros(ctx))]
     if (r === "clima") return [fin(tirarDe(DATOS.clima_terreno, "clima", ctx, "Tabla de clima y terreno"))]
@@ -308,7 +323,8 @@
   function montar(div) {
     if (div.dataset.listo) return
     div.dataset.listo = "1"
-    const fija = div.dataset.region || ""
+    const L = div.dataset.lugar ? (DATOS.lugares || {})[div.dataset.lugar] : null
+    const fija = (L && L.region) || div.dataset.region || ""
     const regiones = Object.keys(DATOS.regiones).sort()
     const reg0 = fija && DATOS.regiones[fija] ? fija : regiones[0]
     div.innerHTML = `
@@ -324,27 +340,33 @@
           <label>Nivel del grupo <input data-k="nivel" type="number" min="1" max="20" value="3"></label>
           <label>Personajes <input data-k="pjs" type="number" min="1" max="10" value="4"></label>
           <button data-a="forzar">Tirar un encuentro</button>
-          <button data-a="4h">Viajar 4 horas</button>
+          <button data-a="4h">Viajar ${(DATOS.regiones[reg0].horas || 4)} horas</button>
           <button data-a="dia">Jornada de viaje</button>
           <button data-a="limpiar" class="enc-sec">Limpiar</button>
         </div>
       </div>
       <div class="enc-res"></div>` +
-      (fija ? `<p class="enc-ayuda">Tablas de ${DATOS.regiones[reg0].nombre || reg0} según la zona, la hora y el nivel del grupo. ` +
+      (fija ? `<p class="enc-ayuda">${L ? `Alrededores de ${div.dataset.lugar}: tablas de ${DATOS.regiones[reg0].nombre || reg0}, con la gente del lugar más a mano. ` : `Tablas de ${DATOS.regiones[reg0].nombre || reg0} según la zona, la hora y el nivel del grupo. `}` +
               `El generador completo, con todas las regiones, está en <a class="internal" href="${RAIZ}para-el-dm/generador-de-encuentros">Generador de encuentros</a>.</p>` : "")
     const q = (k) => div.querySelector(`[data-k="${k}"]`)
     function llenarSectores() {
       const R = DATOS.regiones[q("region").value]
+      const b4 = div.querySelector('[data-a="4h"]')
+      if (b4) b4.textContent = `Viajar ${R.horas || 4} horas`
       q("sector").innerHTML = opciones(R.sectores.map((s) => [s.id, s.nombre]), R.sectores[0] && R.sectores[0].id)
     }
     q("region").addEventListener("change", llenarSectores)
     llenarSectores()
+    if (L) {
+      if (L.sector) q("sector").value = L.sector
+      if (L.contexto) q("contexto").value = L.contexto
+    }
     const res = div.querySelector(".enc-res")
     function ctx() {
       const region = q("region").value, R = DATOS.regiones[region]
       const s = R.sectores.find((x) => x.id === q("sector").value) || R.sectores[0] || {}
       const nivel = Math.max(1, Math.min(20, +q("nivel").value || 1)), pjs = +q("pjs").value || 4
-      return { region, sector: s.tabla, sectorId: s.id, estacion: q("estacion").value, terreno: s.terreno || R.terreno, contexto: q("contexto").value, hora: q("hora").value,
+      return { lugar: div.dataset.lugar || "", master: R.master, horas: R.horas || 4, region, sector: s.tabla, sectorId: s.id, estacion: q("estacion").value, terreno: s.terreno || R.terreno, contexto: q("contexto").value, hora: q("hora").value,
                ng: Math.max(1, nivel + (pjs >= 6 ? 1 : pjs <= 3 ? -1 : 0)) }
     }
     function poner(htmls) { res.insertAdjacentHTML("afterbegin", htmls.join("")) }
@@ -355,7 +377,9 @@
       if (a === "4h") return poner(bloque4h(c, false).map((r) => tarjeta(r)))
       // jornada: 3 bloques de día y 3 de noche (acampados)
       const out = []
-      ;[["dia", "Mañana"], ["dia", "Tarde"], ["dia", "Atardecer"], ["noche", "Primera guardia"], ["noche", "Segunda guardia"], ["noche", "Madrugada"]].forEach(([h, et]) => {
+      const tramos = c.horas >= 12 ? [["dia", "Día"], ["noche", "Noche"]]
+        : [["dia", "Mañana"], ["dia", "Tarde"], ["dia", "Atardecer"], ["noche", "Primera guardia"], ["noche", "Segunda guardia"], ["noche", "Madrugada"]]
+      tramos.forEach(([h, et]) => {
         bloque4h({ ...c, hora: h }, false).forEach((r) => out.push(tarjeta(r, et)))
       })
       poner([`<div class="enc-jornada">${out.join("")}</div>`])
