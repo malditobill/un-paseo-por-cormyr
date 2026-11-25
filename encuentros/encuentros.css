@@ -34,3 +34,4 @@ details.enc-modulo > summary { cursor: pointer; font-family: var(--headerFont); 
 .enc-tiradas li { margin: 1px 0; line-height: 1.35; }
 .enc-tiradas b { color: var(--secondary); }
 .enc-rango { color: var(--gray); }
+.enc-escena { font-style: italic; color: var(--darkgray); margin: 4px 0 6px !important; padding-left: 8px; border-left: 2px solid #d9b56c; line-height: 1.5 !important; }

@@ -220,10 +220,27 @@
 
   function tirarDe(lista, tipo, ctx, etiqueta) {
     const ter = ctx.terreno === "subterraneo" || ctx.terreno === "ciudad" ? "colina" : ctx.terreno
-    const xs = (lista || []).filter((x) => !x.pesos || x.pesos[ter])
+    const xs = (lista || []).filter((x) => (!x.pesos || x.pesos[ter]) && (!x.estaciones || x.estaciones.includes(ctx.estacion)))
     if (!xs.length) return tirarCriatura(ctx)
     const x = tabla(xs, (y) => (y.pesos ? y.pesos[ter] : y.peso || 1), etiqueta, (y) => y.nombre)
     return { tipo, titulo: x.nombre, lineas: [x.resumen || x.descripcion || ""] }
+  }
+
+  const CLIMA_ESCENA = { "Tormenta eléctrica": ["tormenta", "lluvia"], "Banco de niebla": ["niebla"], "Vendaval": ["viento"], "Huracán": ["viento", "tormenta"],
+    "Tornado": ["viento", "tormenta"], "Ola de frío": ["helada", "nieve"], "Nevada": ["nieve"], "Ventisca": ["nieve", "viento"], "Ola de calor": ["calor"], "Granizada": ["tormenta"] }
+  function escena(ctx, clima) {
+    const todas = ((DATOS.escenas || {})[ctx.region + "|" + ctx.sectorId] || [])
+    let xs = todas.filter((e) => e.hora === ctx.hora && e.estacion === ctx.estacion)
+    if (clima && CLIMA_ESCENA[clima]) {
+      const c = todas.filter((e) => CLIMA_ESCENA[clima].includes(e.clima) && (e.estacion === ctx.estacion || !xs.length))
+      if (c.length) xs = c
+    }
+    if (!xs.length) xs = todas.filter((e) => e.estacion === ctx.estacion)
+    if (!xs.length) xs = todas.filter((e) => e.hora === ctx.hora)
+    if (!xs.length) return null
+    const r = d(xs.length)
+    anota(`Escena (${ctx.estacion}, ${ctx.hora === "noche" ? "de noche" : "de día"}${clima && CLIMA_ESCENA[clima] ? ", " + clima.toLowerCase() : ""}): <b>1d${xs.length}</b> = <b>${r}</b>`)
+    return xs[r - 1].texto
   }
 
   const NOMBRE_R = { criatura: "criatura", clima: "clima o terreno", suceso: "suceso", viajeros: "viajeros", doble: "dos encuentros", nada: "nada" }
@@ -240,7 +257,10 @@
     const f = (n) => (n === 100 ? "00" : dd(n))
     anota(`Qué pasa en estas 4 horas (${ctx.contexto === "camino" ? "por camino" : "campo traviesa"}): <b>1d${tope}</b> = <b>${f(x)}</b> → ${NOMBRE_R[r]} <span class="enc-rango">(${f(desde)}–${f(m[i].hasta)})</span>` +
           (forzar ? ` <span class="enc-rango">· encuentro forzado: se tira 1d${tope} para saltear «nada» (${f(tope + 1)}–00)</span>` : ""))
-    const fin = (res) => { res.tiradas = T; T = []; return res }
+    const fin = (res) => {
+      if (res.tipo !== "nada") res.escena = escena(ctx, res.tipo === "clima" ? res.titulo : null)
+      res.tiradas = T; T = []; return res
+    }
     if (r === "doble") {
       const nota = T
       const a = bloque4h(ctx, true)[0], b = bloque4h(ctx, true)[0]
@@ -261,7 +281,7 @@
   function tarjeta(res, hora) {
     const t = res.enlace ? `<a class="internal" href="${RAIZ}${res.enlace}">${esc(res.titulo)}</a>` : esc(res.titulo)
     return `<div class="enc-tarjeta enc-t-${res.tipo}"><div class="enc-cab"><span class="enc-etq">${ETIQ[res.tipo] || res.tipo}</span>` +
-      (hora ? `<span class="enc-hora">${hora}</span>` : "") + `</div><div class="enc-titulo">${t}</div>` +
+      (hora ? `<span class="enc-hora">${hora}</span>` : "") + `</div>` + (res.escena ? `<p class="enc-escena">${res.escena}</p>` : "") + `<div class="enc-titulo">${t}</div>` +
       res.lineas.filter(Boolean).map((l) => `<p>${l}</p>`).join("") +
       (res.tiradas && res.tiradas.length ? `<details class="enc-tiradas" open><summary>Tiradas</summary><ol>${res.tiradas.map((s) => `<li>${s}</li>`).join("")}</ol></details>` : "") +
       (res.fuente ? `<p class="enc-fuente">${esc(res.fuente)}</p>` : "") + `</div>`
@@ -284,6 +304,7 @@
           <label>Zona <select data-k="sector"></select></label>
           <label>Por <select data-k="contexto">${opciones([["campo", "campo traviesa"], ["camino", "camino"]], "campo")}</select></label>
           <label>Hora <select data-k="hora">${opciones([["dia", "de día"], ["noche", "de noche"]], "dia")}</select></label>
+          <label>Estación <select data-k="estacion">${opciones([["invierno", "invierno"], ["primavera", "primavera"], ["verano", "verano"], ["otoño", "otoño"]], "otoño")}</select></label>
         </div>
         <div class="enc-fila">
           <label>Nivel del grupo <input data-k="nivel" type="number" min="1" max="20" value="3"></label>
@@ -309,7 +330,7 @@
       const region = q("region").value, R = DATOS.regiones[region]
       const s = R.sectores.find((x) => x.id === q("sector").value) || R.sectores[0] || {}
       const nivel = Math.max(1, Math.min(20, +q("nivel").value || 1)), pjs = +q("pjs").value || 4
-      return { region, sector: s.tabla, terreno: s.terreno || R.terreno, contexto: q("contexto").value, hora: q("hora").value,
+      return { region, sector: s.tabla, sectorId: s.id, estacion: q("estacion").value, terreno: s.terreno || R.terreno, contexto: q("contexto").value, hora: q("hora").value,
                ng: Math.max(1, nivel + (pjs >= 6 ? 1 : pjs <= 3 ? -1 : 0)) }
     }
     function poner(htmls) { res.insertAdjacentHTML("afterbegin", htmls.join("")) }
