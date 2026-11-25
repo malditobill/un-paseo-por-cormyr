@@ -228,19 +228,33 @@
 
   const CLIMA_ESCENA = { "Tormenta eléctrica": ["tormenta", "lluvia"], "Banco de niebla": ["niebla"], "Vendaval": ["viento"], "Huracán": ["viento", "tormenta"],
     "Tornado": ["viento", "tormenta"], "Ola de frío": ["helada", "nieve"], "Nevada": ["nieve"], "Ventisca": ["nieve", "viento"], "Ola de calor": ["calor"], "Granizada": ["tormenta"] }
+  const VECINAS = { invierno: ["otoño", "primavera"], primavera: ["invierno", "verano"], verano: ["primavera", "otoño"], "otoño": ["verano", "invierno"] }
+  const USADAS = {}   // escenas ya mostradas por zona: no se repiten hasta agotar las posibles
   function escena(ctx, clima) {
-    const todas = ((DATOS.escenas || {})[ctx.region + "|" + ctx.sectorId] || [])
+    const clave = ctx.region + "|" + ctx.sectorId
+    const todas = (DATOS.escenas || {})[clave] || []
     let xs = todas.filter((e) => e.hora === ctx.hora && e.estacion === ctx.estacion)
+    let nota = ""
     if (clima && CLIMA_ESCENA[clima]) {
-      const c = todas.filter((e) => CLIMA_ESCENA[clima].includes(e.clima) && (e.estacion === ctx.estacion || !xs.length))
-      if (c.length) xs = c
+      const c = todas.filter((e) => CLIMA_ESCENA[clima].includes(e.clima) && [ctx.estacion, ...VECINAS[ctx.estacion]].includes(e.estacion))
+      if (c.length) { xs = c; nota = ", " + clima.toLowerCase() }
+    }
+    if (xs.length < 3 && !nota) {
+      const mas = todas.filter((e) => e.hora === ctx.hora && VECINAS[ctx.estacion].includes(e.estacion))
+      if (mas.length) { xs = xs.concat(mas); nota = ", con estaciones vecinas" }
     }
     if (!xs.length) xs = todas.filter((e) => e.estacion === ctx.estacion)
-    if (!xs.length) xs = todas.filter((e) => e.hora === ctx.hora)
+    if (!xs.length) xs = todas
     if (!xs.length) return null
-    const r = d(xs.length)
-    anota(`Escena (${ctx.estacion}, ${ctx.hora === "noche" ? "de noche" : "de día"}${clima && CLIMA_ESCENA[clima] ? ", " + clima.toLowerCase() : ""}): <b>1d${xs.length}</b> = <b>${r}</b>`)
-    return xs[r - 1].texto
+    const usadas = (USADAS[clave] = USADAS[clave] || new Set())
+    let libres = xs.filter((e) => !usadas.has(e.texto))
+    if (!libres.length) { xs.forEach((e) => usadas.delete(e.texto)); libres = xs }
+    const r = d(libres.length)
+    const e = libres[r - 1]
+    usadas.add(e.texto)
+    anota(`Escena (${ctx.estacion}, ${ctx.hora === "noche" ? "de noche" : "de día"}${nota}): <b>1d${libres.length}</b> = <b>${r}</b>` +
+          (libres.length < xs.length ? ` <span class="enc-rango">(entre las ${libres.length} no usadas de ${xs.length})</span>` : ""))
+    return e.texto
   }
 
   const NOMBRE_R = { criatura: "criatura", clima: "clima o terreno", suceso: "suceso", viajeros: "viajeros", doble: "dos encuentros", nada: "nada" }
