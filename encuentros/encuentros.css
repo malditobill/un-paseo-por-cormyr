@@ -28,3 +28,9 @@
 .enc-ayuda { font-size: 0.8rem; color: var(--gray); margin-top: 8px; }
 details.enc-modulo { margin: 1.2rem 0; }
 details.enc-modulo > summary { cursor: pointer; font-family: var(--headerFont); color: var(--secondary); font-size: 1.1rem; }
+.enc-tiradas { margin: 6px 0 2px; font-size: 0.78rem; color: var(--darkgray); background: color-mix(in srgb, var(--lightgray) 25%, transparent); border-radius: 3px; padding: 3px 8px; }
+.enc-tiradas > summary { cursor: pointer; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray); }
+.enc-tiradas ol { margin: 2px 0 2px 1.2rem; padding: 0; }
+.enc-tiradas li { margin: 1px 0; line-height: 1.35; }
+.enc-tiradas b { color: var(--secondary); }
+.enc-rango { color: var(--gray); }

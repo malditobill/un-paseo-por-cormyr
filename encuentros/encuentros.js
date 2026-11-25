@@ -7,28 +7,58 @@
   const RAIZ = BASE.replace(/encuentros\/$/, "")
   let DATOS = null
 
-  // ── azar ──
+  // ── azar, con registro de cada tirada (se muestra en la tarjeta) ──
+  let T = []
+  const anota = (s) => T.push(s)
   const d = (n) => 1 + Math.floor(Math.random() * n)
-  function dados(expr) {
-    // «2d4+2», «1-4», «3», «10d10»
+  const dd = (n) => String(n).padStart(2, "0")
+  // «1-4» -> «1d4», «7-16» -> «1d10+6»
+  function aDados(expr) {
     expr = String(expr || "1").replace(/\s/g, "").replace(/[–—]/g, "-")
-    let m = expr.match(/^(\d+)-(\d+)$/)
-    if (m) return +m[1] + Math.floor(Math.random() * (+m[2] - +m[1] + 1))
-    m = expr.match(/^(\d*)d(\d+)([+-]\d+)?(?:x(\d+))?$/)
-    if (m) {
-      let t = 0
-      for (let i = 0; i < (+m[1] || 1); i++) t += d(+m[2])
-      return (t + (+m[3] || 0)) * (+m[4] || 1)
-    }
-    return parseInt(expr) || 1
+    const m = expr.match(/^(\d+)-(\d+)$/)
+    if (m) { const lo = +m[1], hi = +m[2]; return lo === hi ? String(lo) : `1d${hi - lo + 1}${lo - 1 ? "+" + (lo - 1) : ""}` }
+    return expr
   }
-  function elegir(lista, peso = (x) => x.peso || 1) {
-    const tot = lista.reduce((a, x) => a + peso(x), 0)
-    let r = Math.random() * tot
-    for (const x of lista) if ((r -= peso(x)) <= 0) return x
-    return lista[lista.length - 1]
+  function maxDe(expr) {
+    const e = aDados(expr), m = e.match(/^(\d*)d(\d+)([+-]\d+)?(?:x(\d+))?$/)
+    return m ? ((+m[1] || 1) * +m[2] + (+m[3] || 0)) * (+m[4] || 1) : parseInt(e) || 1
+  }
+  // tira y anota: «Distancia: 2d10×3 = (4+7)×3 = 33 m»
+  function tira(expr, etiqueta, unidad = "") {
+    const e = aDados(expr)
+    const m = e.match(/^(\d*)d(\d+)([+-]\d+)?(?:x(\d+))?$/)
+    if (!m) { const v = parseInt(e) || 1; if (etiqueta) anota(`${etiqueta}: ${v}${unidad} (fijo)`); return v }
+    const caras = [], n = +m[1] || 1
+    for (let i = 0; i < n; i++) caras.push(d(+m[2]))
+    const suma = caras.reduce((a, x) => a + x, 0), mod = +m[3] || 0, mul = +m[4] || 1
+    const total = (suma + mod) * mul
+    const fx = `${n}d${m[2]}${m[3] || ""}${mul > 1 ? "×" + mul : ""}`
+    let det = caras.length > 1 ? `(${caras.join("+")})` : `${caras[0]}`
+    if (mod) det = `${det}${mod > 0 ? "+" : ""}${mod}`
+    if (mul > 1) det = mod || caras.length === 1 ? `(${det})×${mul}` : `${det}×${mul}`
+    if (etiqueta) anota(`${etiqueta}: <b>${fx}</b> = ${det === String(total) ? "" : det + " = "}<b>${total}${unidad}</b>`)
+    return total
+  }
+  // tabla de pesos -> d100 (o d1000 si hay entradas de menos del 1 %) con rangos; tira, anota y devuelve la entrada
+  function tabla(lista, peso, etiqueta, nombre) {
+    const ps = lista.map((x) => Math.max(0, peso(x)))
+    const tot = ps.reduce((a, x) => a + x, 0) || 1
+    const caras = ps.some((x) => x > 0 && x / tot < 0.01) ? 1000 : 100
+    const hasta = []
+    let acc = 0
+    ps.forEach((x, i) => { acc += x; hasta.push(Math.max(i ? hasta[i - 1] + 1 : 1, Math.round((acc / tot) * caras))) })
+    const tope = Math.max(caras, hasta[hasta.length - 1])
+    hasta[hasta.length - 1] = tope
+    const r = d(tope)
+    const i = hasta.findIndex((h) => r <= h)
+    const desde = i ? hasta[i - 1] + 1 : 1
+    const ancho = caras === 1000 ? 3 : 2
+    const f = (n) => (n === caras ? (caras === 1000 ? "000" : "00") : String(n).padStart(ancho, "0"))
+    if (etiqueta) anota(`${etiqueta}: <b>1d${caras}</b> = <b>${f(r)}</b> → ${nombre ? nombre(lista[i]) : ""} <span class="enc-rango">(${f(desde)}–${f(hasta[i])})</span>`)
+    return lista[i]
   }
   const PESO_FREC = { "común": 10, "poco común": 4, "raro": 1, "muy raro": 0.25 }
+  const pesoPerfil = (p) => PESO_FREC[p.frecuencia] || 1
 
   // ── nivel de encuentro (DMG 3.5): cada duplicación de criaturas suma 2 ──
   function vdNum(vd) {
@@ -38,7 +68,6 @@
     return parseFloat(vd) || 0
   }
   function ne(grupos) {
-    // grupos: [[vd, cantidad], …]
     const p = grupos.reduce((a, [vd, n]) => a + n * Math.pow(2, vdNum(vd) / 2), 0)
     return p > 0 ? Math.max(1, Math.round(2 * Math.log2(p))) : 0
   }
@@ -54,29 +83,41 @@
 
   // ── distancia de avistamiento por terreno (DMG 3.5), en metros ──
   const DIST = { llanura: "6d6x6", desierto: "6d6x6", colina: "2d10x3", montana: "4d10x3", bosque: "2d8x3", pantano: "2d8x3", agua: "6d6x6", subterraneo: "2d6x3", ciudad: "1d6x3" }
-  const ACTIVIDAD = ["en marcha, de paso", "cazando o buscando comida", "acampados o en su guarida", "comiendo o descansando", "siguiendo el rastro del grupo", "peleando con otra cosa", "vigilando un paso o un punto alto", "durmiendo (si es de día y son nocturnos) o al acecho"]
+  const ACTIVIDAD = ["en marcha, de paso", "cazando o buscando comida", "acampados o en su guarida", "comiendo o descansando", "siguiendo el rastro del grupo", "peleando con otra cosa", "vigilando un paso o un punto alto", "durmiendo o al acecho"]
   const ACTITUD = [[4, "hostil"], [9, "inamistosa"], [15, "indiferente"], [18, "amistosa"], [20, "servicial"]]
-  const actitud = () => { const r = d(20); return ACTITUD.find(([t]) => r <= t)[1] }
+  function actitud() {
+    const r = d(20), i = ACTITUD.findIndex(([t]) => r <= t), desde = i ? ACTITUD[i - 1][0] + 1 : 1
+    anota(`Actitud: <b>1d20</b> = <b>${dd(r)}</b> → ${ACTITUD[i][1]} <span class="enc-rango">(${dd(desde)}–${dd(ACTITUD[i][0])})</span>`)
+    return ACTITUD[i][1]
+  }
+  function actividad() {
+    const r = d(ACTIVIDAD.length)
+    anota(`Qué están haciendo: <b>1d${ACTIVIDAD.length}</b> = <b>${r}</b> → ${ACTIVIDAD[r - 1]}`)
+    return ACTIVIDAD[r - 1]
+  }
 
   // ── tiradas ──
   function criaturaDe(ref) { return (DATOS.criaturas || {})[ref] || null }
 
-  function resolverCriatura(ent, ctx, contexto) {
+  function resolverCriatura(ent, ctx) {
     const c = criaturaDe(ent.ref) || { nombre: ent.nombre || ent.ref, vd: ent.vd || "1", grupos: [] }
     const ng = ctx.ng
-    // grupos posibles: los de la criatura (sin tribus ni campamentos enteros), o la cantidad de la tabla
     let grupos = (c.grupos || []).filter((g) => !g.guarida)
     if (ent.cantidad) grupos = [{ nombre: "", cantidad: ent.cantidad }]
     if (!grupos.length) grupos = [{ nombre: "", cantidad: "1" }]
-    // del más chico al más grande; se prueba al azar y se achica si se pasa
-    let g = elegir(grupos, (x) => x.peso || 1), n = dados(g.cantidad), el = ne([[c.vd, n]])
-    const orden = grupos.slice().sort((a, b) => dados(a.cantidad) - dados(b.cantidad))
-    for (let i = 0; el > ng + 3 && i < orden.length; i++) { g = orden[i]; n = dados(g.cantidad); el = ne([[c.vd, n]]) }
-    while (el > ng + 3 && n > 1) { n--; el = ne([[c.vd, n]]) }
+    let g = grupos.length > 1 ? tabla(grupos, (x) => x.peso || 1, "Grupo", (x) => `${x.nombre.toLowerCase()} (${x.cantidad})`) : grupos[0]
+    let n = tira(g.cantidad, "Cantidad"), el = ne([[c.vd, n]])
+    if (el > ng + 3) {
+      // demasiados: se prueba el grupo más chico y, si hace falta, se recorta
+      const chico = grupos.slice().sort((a, b) => maxDe(a.cantidad) - maxDe(b.cantidad))[0]
+      if (chico !== g) { g = chico; n = tira(g.cantidad, `NE ${el} supera NG+3: grupo más chico (${g.nombre || g.cantidad})`); el = ne([[c.vd, n]]) }
+      const antes = n
+      while (el > ng + 3 && n > 1) { n--; el = ne([[c.vd, n]]) }
+      if (n !== antes) anota(`Ajuste al grupo: de ${antes} a ${n} para no pasar NE ${ng + 3}`)
+    }
     const [dif, clase] = dificultad(el, ng)
     const lejos = el > ng + 4
-    const terreno = ctx.terreno
-    const dist = dados(DIST[terreno] || "2d10x3")
+    const dist = tira(DIST[ctx.terreno] || "2d10x3", lejos ? "Distancia (×4: se los ve de lejos)" : "Distancia", " m")
     return {
       tipo: lejos ? "avistamiento" : "criatura",
       titulo: `${n} ${n === 1 ? c.nombre : c.plural || c.nombre}` + (g.nombre ? ` (${g.nombre.toLowerCase()})` : ""),
@@ -84,7 +125,7 @@
       lineas: [
         `VD ${c.vd} cada uno · NE ${el} · <b class="enc-${clase}">${dif}</b> para el grupo (NG ${ng})`,
         lejos ? `Demasiado para el grupo: se los ve a lo lejos, a unos ${dist * 4} m, y todavía no los vieron. Se puede evitar el encuentro.`
-              : `Distancia: unos ${dist} m · ${ACTIVIDAD[d(ACTIVIDAD.length) - 1]} · actitud ${actitud()}`,
+              : `Distancia: unos ${dist} m · ${actividad()} · actitud ${actitud()}`,
         g.nota ? g.nota : "",
         ent.nota ? ent.nota : "",
         c.pagina ? "" : `<span class="enc-pend">Hoja de juego pendiente en el bestiario.</span>`,
@@ -94,11 +135,12 @@
   }
 
   function resolverPerfil(p, ctx) {
+    const act = p.actitud && p.actitud !== "variable" ? p.actitud : actitud()
     return {
       tipo: "viajeros",
       titulo: p.nombre,
       enlace: p.pagina,
-      lineas: [p.descripcion, p.composicion ? `<b>Composición:</b> ${p.composicion}` : "", `Actitud inicial: ${p.actitud && p.actitud !== "variable" ? p.actitud : actitud()}`],
+      lineas: [p.descripcion, p.composicion ? `<b>Composición:</b> ${p.composicion}` : "", `Actitud inicial: ${act}`],
       fuente: p.fuentes,
     }
   }
@@ -109,18 +151,29 @@
       && (!p.hora || p.hora === "ambas" || p.hora === ctx.hora) && (!p.epoca || p.epoca === "1374"))
   }
 
+  const nomEnt = (x) => {
+    if (x.ref) { const c = criaturaDe(x.ref); return c ? c.nombre : x.ref }
+    if (x.perfil && DATOS.perfiles[x.perfil]) return DATOS.perfiles[x.perfil].nombre
+    if (x.viajeros) return `viajeros (${x.viajeros})`
+    return x.nombre || "?"
+  }
+
   function tirarCriatura(ctx) {
     const sec = (DATOS.sectores || {})[ctx.sector]
-    let tabla = sec && (sec.tablas[ctx.hora] || sec.tablas.dia)
+    const reg = (sec && (sec.tablas[ctx.hora] || sec.tablas.dia)) || []
     const base = ((DATOS.base || {})[ctx.terreno] || {})[ctx.hora === "noche" ? "noche" : "dia"] || []
-    // capa de la región (70 %) y base del terreno (30 %)
-    if (!tabla || !tabla.length || (base.length && Math.random() < 0.3)) tabla = base
-    if (!tabla.length) return { tipo: "nada", titulo: "Sin tabla para este terreno todavía", lineas: [] }
-    const ent = elegir(tabla, (x) => x.peso || PESO_FREC[x.frecuencia] || 1)
+    let lista = reg, cual = "de la región"
+    if (reg.length && base.length) {
+      const r = d(100)
+      if (r > 70) { lista = base; cual = "general del terreno" }
+      anota(`Qué tabla: <b>1d100</b> = <b>${r === 100 ? "00" : dd(r)}</b> → ${cual} <span class="enc-rango">(01–70 región, 71–00 terreno)</span>`)
+    } else if (!reg.length) { lista = base; cual = "general del terreno" }
+    if (!lista.length) return { tipo: "nada", titulo: "Sin tabla para este terreno todavía", lineas: [] }
+    const ent = tabla(lista, (x) => x.peso || PESO_FREC[x.frecuencia] || 1, `Tabla ${cual}`, nomEnt)
     if (ent.perfil && DATOS.perfiles[ent.perfil]) return resolverPerfil(DATOS.perfiles[ent.perfil], ctx)
     if (ent.viajeros) {
       const ps = perfilesPara(ctx).filter((p) => p.tipo === ent.viajeros)
-      if (ps.length) return resolverPerfil(elegir(ps, (p) => PESO_FREC[p.frecuencia] || 1), ctx)
+      if (ps.length) return resolverPerfil(tabla(ps, pesoPerfil, `Perfil de Cormyr (${ent.viajeros})`, (p) => p.nombre), ctx)
       return tirarViajeros(ctx)
     }
     if (ent.compuesto) return resolverCompuesto(ent, ctx)
@@ -129,18 +182,22 @@
   }
 
   function resolverCompuesto(ent, ctx) {
-    const partes = ent.compuesto.map((p) => ({ c: criaturaDe(p.ref) || { nombre: p.ref, vd: "1" }, n: dados(p.cantidad) }))
+    const partes = ent.compuesto.map((p) => {
+      const c = criaturaDe(p.ref) || { nombre: p.ref, vd: "1" }
+      return { c, n: tira(p.cantidad, `Cantidad de ${c.plural || c.nombre}`) }
+    })
     const el = ne(partes.map((p) => [p.c.vd, p.n]))
     const [dif, clase] = dificultad(el, ctx.ng)
     const nom = (p) => {
       const t = `${p.n} ${p.n === 1 ? p.c.nombre : p.c.plural || p.c.nombre}`
       return p.c.pagina ? `<a class="internal" href="${RAIZ}${p.c.pagina}">${t}</a>` : t
     }
+    const dist = tira(DIST[ctx.terreno] || "2d10x3", "Distancia", " m")
     return {
       tipo: el > ctx.ng + 4 ? "avistamiento" : "criatura",
       titulo: ent.nombre || "Grupo mixto",
       lineas: [partes.map(nom).join(", "), `NE ${el} · <b class="enc-${clase}">${dif}</b> para el grupo (NG ${ctx.ng})`,
-               `Distancia: unos ${dados(DIST[ctx.terreno] || "2d10x3")} m · actitud ${actitud()}`, ent.nota || ""],
+               `Distancia: unos ${dist} m · actitud ${actitud()}`, ent.nota || ""],
       fuente: ent.fuente,
     }
   }
@@ -149,33 +206,52 @@
     // primero el tipo de viajeros (tabla de caminos); después, un perfil propio de Cormyr de ese tipo en la región
     const ps = perfilesPara(ctx)
     const vs = DATOS.viajeros || []
-    const v = vs.length ? elegir(vs) : null
+    const v = vs.length ? tabla(vs, (x) => x.peso || 1, "Tipo de viajeros", (x) => x.nombre.toLowerCase()) : null
     let cand = v && v.tipo ? ps.filter((p) => p.tipo === v.tipo) : []
-    if (!cand.length && ps.length && (!v || Math.random() < 0.5)) cand = ps
-    if (cand.length) return resolverPerfil(elegir(cand, (p) => PESO_FREC[p.frecuencia] || 1), ctx)
-    if (v) return { tipo: "viajeros", titulo: v.nombre, lineas: [v.resumen] }
+    if (!cand.length && ps.length) {
+      const r = d(2)
+      anota(`No hay perfil de ese tipo en la región: <b>1d2</b> = <b>${r}</b> → ${r === 1 ? "otro perfil de la región" : "viajeros genéricos"}`)
+      if (r === 1) cand = ps
+    }
+    if (cand.length) return resolverPerfil(tabla(cand, pesoPerfil, "Perfil de Cormyr", (p) => p.nombre), ctx)
+    if (v) return { tipo: "viajeros", titulo: v.nombre, lineas: [v.resumen, `Actitud inicial: ${actitud()}`] }
     return tirarCriatura(ctx)
   }
 
-  function tirarDe(lista, tipo, ctx) {
+  function tirarDe(lista, tipo, ctx, etiqueta) {
     const ter = ctx.terreno === "subterraneo" || ctx.terreno === "ciudad" ? "colina" : ctx.terreno
     const xs = (lista || []).filter((x) => !x.pesos || x.pesos[ter])
     if (!xs.length) return tirarCriatura(ctx)
-    const x = elegir(xs, (y) => (y.pesos ? y.pesos[ter] : y.peso || 1))
+    const x = tabla(xs, (y) => (y.pesos ? y.pesos[ter] : y.peso || 1), etiqueta, (y) => y.nombre)
     return { tipo, titulo: x.nombre, lineas: [x.resumen || x.descripcion || ""] }
   }
 
+  const NOMBRE_R = { criatura: "criatura", clima: "clima o terreno", suceso: "suceso", viajeros: "viajeros", doble: "dos encuentros", nada: "nada" }
   function bloque4h(ctx, forzar) {
     const m = (DATOS.master || {})[ctx.contexto === "camino" ? "camino" : "campo"] ||
       [{ hasta: 20, r: "criatura" }, { hasta: 25, r: "clima" }, { hasta: 30, r: "suceso" }, { hasta: 35, r: "viajeros" }, { hasta: 40, r: "doble" }, { hasta: 100, r: "nada" }]
+    T = []
     let r
-    do { const x = d(100); r = m.find((e) => x <= e.hasta).r } while (forzar && r === "nada")
-    if (r === "doble") return [bloque4h(ctx, true)[0], bloque4h(ctx, true)[0]]
-    if (r === "nada") return [{ tipo: "nada", titulo: "Sin novedad", lineas: ["Cuatro horas tranquilas."] }]
-    if (r === "criatura") return [tirarCriatura(ctx)]
-    if (r === "viajeros") return [tirarViajeros(ctx)]
-    if (r === "clima") return [tirarDe(DATOS.clima_terreno, "clima", ctx)]
-    return [tirarDe(DATOS.sucesos, "suceso", ctx)]
+    // forzado: se tira solo entre los resultados que no son «nada» (p. ej. 1d40 en vez de 1d100)
+    const tope = forzar ? Math.max(...m.filter((e) => e.r !== "nada").map((e) => e.hasta)) : 100
+    const x = d(tope), i = m.findIndex((e) => x <= e.hasta)
+    r = m[i].r
+    const desde = i ? m[i - 1].hasta + 1 : 1
+    const f = (n) => (n === 100 ? "00" : dd(n))
+    anota(`Qué pasa en estas 4 horas (${ctx.contexto === "camino" ? "por camino" : "campo traviesa"}): <b>1d${tope}</b> = <b>${f(x)}</b> → ${NOMBRE_R[r]} <span class="enc-rango">(${f(desde)}–${f(m[i].hasta)})</span>` +
+          (forzar ? ` <span class="enc-rango">· encuentro forzado: se tira 1d${tope} para saltear «nada» (${f(tope + 1)}–00)</span>` : ""))
+    const fin = (res) => { res.tiradas = T; T = []; return res }
+    if (r === "doble") {
+      const nota = T
+      const a = bloque4h(ctx, true)[0], b = bloque4h(ctx, true)[0]
+      a.tiradas = nota.concat(a.tiradas || [])
+      return [a, b]
+    }
+    if (r === "nada") return [fin({ tipo: "nada", titulo: "Sin novedad", lineas: ["Cuatro horas tranquilas."] })]
+    if (r === "criatura") return [fin(tirarCriatura(ctx))]
+    if (r === "viajeros") return [fin(tirarViajeros(ctx))]
+    if (r === "clima") return [fin(tirarDe(DATOS.clima_terreno, "clima", ctx, "Tabla de clima y terreno"))]
+    return [fin(tirarDe(DATOS.sucesos, "suceso", ctx, "Tabla de sucesos"))]
   }
 
   // ── interfaz ──
@@ -187,6 +263,7 @@
     return `<div class="enc-tarjeta enc-t-${res.tipo}"><div class="enc-cab"><span class="enc-etq">${ETIQ[res.tipo] || res.tipo}</span>` +
       (hora ? `<span class="enc-hora">${hora}</span>` : "") + `</div><div class="enc-titulo">${t}</div>` +
       res.lineas.filter(Boolean).map((l) => `<p>${l}</p>`).join("") +
+      (res.tiradas && res.tiradas.length ? `<details class="enc-tiradas" open><summary>Tiradas</summary><ol>${res.tiradas.map((s) => `<li>${s}</li>`).join("")}</ol></details>` : "") +
       (res.fuente ? `<p class="enc-fuente">${esc(res.fuente)}</p>` : "") + `</div>`
   }
 
