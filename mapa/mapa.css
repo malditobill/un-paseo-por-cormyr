@@ -196,7 +196,7 @@ html.cronica-ancha .mapa-ref-control { display: block !important; }
   box-shadow: 0 2px 10px rgba(38, 32, 64, .18); color: #262040; font-family: var(--bodyFont), Georgia, serif; }
 .mapa-ficha b { display: block; padding-right: 1.4rem; font-family: var(--headerFont), Georgia, serif; font-size: 1.15rem; color: #3d3265; line-height: 1.2; }
 .mapa-ficha small { display: block; color: #8a6a1f; font-style: italic; margin: .1rem 0 .35rem; }
-.mapa-ficha p { margin: 0 0 .45rem; font-size: .92rem; line-height: 1.38;
+.mapa-ficha p { margin: 0 0 .45rem; font-size: .92rem; line-height: 1.38; color: #262040; /* fondo crema fijo: no hereda el color del tema oscuro */
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .mapa-ficha a { color: #3d3265; font-weight: 600; font-size: .92rem; }
 .mapa-ficha-cerrar { position: absolute; top: .35rem; right: .45rem; width: 1.5rem; height: 1.5rem; padding: 0; border: 0;

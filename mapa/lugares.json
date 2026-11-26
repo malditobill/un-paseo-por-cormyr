@@ -504,7 +504,7 @@
 "x": 1041,
 "y": 1661,
 "u": "geografía/castillos/darkhold",
-"r": ""
+"r": "Darkhold no parece construido, sino arrancado de algún otro lugar y plantado en la montaña. Se alza sobre un espolón rocoso de Gray Watcher —Grey Watcher, en otras bocas—, al fondo de un valle encajado entre dos ramales de las Sunset Mountains, y desde allí…"
 },
 {
 "n": "Daerlun",
@@ -514,7 +514,7 @@
 "dx": -68.0,
 "dy": 36.0,
 "u": "geografía/ciudades/daerlun",
-"r": ""
+"r": "Daerlun es la ciudad sembiana que mira a Cormyr. Se levanta del lado sembiano de la frontera, y entre ella y el reino hay siglos de matrimonios cruzados y el comercio más estrecho de toda Sembia. Es la puerta por la que el dinero sembiano entra en Cormyr y, a…"
 },
 {
 "n": "Westgate",
@@ -554,7 +554,7 @@
 "x": 897,
 "y": 3662,
 "u": "geografía/ciudades/iriaebor",
-"r": ""
+"r": "Iriaebor se ve antes de llegar. Sobre el brazo norte del River Chionthar se levanta el Tor, una cresta de 91 m de altura media, y encima de la cresta, apretadas hasta no dejar un palmo libre, las torres que le dieron el nombre de City of a Thousand Spires. Al…"
 },
 {
 "n": "Berdusk",
@@ -562,7 +562,7 @@
 "x": 183,
 "y": 4003,
 "u": "geografía/ciudades/berdusk",
-"r": ""
+"r": "Berdusk tiene fama de amable. La llaman la Jewel of the Vale, y es la ciudad del Sunset Vale adonde se va a firmar la paz, a escuchar música y a estudiar canciones. Se asienta junto al Chionthar, en un tramo donde el río se pone difícil: aguas arriba están…"
 },
 {
 "n": "Asbravn",
