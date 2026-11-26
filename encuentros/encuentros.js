@@ -235,7 +235,13 @@
   const USADAS = {}   // escenas ya mostradas por zona: no se repiten hasta agotar las posibles
   function escena(ctx, clima) {
     const clave = ctx.region + "|" + ctx.sectorId
-    const todas = (DATOS.escenas || {})[clave] || []
+    // escenas que nombran un poblado: en un lugar, solo las suyas o las que no nombran ninguno
+    const crudas = (DATOS.escenas || {})[clave] || []
+    const nombra = (e) => (e.lugar ? [e.lugar] : e.lugares || [])
+    const neutras = crudas.filter((e) => !nombra(e).length)
+    const todas = ctx.lugar
+      ? crudas.filter((e) => nombra(e).some((n) => ctx.lugar === n || ctx.lugar.startsWith(n + " "))).concat(neutras)
+      : (neutras.length >= 6 ? neutras : crudas)
     let xs = todas.filter((e) => e.hora === ctx.hora && e.estacion === ctx.estacion)
     let nota = ""
     if (clima && CLIMA_ESCENA[clima]) {
@@ -255,7 +261,8 @@
     const r = d(libres.length)
     const e = libres[r - 1]
     usadas.add(e.texto)
-    anota(`Escena (${ctx.estacion}, ${ctx.hora === "noche" ? "de noche" : "de día"}${nota}): <b>1d${libres.length}</b> = <b>${r}</b>` +
+    const donde = nombra(e).length && !ctx.lugar ? ` <span class="enc-rango">(escena de ${nombra(e).join(", ")})</span>` : ""
+    anota(`Escena (${ctx.estacion}, ${ctx.hora === "noche" ? "de noche" : "de día"}${nota}): <b>1d${libres.length}</b> = <b>${r}</b>${donde}` +
           (libres.length < xs.length ? ` <span class="enc-rango">(entre las ${libres.length} no usadas de ${xs.length})</span>` : ""))
     return e.texto
   }
