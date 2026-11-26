@@ -368,7 +368,8 @@
       barraDer.querySelector(".mapa-referencias")?.remove()
       const caja = document.createElement("div")
       caja.className = "mapa-referencias mapa-ref"
-      caja.innerHTML = refHtml
+      // la lista va envuelta: scrollea por dentro del marco y el título queda fijo
+      caja.innerHTML = refHtml.replace("</h3>", '</h3><div class="ref-lista">') + "</div>"
       const toc = barraDer.querySelector(".toc")
       toc ? toc.after(caja) : barraDer.appendChild(caja)
       conectar(caja)

@@ -198,7 +198,7 @@
   "posicion": "derecha"
  },
  "region": {
-  "nombre": "Dragonmere",
+  "nombre": "Región",
   "contorno": true,
   "contornoColor": "#fcfaf6",
   "contornoAncho": 3,
