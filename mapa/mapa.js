@@ -42,14 +42,15 @@
     ["MedievalSharp", "MedievalSharp"],
     ["Pirata One", "Pirata+One"],
   ]
-  const fuentesCargadas = new Set()
+  // sin caché propia: la navegación sin recarga de Quartz borra el <link>, así que se repone si falta
   function cargarFuentes(lista) {
-    const q = [...new Set(lista)].filter((f) => f && !fuentesCargadas.has(f)).map((f) => (FUENTES.find((x) => x[0] === f) || [])[1]).filter(Boolean)
+    const q = [...new Set(lista)].filter(Boolean).map((f) => (FUENTES.find((x) => x[0] === f) || [])[1]).filter(Boolean)
     if (!q.length) return
-    lista.forEach((f) => fuentesCargadas.add(f))
+    const href = "https://fonts.googleapis.com/css2?" + q.map((x) => "family=" + x).join("&") + "&display=swap"
+    if ([...document.querySelectorAll('link[rel="stylesheet"]')].some((l) => l.href === href || l.getAttribute("href") === href)) return
     const k = document.createElement("link")
     k.rel = "stylesheet"
-    k.href = "https://fonts.googleapis.com/css2?" + q.map((x) => "family=" + x).join("&") + "&display=swap"
+    k.href = href
     document.head.appendChild(k)
   }
   const CAPAS = [
@@ -70,17 +71,22 @@
       document.head.appendChild(e)
     })
   }
+  // Las hojas de estilo se revisan en cada armado: la navegación sin recarga de Quartz rehace el <head>
+  // y borra los <link> agregados acá (los scripts, una vez ejecutados, siguen vivos).
+  function estilos() {
+    const hrefs = [conV(BASE + "leaflet/leaflet.css"), conV(BASE + "mapa.css")]
+    const presentes = new Set([...document.querySelectorAll('link[rel="stylesheet"]')].map((l) => l.getAttribute("href")))
+    return Promise.all(hrefs.filter((h) => !presentes.has(h)).map((h) => cargar("link", { rel: "stylesheet", href: h })))
+  }
   function cargarLeaflet() {
     if (!leaflet) {
       leaflet = Promise.all([
-        cargar("link", { rel: "stylesheet", href: conV(BASE + "leaflet/leaflet.css") }),
-        cargar("link", { rel: "stylesheet", href: conV(BASE + "mapa.css") }),
         cargar("script", { src: conV(BASE + "leaflet/leaflet.js") }),
         cargar("script", { src: conV(BASE + "iconos.js") }),
         cargar("script", { src: conV(BASE + "trazos.js") }),
       ])
     }
-    return leaflet
+    return Promise.all([leaflet, estilos()])
   }
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c])
 
