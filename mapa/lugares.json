@@ -650,31 +650,40 @@
 "n": "Shaddan Hills",
 "t": "region2",
 "x": 2723,
-"y": 416
+"y": 416,
+"rot": 10.0
 },
 {
 "n": "The Redwoods",
 "t": "region2",
 "x": 3999,
-"y": 1113
+"y": 1113,
+"rot": -22.0
 },
 {
 "n": "Orlath Woods",
 "t": "region2",
 "x": 3838,
-"y": 189
+"y": 189,
+"rot": -18.0,
+"dx": -1.0
 },
 {
 "n": "The Far Hills",
 "t": "region2",
 "x": 1256,
-"y": 2048
+"y": 2048,
+"dx": -5.0,
+"dy": -26.0
 },
 {
 "n": "Gritstone Moorland",
 "t": "region2",
 "x": 3036,
-"y": 3347
+"y": 3347,
+"rot": -22.0,
+"dx": -21.0,
+"dy": 11.0
 },
 {
 "n": "Redwater",
@@ -686,7 +695,10 @@
 "n": "The Reaching Woods",
 "t": "region2",
 "x": 211,
-"y": 2219
+"y": 2219,
+"rot": -73.0,
+"dx": -11.0,
+"dy": 55.0
 },
 {
 "n": "Sunset Foothills",
