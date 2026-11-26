@@ -267,7 +267,7 @@
 {
 "n": "Ghars",
 "t": "pueblo",
-"x": 5037,
+"x": 5000,
 "y": 1861,
 "u": "geografía/pueblos/ghars",
 "r": "Ghars vive a la sombra de una guarnición de Purple Dragons que patrulla al norte y al este del Vast Swamp, y su suerte es estar justo dentro del alcance de las incursiones que salen de esa ciénaga. Fue una aldea, y la guarnición la hizo crecer hasta pueblo de…"
@@ -362,8 +362,8 @@
 "x": 3798,
 "y": 1129,
 "rot": -29.0,
-"dx": 109.0,
-"dy": -52.0,
+"dx": 94.0,
+"dy": -70.0,
 "u": "geografía/castillos/helmlands",
 "r": "Los Helmlands son un pedazo de tierra donde las reglas dejaron de valer. Quedan en el borde oriental de los Stormhorn Mountains, cerca del Gnoll Pass y de Castle Crag, y los cormyrenses los rehúyen. Nunca se asentaron allí: una superstición que viene del Time…"
 },
@@ -380,7 +380,7 @@
 },
 {
 "n": "King's Forest",
-"t": "region2",
+"t": "region",
 "x": 3262,
 "y": 2205,
 "dx": 48.0,
@@ -390,11 +390,11 @@
 },
 {
 "n": "Hullack Forest",
-"t": "region2",
+"t": "region",
 "x": 5175,
 "y": 1310,
-"dx": -36.0,
-"dy": -6.0,
+"dx": -67.0,
+"dy": -17.0,
 "u": "geografía/regiones/hullack-forest",
 "r": "Desde las lomas del oeste, más allá de la cinta plateada del Immerflow, el Hullack Forest es una línea verde oscura que ocupa todo el horizonte sin interrumpirse. Por dentro es otra cosa. Es oscuro, denso y húmedo; los árboles crecen apretados unos contra…"
 },
@@ -420,7 +420,7 @@
 "r": "En el Vast Swamp los árboles parecen muertos, aun los que están vivos. La corteza y las hojas son negras, como si el barro que sube por las raíces los tiñera desde adentro, y el musgo cuelga de las ramas en tiras verdes que recuerdan carne picada colgando de…"
 },
 {
-"n": "Tunlands",
+"n": "The Tunlands",
 "t": "region2",
 "x": 1980,
 "y": 2411,
@@ -441,9 +441,12 @@
 },
 {
 "n": "Wyvernwater",
-"t": "paraje",
+"t": "region2",
 "x": 4441,
 "y": 1733,
+"rot": -37.0,
+"dx": 11.0,
+"dy": 7.0,
 "u": "geografía/regiones/wyvernwater",
 "r": ""
 },
@@ -648,6 +651,48 @@
 "t": "region2",
 "x": 2723,
 "y": 416
+},
+{
+"n": "The Redwoods",
+"t": "region2",
+"x": 3999,
+"y": 1113
+},
+{
+"n": "Orlath Woods",
+"t": "region2",
+"x": 3838,
+"y": 189
+},
+{
+"n": "The Far Hills",
+"t": "region2",
+"x": 1256,
+"y": 2048
+},
+{
+"n": "Gritstone Moorland",
+"t": "region2",
+"x": 3036,
+"y": 3347
+},
+{
+"n": "Redwater",
+"t": "region2",
+"x": 5710,
+"y": 3726
+},
+{
+"n": "The Reaching Woods",
+"t": "region2",
+"x": 211,
+"y": 2219
+},
+{
+"n": "Sunset Foothills",
+"t": "region2",
+"x": 2187,
+"y": 749
 }
 ]
 }

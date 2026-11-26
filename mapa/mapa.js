@@ -73,7 +73,7 @@
   }
   // Las hojas de estilo se revisan en cada armado: la navegación sin recarga de Quartz rehace el <head>
   // y borra los <link> agregados acá (los scripts, una vez ejecutados, siguen vivos).
-  function estilos() {
+  function reponerEstilos() {
     const hrefs = [conV(BASE + "leaflet/leaflet.css"), conV(BASE + "mapa.css")]
     const presentes = new Set([...document.querySelectorAll('link[rel="stylesheet"]')].map((l) => l.getAttribute("href")))
     return Promise.all(hrefs.filter((h) => !presentes.has(h)).map((h) => cargar("link", { rel: "stylesheet", href: h })))
@@ -86,7 +86,7 @@
         cargar("script", { src: conV(BASE + "trazos.js") }),
       ])
     }
-    return Promise.all([leaflet, estilos()])
+    return Promise.all([leaflet, reponerEstilos()])
   }
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c])
 
@@ -433,6 +433,10 @@
     }
   }
   document.addEventListener("nav", iniciar)
+  // seguro: si algo saca del <head> los estilos del mapa mientras hay un mapa en pantalla, se reponen
+  new MutationObserver(() => {
+    if (leaflet && document.querySelector(".mapa-lienzo")) reponerEstilos()
+  }).observe(document.head, { childList: true })
   if (document.readyState !== "loading") iniciar()
   else document.addEventListener("DOMContentLoaded", iniciar)
 })()
