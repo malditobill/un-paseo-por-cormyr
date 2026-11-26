@@ -13,6 +13,7 @@
 .mapa-lienzo {
   aspect-ratio: 3 / 2; width: 100%; max-height: 78vh; min-height: 260px; background: #faf7ee;
   border: 1px solid #3d3265; box-shadow: inset 0 0 0 3px #faf7ee, inset 0 0 0 4px #b08d3c;
+  isolation: isolate;   /* las capas de Leaflet (z-index 400–1000) no tapan la vista gráfica ampliada ni otros paneles */
 }
 #mapa-reino.pantalla-completa {
   position: fixed; inset: 0; z-index: 1000; margin: 0; padding: .8rem; background: var(--light);
