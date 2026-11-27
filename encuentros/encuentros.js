@@ -327,9 +327,100 @@
     return lista.map(([v, t]) => `<option value="${v}"${v === sel ? " selected" : ""}>${t}</option>`).join("")
   }
 
+
+  // ── modo ciudad: barrios, turnos del día y encuentros sobre todo sociales ──
+  const TURNOS = [["mañana", "Mañana", "dia"], ["tarde", "Tarde", "dia"], ["noche", "Noche", "noche"], ["madrugada", "Madrugada", "noche"]]
+  const ETIQ_C = { guardia: "Guardia", comercio: "Comercio", gente: "Gente", faccion: "Facciones", suceso: "Suceso", peligro: "Peligro", nada: "Sin novedad" }
+  function escenaCiudad(C, c) {
+    const hora = TURNOS.find((x) => x[0] === c.turno)[2]
+    const xs = (C.escenas || []).filter((e) => e.barrio === c.barrio && (!e.hora || e.hora === hora) && (!e.estacion || e.estacion === c.estacion))
+    if (!xs.length) return null
+    const clave = C.ciudad + "|" + c.barrio + "|" + hora
+    const usadas = (USADAS[clave] = USADAS[clave] || new Set())
+    let libres = xs.filter((e) => !usadas.has(e.texto))
+    if (!libres.length) { xs.forEach((e) => usadas.delete(e.texto)); libres = xs }
+    const r = d(libres.length), e = libres[r - 1]
+    usadas.add(e.texto)
+    anota(`Escena (${c.turno}): <b>1d${libres.length}</b> = <b>${r}</b>`)
+    return e.texto
+  }
+  function turnoCiudad(C, c, forzar) {
+    T = []
+    const ch = C.chequeo || { dado: 6 }, umbral = ch[c.turno] != null ? ch[c.turno] : 2
+    const nb = (C.barrios.find((b) => b.id === c.barrio) || {}).nombre || c.barrio
+    if (!forzar) {
+      const x = d(ch.dado)
+      anota(`¿Hay encuentro esta ${c.turno} (${nb.toLowerCase()})? <b>1d${ch.dado}</b> = <b>${x}</b> → ${x <= umbral ? "sí" : "no"} <span class="enc-rango">(encuentro con ${umbral === 1 ? "1" : "1–" + umbral})</span>`)
+      if (x > umbral) { const r = { tipo: "nada", titulo: "Sin novedad", lineas: ["La ciudad sigue a lo suyo."], tiradas: T }; T = []; return r }
+    }
+    const xs = C.encuentros.filter((e) => (!e.barrios || e.barrios.includes(c.barrio)) && (!e.turnos || e.turnos.includes(c.turno)) &&
+      (!e.estaciones || e.estaciones.includes(c.estacion)))
+    const e = tabla(xs, (x) => x.peso || 1, `Tabla de ${C.ciudad} (${nb.toLowerCase()}, ${c.turno})`, (x) => x.nombre)
+    const lineas = [e.texto]
+    let enlace = null, titulo = e.nombre
+    if (e.ref && criaturaDe(e.ref)) {
+      const cr = criaturaDe(e.ref), n = tira(e.cantidad || "1", "Cantidad")
+      titulo = `${e.nombre}: ${n} ${n === 1 ? cr.nombre : cr.plural || cr.nombre}`
+      enlace = cr.pagina
+      lineas.push(`VD ${cr.vd} cada uno · NE ${ne([[cr.vd, n]])} · <b class="enc-${dificultad(ne([[cr.vd, n]]), c.ng)[1]}">${dificultad(ne([[cr.vd, n]]), c.ng)[0]}</b> para el grupo (NG ${c.ng})`)
+    } else if (e.cantidad) {
+      lineas.push(`Cuántos: ${tira(e.cantidad, "Cantidad")}`)
+    }
+    if (e.perfil && DATOS.perfiles[e.perfil]) {
+      const p = DATOS.perfiles[e.perfil]
+      if (p.composicion) lineas.push(`<b>Composición:</b> ${p.composicion}`)
+      if (p.pagina) enlace = enlace || p.pagina
+    }
+    lineas.push(`Actitud inicial: ${e.actitud || actitud()}`)
+    if (e.gancho) lineas.push(`<b>Gancho:</b> ${e.gancho}`)
+    if ((e.paginas || []).length) lineas.push(`Ver: ${e.paginas.map(([n, pg]) => `<a class="internal" href="${RAIZ}${pg}">${n}</a>`).join(", ")}`)
+    const res = { tipo: e.tipo, titulo, enlace, lineas, fuente: e.fuente }
+    res.escena = escenaCiudad(C, c)
+    res.tiradas = T; T = []
+    return res
+  }
+  function montarCiudad(div, C) {
+    div.innerHTML = `
+      <div class="enc-panel">
+        <div class="enc-fila">
+          <label>Barrio <select data-k="barrio">${opciones(C.barrios.map((b) => [b.id, b.nombre]), C.barrios[0].id)}</select></label>
+          <label>Momento <select data-k="turno">${opciones(TURNOS.map((x) => [x[0], x[1]]), "tarde")}</select></label>
+          <label>Estación <select data-k="estacion">${opciones([["invierno", "invierno"], ["primavera", "primavera"], ["verano", "verano"], ["otoño", "otoño"]], "otoño")}</select></label>
+        </div>
+        <div class="enc-fila">
+          <label>Nivel del grupo <input data-k="nivel" type="number" min="1" max="20" value="3"></label>
+          <label>Personajes <input data-k="pjs" type="number" min="1" max="10" value="4"></label>
+          <button data-a="forzar">Tirar un encuentro</button>
+          <button data-a="turno">Pasar el momento</button>
+          <button data-a="dia">Un día en la ciudad</button>
+          <button data-a="limpiar" class="enc-sec">Limpiar</button>
+        </div>
+      </div>
+      <div class="enc-res"></div>
+      <p class="enc-ayuda">Encuentros dentro de ${C.ciudad}, por barrio y momento del día. ${C.nota || ""} ` +
+      `El generador completo está en <a class="internal" href="${RAIZ}para-el-dm/generador-de-encuentros">Generador de encuentros</a>.</p>`
+    const q = (k) => div.querySelector(`[data-k="${k}"]`)
+    const res = div.querySelector(".enc-res")
+    const ctx = () => {
+      const nivel = Math.max(1, Math.min(20, +q("nivel").value || 1)), pjs = +q("pjs").value || 4
+      return { barrio: q("barrio").value, turno: q("turno").value, estacion: q("estacion").value, ng: Math.max(1, nivel + (pjs >= 6 ? 1 : pjs <= 3 ? -1 : 0)) }
+    }
+    const tarjetaC = (r, et) => tarjeta({ ...r, tipo: r.tipo }, et).replace(/<span class="enc-etq">[^<]*<\/span>/, `<span class="enc-etq">${ETIQ_C[r.tipo] || r.tipo}</span>`)
+    div.querySelectorAll("button[data-a]").forEach((b) => b.addEventListener("click", () => {
+      const a = b.dataset.a, c = ctx()
+      if (a === "limpiar") { res.innerHTML = ""; return }
+      if (a === "forzar") return res.insertAdjacentHTML("afterbegin", tarjetaC(turnoCiudad(C, c, true)))
+      if (a === "turno") return res.insertAdjacentHTML("afterbegin", tarjetaC(turnoCiudad(C, c, false)))
+      const out = TURNOS.map(([tn, et]) => tarjetaC(turnoCiudad(C, { ...c, turno: tn }, false), et))
+      res.insertAdjacentHTML("afterbegin", `<div class="enc-jornada">${out.join("")}</div>`)
+    }))
+  }
+
   function montar(div) {
     if (div.dataset.listo) return
     div.dataset.listo = "1"
+    const CI = div.dataset.lugar && (DATOS.ciudades || {})[div.dataset.lugar]
+    if (CI) return montarCiudad(div, CI)
     const L = div.dataset.lugar ? (DATOS.lugares || {})[div.dataset.lugar] : null
     const fija = (L && L.region) || div.dataset.region || ""
     const regiones = Object.keys(DATOS.regiones).sort()
