@@ -1,0 +1,59 @@
+/* Clima y calendario: misma familia visual que el generador de encuentros (violeta, dorado, papel). */
+.clima { margin: 0.6rem 0 1.2rem; font-size: 0.92rem; }
+.cl-informe { border: 3px double #3d3265; background: var(--light); padding: 8px 14px 10px; border-radius: 2px; }
+.cl-cab { display: flex; justify-content: space-between; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray); }
+.cl-fecha { font-family: var(--headerFont); font-weight: 700; font-size: 1.12rem; color: var(--secondary); margin: 2px 0 0; line-height: 1.3; }
+.cl-anio { font-weight: 400; font-size: 0.85rem; color: var(--gray); white-space: nowrap; }
+.cl-notas { font-size: 0.82rem; color: #8a6a1f; font-style: italic; margin-top: 2px; }
+.cl-cuerpo { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 8px; align-items: flex-start; }
+.cl-principal { display: flex; gap: 10px; align-items: center; min-width: 12rem; flex: 0 1 15rem; }
+.cl-icono { font-size: 2.4rem; line-height: 1; color: #3d3265; width: 2.6rem; text-align: center; }
+.cl-temp b { font-size: 1.5rem; color: var(--darkgray); }
+.cl-temp span { color: var(--gray); }
+.cl-frase { font-size: 0.88rem; color: var(--darkgray); line-height: 1.35; }
+.cl-datos { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; flex: 1 1 18rem; font-size: 0.86rem; }
+.cl-datos dt { color: var(--gray); font-weight: 600; font-size: 0.78rem; padding-top: 1px; }
+.cl-datos dd { margin: 0; color: var(--darkgray); }
+.cl-dd-luna svg { vertical-align: -5px; }
+.cl-luna-sombra { fill: #2a2540; }
+.cl-luna-luz { fill: #f1ead2; }
+.cl-luna-borde { fill: none; stroke: #8a7f5a; stroke-width: 1; }
+.cl-efectos { margin-top: 8px; font-size: 0.82rem; }
+.cl-efectos > summary { cursor: pointer; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray); }
+.cl-efectos ul { margin: 4px 0 0 1.1rem; padding: 0; }
+.cl-efectos li { margin: 2px 0; line-height: 1.4; }
+.cl-nav { display: flex; gap: 6px; margin-top: 6px; }
+.cl-nav button, .cl-fila button { font: inherit; font-size: 0.82rem; padding: 2px 10px; cursor: pointer; border-radius: 3px;
+  border: 1px solid #3d3265; background: transparent; color: var(--secondary); }
+.cl-nav button:hover, .cl-fila button:hover { background: #3d3265; color: #fcfaf6; }
+details.cl-modulo { margin: 1.2rem 0; }
+details.cl-modulo > summary { cursor: pointer; font-family: var(--headerFont); color: var(--secondary); font-size: 1.1rem; }
+details.cl-modulo > summary .cl-sum { font-family: var(--bodyFont); font-size: 0.86rem; color: var(--gray); margin-left: 6px; }
+/* almanaque */
+.cl-panel { border: 1px solid var(--lightgray); background: var(--light); padding: 6px 12px; border-radius: 2px; margin-bottom: 10px; }
+.cl-fila { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: end; }
+.cl-fila label { display: flex; flex-direction: column; font-size: 0.78rem; color: var(--secondary); font-weight: 600; }
+.cl-fila select, .cl-fila input { font: inherit; font-size: 0.9rem; padding: 2px 4px; border: 1px solid var(--lightgray);
+  background: var(--light); color: var(--darkgray); border-radius: 3px; }
+.cl-fila input[type=number] { width: 4.6rem; }
+.cl-mes { margin-top: 14px; }
+.cl-mes-cab { font-family: var(--headerFont); font-weight: 700; color: var(--secondary); font-size: 1.05rem; margin-bottom: 4px; }
+.cl-mes-cab span { font-weight: 400; color: var(--gray); }
+.cl-rejilla { display: flex; flex-direction: column; gap: 4px; }
+.cl-tenday { display: grid; grid-template-columns: 4.6rem repeat(10, 1fr); gap: 3px; align-items: stretch; }
+.cl-tenday-n { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.04em; align-self: center; }
+.cl-celda { font: inherit; display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 3px 1px; cursor: pointer;
+  border: 1px solid var(--lightgray); background: var(--light); border-radius: 3px; color: var(--darkgray); min-width: 0; }
+.cl-celda:hover { border-color: #3d3265; }
+.cl-celda.cl-sel { border: 2px solid #3d3265; background: color-mix(in srgb, #3d3265 8%, var(--light)); }
+.cl-celda.cl-fiesta { box-shadow: inset 0 -3px 0 #d9b56c; }
+.cl-n { font-size: 0.72rem; font-weight: 700; color: var(--secondary); }
+.cl-i { font-size: 1rem; line-height: 1; color: #3d3265; }
+.cl-t { font-size: 0.64rem; color: var(--gray); white-space: nowrap; }
+.cl-festivos { display: flex; gap: 6px; margin-top: 6px; }
+.cl-festivo { flex-direction: row; gap: 6px; padding: 3px 10px; box-shadow: inset 0 -3px 0 #d9b56c; }
+@media (max-width: 640px) {
+  .cl-tenday { grid-template-columns: repeat(5, 1fr); }
+  .cl-tenday-n { grid-column: 1 / -1; }
+  .cl-t { font-size: 0.6rem; }
+}

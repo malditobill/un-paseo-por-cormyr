@@ -6,6 +6,12 @@
   const V = (document.currentScript.src.match(/\?v=([\w-]+)/) || [])[1] || ""
   const RAIZ = BASE.replace(/encuentros\/$/, "")
   let DATOS = null
+  // estación del día de hoy en el calendario de Harptos (la fecha del mundo avanza con la real; ver clima/clima.js)
+  function estacionHoy() {
+    const r = new Date(), n = Math.round((new Date(r.getFullYear(), r.getMonth(), r.getDate()) - new Date(r.getFullYear(), 0, 1)) / 864e5) + 1
+    const b = r.getFullYear() % 4 === 0 && n > 213 ? 1 : 0   // Shieldmeet
+    return n >= 355 + b || n < 80 ? "invierno" : n < 172 ? "primavera" : n < 264 + b ? "verano" : "otoño"
+  }
 
   // ── azar, con registro de cada tirada (se muestra en la tarjeta) ──
   let T = []
@@ -385,7 +391,7 @@
         <div class="enc-fila">
           <label>Barrio <select data-k="barrio">${opciones(C.barrios.map((b) => [b.id, b.nombre]), C.barrios[0].id)}</select></label>
           <label>Momento <select data-k="turno">${opciones(TURNOS.map((x) => [x[0], x[1]]), "tarde")}</select></label>
-          <label>Estación <select data-k="estacion">${opciones([["invierno", "invierno"], ["primavera", "primavera"], ["verano", "verano"], ["otoño", "otoño"]], "otoño")}</select></label>
+          <label>Estación <select data-k="estacion">${opciones([["invierno", "invierno"], ["primavera", "primavera"], ["verano", "verano"], ["otoño", "otoño"]], estacionHoy())}</select></label>
         </div>
         <div class="enc-fila">
           <label>Nivel del grupo <input data-k="nivel" type="number" min="1" max="20" value="3"></label>
@@ -432,7 +438,7 @@
           <label>Zona <select data-k="sector"></select></label>
           <label>Por <select data-k="contexto">${opciones([["campo", "campo traviesa"], ["camino", "camino"]], "campo")}</select></label>
           <label>Hora <select data-k="hora">${opciones([["dia", "de día"], ["noche", "de noche"]], "dia")}</select></label>
-          <label>Estación <select data-k="estacion">${opciones([["invierno", "invierno"], ["primavera", "primavera"], ["verano", "verano"], ["otoño", "otoño"]], "otoño")}</select></label>
+          <label>Estación <select data-k="estacion">${opciones([["invierno", "invierno"], ["primavera", "primavera"], ["verano", "verano"], ["otoño", "otoño"]], estacionHoy())}</select></label>
         </div>
         <div class="enc-fila">
           <label>Nivel del grupo <input data-k="nivel" type="number" min="1" max="20" value="3"></label>
