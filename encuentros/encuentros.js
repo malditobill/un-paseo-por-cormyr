@@ -347,7 +347,7 @@
   function turnoCiudad(C, c, forzar) {
     T = []
     const ch = C.chequeo || { dado: 6 }, umbral = ch[c.turno] != null ? ch[c.turno] : 2
-    const nb = (C.barrios.find((b) => b.id === c.barrio) || {}).nombre || c.barrio
+    const nb = ((C.barrios.find((b) => b.id === c.barrio) || {}).nombre || c.barrio).replace(/\s*\([^)]*\)/, "")
     if (!forzar) {
       const x = d(ch.dado)
       anota(`¿Hay encuentro esta ${c.turno} (${nb.toLowerCase()})? <b>1d${ch.dado}</b> = <b>${x}</b> → ${x <= umbral ? "sí" : "no"} <span class="enc-rango">(encuentro con ${umbral === 1 ? "1" : "1–" + umbral})</span>`)
