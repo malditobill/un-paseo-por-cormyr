@@ -57,3 +57,30 @@ details.cl-modulo > summary .cl-sum { font-family: var(--bodyFont); font-size: 0
   .cl-tenday-n { grid-column: 1 / -1; }
   .cl-t { font-size: 0.6rem; }
 }
+/* cabecera: almanaque de hoy en el hueco a la izquierda del logo */
+#cl-cabecera { position: fixed; top: 0.6rem; left: 1rem; z-index: 41; box-sizing: border-box; overflow: hidden;
+  display: flex; flex-direction: column; gap: 3px; padding: 8px 12px; font-size: 0.82rem; line-height: 1.3;
+  background: var(--light); border: 3px double #3d3265; border-radius: 2px; color: var(--darkgray);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #d9b56c 45%, transparent); transition: opacity 0.4s; }
+#cl-cabecera[hidden] { display: none; }
+#cl-cabecera.clc-cambia { opacity: 0; }
+.clc-fecha { display: flex; gap: 10px; align-items: flex-start; }
+.clc-fecha svg { flex: none; margin-top: 2px; }
+.clc-dia { font-family: var(--headerFont); font-weight: 700; font-size: 1.12rem; color: var(--secondary); line-height: 1.1; }
+.clc-greg { color: var(--gray); font-size: 0.8rem; }
+.clc-sub { font-size: 0.76rem; color: var(--darkgray); }
+.clc-nota { font-size: 0.74rem; color: #8a6a1f; font-style: italic; }
+.clc-nota a { color: inherit; }
+.clc-sep { height: 1px; margin: 3px 0; background: linear-gradient(90deg, transparent, #d9b56c, transparent); }
+.clc-lugar { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); }
+.clc-lugar a { font-family: var(--headerFont); text-transform: none; letter-spacing: 0; font-size: 0.95rem; font-weight: 700; color: var(--secondary); }
+.clc-clima { display: flex; align-items: center; gap: 8px; }
+.clc-icono { font-size: 1.5rem; line-height: 1; color: #3d3265; }
+.clc-clima b { font-size: 1.05rem; }
+.clc-frase { font-size: 0.78rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.clc-pie { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; }
+.clc-pie a { color: var(--secondary); }
+.clc-otro { font: inherit; font-size: 0.74rem; padding: 0; border: 0; background: none; color: var(--gray); cursor: pointer; }
+.clc-otro:hover { color: var(--secondary); }
+#cl-cabecera.clc-compacta .clc-tenday, #cl-cabecera.clc-compacta .clc-sep { display: none; }
+#cl-cabecera.clc-compacta .clc-frase { -webkit-line-clamp: 2; }

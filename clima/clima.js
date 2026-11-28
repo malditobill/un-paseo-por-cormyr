@@ -79,12 +79,16 @@
     const a = ordinal(f.anio, 2, 19), b = ordinal(f.anio, 5, 20), c = ordinal(f.anio, 8, 21), d = ordinal(f.anio, 11, 20)
     return f.n >= d || f.n < a ? "invierno" : f.n < b ? "primavera" : f.n < c ? "verano" : "otoño"
   }
+  // Regla de la crónica: todo mes o día de Harptos lleva entre paréntesis su equivalente gregoriano
+  // (mismo ordinal del año; año gregoriano = DR + 652, así coinciden los bisiestos).
+  const GREG = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+  function greg(f) { const g = new Date(f.anio + 652, 0, f.n); return `${g.getDate()} de ${GREG[g.getMonth()]}` }
   function nombreFecha(f, corto) {
-    if (f.festivo) return corto ? f.festivo : `${f.festivo} (${FESTIVO_ES[f.festivo]})`
+    if (f.festivo) return corto ? `${f.festivo} (${greg(f)})` : `${f.festivo} (${greg(f)}), ${FESTIVO_ES[f.festivo]}`
     const [mes, , es] = MESES[f.mes]
-    if (corto) return `${f.dia} de ${mes}`
+    if (corto) return `${f.dia} de ${mes} (${greg(f)})`
     const dec = Math.floor((f.dia - 1) / 10), dd = (f.dia - 1) % 10
-    return `${f.dia} de ${mes}, ${ORD[dd]} día de la ${ORDF[dec]} tenday de ${es}`
+    return `${f.dia} de ${mes} (${greg(f)}), ${ORD[dd]} día de la ${ORDF[dec]} tenday de ${es}`
   }
   function notasDelDia(f) {
     const xs = []
@@ -395,8 +399,10 @@
     const regiones = Object.keys(D.regiones).sort()
     const lugares = Object.keys(D.lugares).sort()
     let f = hoy()
-    const selMes = MESES.map(([m], i) => `<option value="m${i}">${m}</option>`).join("") +
-      ["Midwinter", "Greengrass", "Midsummer", "Shieldmeet", "Highharvestide", "Feast of the Moon"].map((x) => `<option value="f${x}">${x}</option>`).join("")
+    const selMes = MESES.map(([m], i) => `<option value="m${i}">${m} (${GREG[i]})</option>`).join("") +
+      ["Midwinter", "Greengrass", "Midsummer", "Shieldmeet", "Highharvestide", "Feast of the Moon"].map((x) => {
+        const g = fechaDe(1376, ordinalFestivo(1376, x)), fn = x === "Shieldmeet" ? greg(g) : greg(fechaDe(1374, ordinalFestivo(1374, x)))
+        return `<option value="f${x}">${x} (${fn})</option>` }).join("")
     div.innerHTML = `<div class="cl-panel"><div class="cl-fila">
         <label>Lugar <select data-k="lugar">
           <optgroup label="Regiones">${regiones.map((r) => `<option value="region:${r}">${r}</option>`).join("")}</optgroup>
@@ -446,8 +452,8 @@
       }
       const fest = diasDel(f.anio).filter((x, i) => x.festivo && diasDel(f.anio)[i - 1]?.mes === m)
       const festHtml = fest.map((x) => { const g = fechaDe(f.anio, ordinalFestivo(f.anio, x.festivo)); const c = clima(g, L.perfil, L.lugar)
-        return `<button class="cl-celda cl-festivo${g.n === f.n ? " cl-sel" : ""}" data-n="${g.n}" title="${x.festivo}: ${frase(c)}"><span class="cl-n">${x.festivo}</span>${svgLuna(luna(g), 14)}<span class="cl-i">${ICONO_P[c.precip] || ICONO[c.cielo]}</span><span class="cl-t">${c.max}°/${c.min}°</span></button>` }).join("")
-      mes.innerHTML = `<div class="cl-mes-cab">${MESES[m][0]} <span>(${MESES[m][2]})</span> · ${f.anio} DR</div>
+        return `<button class="cl-celda cl-festivo${g.n === f.n ? " cl-sel" : ""}" data-n="${g.n}" title="${nombreFecha(g, true)}: ${frase(c)}"><span class="cl-n">${x.festivo} (${greg(g)})</span>${svgLuna(luna(g), 14)}<span class="cl-i">${ICONO_P[c.precip] || ICONO[c.cielo]}</span><span class="cl-t">${c.max}°/${c.min}°</span></button>` }).join("")
+      mes.innerHTML = `<div class="cl-mes-cab">${MESES[m][0]} (${GREG[m]}) <span>· ${MESES[m][2]}</span> · ${f.anio} DR</div>
         <div class="cl-rejilla">${[0, 1, 2].map((t) => `<div class="cl-tenday"><div class="cl-tenday-n">${ORDF[t]} tenday</div>${celdas.slice(t * 10, t * 10 + 10).join("")}</div>`).join("")}</div>
         ${festHtml ? `<div class="cl-festivos">${festHtml}</div>` : ""}`
       mes.querySelectorAll("button[data-n]").forEach((b) => b.addEventListener("click", () => { f = fechaDe(f.anio, +b.dataset.n); pintar() }))
@@ -462,6 +468,73 @@
   }
 
   // API para otras herramientas (p. ej. el generador de encuentros toma la estación del día)
+  // ───────────── Cabecera: la fecha de hoy, Selûne y el tiempo en un lugar del reino al azar ─────────────
+  // Va en el hueco a la izquierda del logo (pantallas anchas). Cambia de lugar cada 20 s (no mientras el mouse está encima).
+  // Quartz rehace el <body> al navegar: se vuelve a crear en cada "nav", con el mismo lugar.
+  let rotador = null, lugarCab = null
+  function poolCabecera() {
+    const fuera = new Set(D.fueraDelReino || [])
+    return Object.keys(D._enlaces || {}).filter((x) => !fuera.has(x))
+  }
+  function perfilDeNombre(nombre) {
+    return perfilDe({ dataset: D.regiones[nombre] && !D.lugares[nombre] ? { region: nombre } : { lugar: nombre } })
+  }
+  function ubicarCabecera(el) {
+    const logoH = Math.min(260, innerHeight * 0.3)
+    const libre = (innerWidth - logoH * 2.98) / 2 - 30
+    // alineado con el marco de la barra lateral izquierda, si está a la vista
+    const s = document.querySelector(".left.sidebar"), rs = s && s.getBoundingClientRect()
+    const izq = rs && rs.width > 150 ? rs.left + 8 : 16
+    const ancho = Math.min(rs && rs.width > 150 ? rs.width - 30 : 280, libre + 16 - izq)
+    const ok = innerWidth > 800 && ancho >= 200
+    el.hidden = !ok
+    if (ok) { el.style.left = izq + "px"; el.style.width = ancho + "px"; el.style.height = logoH + "px" }
+    el.classList.toggle("clc-compacta", logoH < 235)
+  }
+  function pintarCabecera(el, otro) {
+    const pool = poolCabecera()
+    if (!pool.length) return
+    if (otro || !lugarCab) { let x; do { x = pool[Math.floor(Math.random() * pool.length)] } while (pool.length > 1 && x === lugarCab); lugarCab = x }
+    const f = hoy(), l = luna(f), c = clima(f, perfilDeNombre(lugarCab), lugarCab)
+    const dia = f.festivo ? f.festivo : `${f.dia} de ${MESES[f.mes][0]}`
+    const sub = f.festivo ? FESTIVO_ES[f.festivo] : `${ORD[(f.dia - 1) % 10]} día de la ${ORDF[Math.floor((f.dia - 1) / 10)]} tenday`
+    const notas = notasDelDia(f)
+    const href = (p) => RAIZ + p.split("/").map(encodeURIComponent).join("/")
+    const viento = c.viento === 0 ? "sin viento" : `viento ${c.vientoNombre}${c.dir ? " del " + c.dir : ""}`
+    el.innerHTML = `
+      <div class="clc-fecha">${svgLuna(l, 46)}<div>
+        <div class="clc-dia">${dia}</div><div class="clc-greg">(${greg(f)})</div>
+        <div class="clc-sub clc-tenday">${sub}</div><div class="clc-sub">Selûne: ${l.nombre}</div>
+        ${notas.length ? `<div class="clc-nota">${notas.join(" · ")}</div>` : ""}</div></div>
+      <div class="clc-sep"></div>
+      <div class="clc-lugar">El tiempo en <a href="${href(D._enlaces[lugarCab])}">${lugarCab}</a></div>
+      <div class="clc-clima"><span class="clc-icono">${ICONO_P[c.precip] || ICONO[c.cielo] || ""}</span><span><b>${grados(c.max)}</b> / ${grados(c.min)}</span></div>
+      <div class="clc-frase">${frase(c)}; ${viento}.</div>
+      <div class="clc-pie"><button type="button" class="clc-otro" title="Otro lugar">otro lugar ↻</button><a href="${href("para-el-dm/clima-y-calendario")}">almanaque ›</a></div>`
+    el.querySelector(".clc-otro").addEventListener("click", () => pintarCabecera(el, true))
+  }
+  function montarCabecera() {
+    if (!D._enlaces) return
+    let el = document.getElementById("cl-cabecera")
+    if (!el) {
+      el = document.createElement("aside")
+      el.id = "cl-cabecera"
+      el.setAttribute("aria-label", "Almanaque de hoy")
+      document.body.appendChild(el)
+    }
+    ubicarCabecera(el)
+    pintarCabecera(el)
+    if (!rotador) {
+      rotador = setInterval(() => {
+        const e = document.getElementById("cl-cabecera")
+        if (!e || e.hidden || e.matches(":hover")) return
+        e.classList.add("clc-cambia")
+        setTimeout(() => { pintarCabecera(e, true); e.classList.remove("clc-cambia") }, 400)
+      }, 20000)
+      addEventListener("resize", () => { const e = document.getElementById("cl-cabecera"); if (e) ubicarCabecera(e) })
+    }
+  }
+
   async function cargar() {
     if (!D) D = await (await fetch(BASE + "datos.json" + (V ? "?v=" + V : ""))).json()
     return D
@@ -470,9 +543,9 @@
 
   async function iniciar() {
     const divs = document.querySelectorAll("div.clima")
-    if (!divs.length) return
     try { await cargar() }
     catch (e) { divs.forEach((x) => (x.textContent = "No se pudo cargar el clima.")); return }
+    montarCabecera()
     divs.forEach((div) => {
       if (div.dataset.montado) return
       div.dataset.montado = "1"
