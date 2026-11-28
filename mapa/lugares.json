@@ -34,7 +34,7 @@
 "x": 4522,
 "y": 530,
 "u": "geografía/ciudades/tilverton",
-"r": "Donde estaba Tilverton hoy hay un cráter. En Mirtul de 1372 DR, en la guerra contra los shadovar de Thultanthar, la ciudad se hundió en una oscuridad mágica que no se ha disipado, y en su lugar quedó una herida en la tierra: el Tilverton Scar. Halfhap, que…"
+"r": "Donde estaba Tilverton hoy hay un cráter. En Mirtul (mayo) de 1372 DR, en la guerra contra los shadovar de Thultanthar, la ciudad se hundió en una oscuridad mágica que no se ha disipado, y en su lugar quedó una herida en la tierra: el Tilverton Scar. Halfhap,…"
 },
 {
 "n": "Eagle Peak",
@@ -528,7 +528,7 @@
 "r": ""
 },
 {
-"n": "Tezir",
+"n": "Teziir",
 "t": "extranjera",
 "x": 4764,
 "y": 3594,
@@ -644,7 +644,9 @@
 "x": 3089,
 "y": 557,
 "dx": -136.0,
-"dy": -125.0
+"dy": -125.0,
+"u": "geografía/regiones/goblin-marches",
+"r": "Al norte de los Stormhorns, del otro lado de la muralla de montañas que protege el corazón del reino, empieza una tierra que Cormyr llama suya y casi nunca pisa. Las Goblin Marches figuran en los mapas de la corona, pero el camino de ida es difícil, el de…"
 },
 {
 "n": "Shaddan Hills",

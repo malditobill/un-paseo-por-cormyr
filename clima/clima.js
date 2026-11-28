@@ -541,7 +541,24 @@
   }
   window.CormyrClima = { cargar, hoy, mover, fechaDe, ordinal, estacionDe, luna, sol, nombreFecha, clima, efectos, frase, absoluto }
 
+  // Al navegar, Quartz rehace el <head> y a veces deja las hojas inyectadas (clima.css, encuentros.css)
+  // con el <link> presente pero vacío: sin reglas, la cabecera pierde el position:fixed y su marco
+  // cubre toda la ventana. Se reemplaza cada <link> vacío por uno nuevo.
+  function reponerHojas() {
+    document.querySelectorAll('link[rel="stylesheet"][href*="clima/clima.css"], link[rel="stylesheet"][href*="encuentros/encuentros.css"]').forEach((l) => {
+      let vacia = false
+      try { vacia = !l.sheet || l.sheet.cssRules.length === 0 } catch (e) { return }
+      if (!vacia) return
+      const n = document.createElement("link")
+      n.rel = "stylesheet"
+      n.href = l.href
+      l.replaceWith(n)
+    })
+  }
+
   async function iniciar() {
+    reponerHojas()
+    setTimeout(reponerHojas, 500)   // por si el <link> todavía estaba cargando
     const divs = document.querySelectorAll("div.clima")
     try { await cargar() }
     catch (e) { divs.forEach((x) => (x.textContent = "No se pudo cargar el clima.")); return }
